@@ -132,12 +132,33 @@ struct SVGAbstractPath {
 
 
 
-func renderSVGPathNode(_ path: SVGConcretePath, pathStyle: String, id: String) -> String {
+struct SVGPathNode {
+
+    let path: SVGConcretePath
+    let pathStyle: String
+    let nodeId: String
     
-    return """
-        <path
-        style="\(pathStyle)"
-        d="\(path.render())"
-        id="\(id)"/>
-        """
+    func render() -> String {
+    
+        return """
+            <path
+            style="\(pathStyle)"
+            d="\(path.render())"
+            id="\(nodeId)"/>
+            """
+    }
+}
+
+struct SVGFile {
+    
+    let pathsNodes: [SVGPathNode]
+    
+    func render() -> String {
+    
+        return """
+            <svg viewBox="0 0 3178.5827 4493.8583">
+                \(pathsNodes.map { $0.render() } .joined(separator: "\n") )
+            </svg>
+            """
+    }
 }

@@ -21,11 +21,15 @@ let svgPath = SVGAbstractPath(components: [
     .axis(.secondary, 60, .relative),
 ])
 
-let svgContentString = renderSVGPathNode(
-    svgPath.resolve(usingAsMainAxis: .vertical),
-    pathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1",
-    id: "n1"
-)
+let svgContentString = SVGFile(
+    pathsNodes: [
+        SVGPathNode(
+            path: svgPath.resolve(usingAsMainAxis: .vertical),
+            pathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1",
+            nodeId: "n1"
+        )
+    ]
+).render()
 
 
 write(svgContentString, to: outputFileURL)
