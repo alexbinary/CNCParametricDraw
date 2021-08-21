@@ -19,6 +19,11 @@ struct SVGConcreteCoordinate {
     
     let x: Float
     let y: Float
+    
+    func render() -> String {
+        
+        return "\(x) \(y)"
+    }
 }
 
 enum SVGConcretePathComponent {
@@ -26,11 +31,29 @@ enum SVGConcretePathComponent {
     case move(SVGConcreteCoordinate, SVGCoordinateRef)
     case line(SVGConcreteCoordinate, SVGCoordinateRef)
     case axis(SVGConcreteAxis, Float, SVGCoordinateRef)
+    
+    func render() -> String {
+        
+        switch self {
+        case .move(let coordinate, let coordinateRef):
+            return "\(coordinateRef == .absolute ? "M" : "m")\(coordinate.render())"
+        case .line(let coordinate, let coordinateRef):
+            return "\(coordinateRef == .absolute ? "L" : "l")\(coordinate.render())"
+        case .axis(let axis, let value, let coordinateRef):
+            let opCode = axis == .horizontal ? "h" : "v"
+            return "\(coordinateRef == .absolute ? opCode.uppercased() : opCode)\(value)"
+        }
+    }
 }
 
 struct SVGConcretePath {
     
     let components: [SVGConcretePathComponent]
+    
+    func render() -> String {
+        
+        return components.map { $0.render() }.joined()
+    }
 }
 
 
