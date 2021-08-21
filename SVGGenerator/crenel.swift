@@ -35,7 +35,7 @@ struct CrenelMove {
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
-        let totalCrenelationLength: Float = Float(numberOfCrenels) * crenelActualLength - (Float(max(numberOfCrenels - 1, 0))) * antiCrenelActualLength
+        let totalCrenelationLength: Float = Float(numberOfCrenels) * crenelActualLength + max(Float(numberOfCrenels) - 1, 0) * antiCrenelActualLength
         
         let buttsTotalLength: Float = totalLength - totalCrenelationLength
         let buttsStartLength: Float = buttsTotalLength/2
@@ -59,7 +59,9 @@ struct CrenelMove {
                 pathComponents.append(antiCrenelMove)
             }
         }
-        pathComponents.append(contentsOf: crenelMove)
+        if numberOfCrenels > 0 {
+            pathComponents.append(contentsOf: crenelMove)
+        }
         pathComponents.append(buttEndMove)
         
         return SVGAbstractPath(components: pathComponents)
