@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
+		29247C5C26D18931007238C8 /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		29247C5026D183A7007238C8 /* SVGGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SVGGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		29247C5B26D18931007238C8 /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				29247C5326D183A7007238C8 /* main.swift */,
+				29247C5B26D18931007238C8 /* SVG.swift */,
 			);
 			path = SVGGenerator;
 			sourceTree = "<group>";
@@ -119,6 +122,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29247C5C26D18931007238C8 /* SVG.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
