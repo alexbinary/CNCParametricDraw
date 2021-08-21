@@ -138,6 +138,14 @@ struct SVGAbstractPath {
     
     let components: [SVGAbstractPathComponent]
     
+    func appending(_ additionalComponents: [SVGAbstractPathComponent]) -> SVGAbstractPath {
+        
+        var allComponents = components
+        allComponents.append(contentsOf: additionalComponents)
+        
+        return SVGAbstractPath(components: allComponents)
+    }
+    
     func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcretePath {
         
         return SVGConcretePath(components: components.map { $0.resolve(usingAsMainAxis: mainAxis) })

@@ -13,6 +13,8 @@ func write(_ content: String, to url: URL) {
 }
 
 
+let offsetStart: Float = 5
+let offsetEnd: Float = 5
 
 let abstractSVGPaths = [
     SVGAbstractPath(components: [
@@ -24,7 +26,9 @@ let abstractSVGPaths = [
         .move(SVGAbstractCoordinate(mainAxisValue: 100, secondaryAxisValue: 0), .absolute),
         .axis(.secondary, 50, .relative),
     ]),
-    CrenelMove(
+    SVGAbstractPath(components: [
+        .move(SVGAbstractCoordinate(mainAxisValue: offsetStart, secondaryAxisValue: 0), .relative)
+    ]).appending(CrenelMove(
         totalLength: 100,
         numberOfCrenels: 2,
         crenelConfig: CrenelConfig(
@@ -33,9 +37,9 @@ let abstractSVGPaths = [
             depth: 1
         ),
         direction: .normal,
-        offsetStart: 0,
-        offsetEnd: 0
-    ).makePath(),
+        offsetStart: offsetStart,
+        offsetEnd: offsetEnd
+    ).makePath().components),
     CrenelMove(
         totalLength: 100,
         numberOfCrenels: 5,
