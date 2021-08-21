@@ -31,6 +31,7 @@ enum SVGConcretePathComponent {
     case move(SVGConcreteCoordinate, SVGCoordinateRef)
     case line(SVGConcreteCoordinate, SVGCoordinateRef)
     case axis(SVGConcreteAxis, Float, SVGCoordinateRef)
+    case close
     
     func render() -> String {
         
@@ -42,6 +43,8 @@ enum SVGConcretePathComponent {
         case .axis(let axis, let value, let coordinateRef):
             let opCode = axis == .horizontal ? "h" : "v"
             return "\(coordinateRef == .absolute ? opCode.uppercased() : opCode)\(value)"
+        case .close:
+            return "Z"
         }
     }
 }
@@ -106,6 +109,7 @@ enum SVGAbstractPathComponent {
     case move(SVGAbstractCoordinate, SVGCoordinateRef)
     case line(SVGAbstractCoordinate, SVGCoordinateRef)
     case axis(SVGAbstractAxis, Float, SVGCoordinateRef)
+    case close
     
     func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcretePathComponent {
         
@@ -116,6 +120,8 @@ enum SVGAbstractPathComponent {
             return .line(coordinate.resolve(usingAsMainAxis: mainAxis), coordinateRef)
         case .axis(let axis, let value, let coordinateRef):
             return .axis(axis.resolve(usingAsMainAxis: mainAxis), value, coordinateRef)
+        case .close:
+            return .close
         }
     }
 }

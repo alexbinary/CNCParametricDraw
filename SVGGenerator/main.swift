@@ -19,12 +19,13 @@ let svgPath = SVGAbstractPath(components: [
     .line(SVGAbstractCoordinate(mainAxisValue: 30, secondaryAxisValue: 40), .relative),
     .axis(.main, 50, .relative),
     .axis(.secondary, 60, .relative),
+    .close,
 ])
 
 let svgContentString = SVGFile(
     pathsNodes: [
         SVGPathNode(
-            path: svgPath.resolve(usingAsMainAxis: .vertical),
+            path: svgPath.resolve(usingAsMainAxis: .horizontal),
             pathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1",
             nodeId: "n1"
         )
