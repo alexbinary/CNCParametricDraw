@@ -21,7 +21,19 @@ let abstractSVGPaths = [
         .axis(.main, 50, .relative),
         .axis(.secondary, 60, .relative),
         .close,
-    ])
+    ]),
+    CrenelMove(
+        totalLength: 100,
+        numberOfCrenels: 4,
+        crenelConfig: CrenelConfig(
+            baseLength: 5,
+            lengthAdjustment: -0.75,
+            depth: 3.15
+        ),
+        direction: .normal,
+        offsetStart: 0,
+        offsetEnd: 0
+    ).makePath()
 ]
 
 let nodes = abstractSVGPaths.map {
