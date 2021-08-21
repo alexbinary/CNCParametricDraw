@@ -129,3 +129,15 @@ struct SVGAbstractPath {
         return SVGConcretePath(components: components.map { $0.resolve(usingAsMainAxis: mainAxis) })
     }
 }
+
+
+
+func renderSVGPathNode(_ path: SVGConcretePath, pathStyle: String, id: String) -> String {
+    
+    return """
+        <path
+        style="\(pathStyle)"
+        d="\(path.render())"
+        id="\(id)"/>
+        """
+}

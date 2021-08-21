@@ -5,17 +5,12 @@ import Foundation
 
 let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("generated.svg")
 
-let svgContentString = "test2"
-
 func write(_ content: String, to url: URL) {
 
     try! svgContentString.data(using: .utf8)!.write(to: outputFileURL)
+    
+    print("written to \(outputFileURL)")
 }
-
-//write(svgContentString, to: outputFileURL)
-//
-//print(outputFileURL)
-
 
 
 
@@ -26,4 +21,11 @@ let svgPath = SVGAbstractPath(components: [
     .axis(.secondary, 60, .relative),
 ])
 
-print(svgPath.resolve(usingAsMainAxis: .vertical).render())
+let svgContentString = renderSVGPathNode(
+    svgPath.resolve(usingAsMainAxis: .vertical),
+    pathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1",
+    id: "n1"
+)
+
+
+write(svgContentString, to: outputFileURL)
