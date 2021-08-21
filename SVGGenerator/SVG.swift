@@ -53,6 +53,14 @@ struct SVGConcretePath {
     
     let components: [SVGConcretePathComponent]
     
+    func starting(at point: SVGConcreteCoordinate) -> SVGConcretePath {
+        
+        var completedComponents = components
+        completedComponents.insert(.move(point, .absolute), at: 0)
+        
+        return SVGConcretePath(components: completedComponents)
+    }
+    
     func render() -> String {
         
         return components.map { $0.render() }.joined()
