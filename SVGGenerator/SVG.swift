@@ -85,6 +85,11 @@ struct SVGPath {
     }
 }
 
+struct SVGPathGroup {
+    
+    let paths: [SVGPath]
+}
+
 
 
 
