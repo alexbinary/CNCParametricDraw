@@ -36,19 +36,19 @@ struct SVGCoordinate {
     }
 }
 
-enum SVGPathComponent {
+enum SVGPathCommand {
     
-    case move(SVGCoordinate, SVGCoordinateRef)
-    case line(SVGCoordinate, SVGCoordinateRef)
+    case moveTo(SVGCoordinate, SVGCoordinateRef)
+    case lineTo(SVGCoordinate, SVGCoordinateRef)
     case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
     
     func render() -> String {
         
         switch self {
-        case .move(let coordinate, let coordinateRef):
+        case .moveTo(let coordinate, let coordinateRef):
             return "\(coordinateRef == .absolute ? "M" : "m")\(coordinate.render())"
-        case .line(let coordinate, let coordinateRef):
+        case .lineTo(let coordinate, let coordinateRef):
             return "\(coordinateRef == .absolute ? "L" : "l")\(coordinate.render())"
         case .axis(let axis, let value, let coordinateRef):
             let opCode = axis == .horizontal ? "h" : "v"
@@ -61,27 +61,27 @@ enum SVGPathComponent {
 
 struct SVGPath {
     
-    let components: [SVGPathComponent]
+    let commands: [SVGPathCommand]
     
     func starting(at point: SVGCoordinate) -> SVGPath {
         
-        var completedComponents = components
-        completedComponents.insert(.move(point, .absolute), at: 0)
+        var completedCommands = commands
+        completedCommands.insert(.moveTo(point, .absolute), at: 0)
         
-        return SVGPath(components: completedComponents)
+        return SVGPath(commands: completedCommands)
     }
     
     func render() -> String {
         
-        return components.map { $0.render() }.joined()
+        return commands.map { $0.render() }.joined()
     }
     
-    func appending(_ additionalComponents: [SVGPathComponent]) -> SVGPath {
+    func appending(_ additionalCommands: [SVGPathCommand]) -> SVGPath {
     
-        var allComponents = components
-        allComponents.append(contentsOf: additionalComponents)
+        var allCommands = commands
+        allCommands.append(contentsOf: additionalCommands)
 
-        return SVGPath(components: allComponents)
+        return SVGPath(commands: allCommands)
     }
 }
 

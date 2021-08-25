@@ -41,16 +41,16 @@ struct CrenelMove {
         let buttsStartLength: Float = buttsTotalLength/2
         let buttsEndLength: Float = buttsTotalLength - buttsStartLength
 
-        let buttStartMove: SVGPathComponent = .axis(.horizontal, buttsStartLength - offsetStart, .relative)
-        let crenelMove: [SVGPathComponent] = [
+        let buttStartMove: SVGPathCommand = .axis(.horizontal, buttsStartLength - offsetStart, .relative)
+        let crenelMove: [SVGPathCommand] = [
             .axis(.vertical, crenelConfig.depth * direction, .relative),
             .axis(.horizontal, crenelActualLength, .relative),
             .axis(.vertical, -crenelConfig.depth * direction, .relative),
         ]
-        let antiCrenelMove: SVGPathComponent = .axis(.horizontal, antiCrenelActualLength, .relative)
-        let buttEndMove: SVGPathComponent = .axis(.horizontal, buttsEndLength + offsetEnd, .relative)
+        let antiCrenelMove: SVGPathCommand = .axis(.horizontal, antiCrenelActualLength, .relative)
+        let buttEndMove: SVGPathCommand = .axis(.horizontal, buttsEndLength + offsetEnd, .relative)
 
-        var pathComponents: [SVGPathComponent] = []
+        var pathComponents: [SVGPathCommand] = []
         
         pathComponents.append(buttStartMove)
         if numberOfCrenels > 1 {
@@ -64,6 +64,6 @@ struct CrenelMove {
         }
         pathComponents.append(buttEndMove)
         
-        return SVGPath(components: pathComponents)
+        return SVGPath(commands: pathComponents)
     }
 }

@@ -17,17 +17,17 @@ let offsetStart: Float = 5
 let offsetEnd: Float = 5
 
 let abstractSVGPaths = [
-    SVGPath(components: [
-        .move(SVGCoordinate(x: 10, y: 20), .relative),
-        .line(SVGCoordinate(x: 30, y: 40), .relative),
+    SVGPath(commands: [
+        .moveTo(SVGCoordinate(x: 10, y: 20), .relative),
+        .lineTo(SVGCoordinate(x: 30, y: 40), .relative),
         .axis(.horizontal, 50, .relative),
         .axis(.vertical, 60, .relative),
         .close,
-        .move(SVGCoordinate(x: 100, y: 0), .absolute),
+        .moveTo(SVGCoordinate(x: 100, y: 0), .absolute),
         .axis(.vertical, 50, .relative),
     ]),
-    SVGPath(components: [
-        .move(SVGCoordinate(x: offsetStart, y: 0), .relative)
+    SVGPath(commands: [
+        .moveTo(SVGCoordinate(x: offsetStart, y: 0), .relative)
     ]).appending(CrenelMove(
         totalLength: 100,
         numberOfCrenels: 2,
@@ -39,7 +39,7 @@ let abstractSVGPaths = [
         direction: .normal,
         offsetStart: offsetStart,
         offsetEnd: offsetEnd
-    ).makePath().components),
+    ).makePath().commands),
     CrenelMove(
         totalLength: 100,
         numberOfCrenels: 5,
