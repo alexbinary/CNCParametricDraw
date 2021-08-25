@@ -75,92 +75,16 @@ struct SVGPath {
         
         return components.map { $0.render() }.joined()
     }
-}
-
-
-
-
-enum SVGAbstractAxis {
     
-    case main
-    case secondary
+    func appending(_ additionalComponents: [SVGPathComponent]) -> SVGPath {
     
-    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGAxis {
-        
-        switch mainAxis {
-        case .horizontal:
-            switch self {
-            case .main:
-                return .horizontal
-            case .secondary:
-                return .vertical
-            }
-        case .vertical:
-            switch self {
-            case .main:
-                return .vertical
-            case .secondary:
-                return .horizontal
-            }
-        }
-    }
-}
-
-struct SVGAbstractCoordinate {
-    
-    let mainAxisValue: Float
-    let secondaryAxisValue: Float
-    
-    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGCoordinate {
-        
-        switch mainAxis {
-        case .horizontal:
-            return SVGCoordinate(x: mainAxisValue, y: secondaryAxisValue)
-        case .vertical:
-            return SVGCoordinate(x: secondaryAxisValue, y: mainAxisValue)
-        }
-    }
-}
-
-enum SVGAbstractPathComponent {
-    
-    case move(SVGAbstractCoordinate, SVGCoordinateRef)
-    case line(SVGAbstractCoordinate, SVGCoordinateRef)
-    case axis(SVGAbstractAxis, Float, SVGCoordinateRef)
-    case close
-    
-    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGPathComponent {
-        
-        switch self {
-        case .move(let coordinate, let coordinateRef):
-            return .move(coordinate.resolve(usingAsMainAxis: mainAxis), coordinateRef)
-        case .line(let coordinate, let coordinateRef):
-            return .line(coordinate.resolve(usingAsMainAxis: mainAxis), coordinateRef)
-        case .axis(let axis, let value, let coordinateRef):
-            return .axis(axis.resolve(usingAsMainAxis: mainAxis), value, coordinateRef)
-        case .close:
-            return .close
-        }
-    }
-}
-
-struct SVGAbstractPath {
-    
-    let components: [SVGAbstractPathComponent]
-    
-    func appending(_ additionalComponents: [SVGAbstractPathComponent]) -> SVGAbstractPath {
-        
         var allComponents = components
         allComponents.append(contentsOf: additionalComponents)
-        
-        return SVGAbstractPath(components: allComponents)
-    }
-    
-    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGPath {
-        
-        return SVGPath(components: components.map { $0.resolve(usingAsMainAxis: mainAxis) })
+
+        return SVGPath(components: allComponents)
     }
 }
+
 
 
 

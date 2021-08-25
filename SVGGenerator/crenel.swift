@@ -30,7 +30,7 @@ struct CrenelMove {
     let offsetStart: Float
     let offsetEnd: Float
     
-    func makePath() -> SVGAbstractPath {
+    func makePath() -> SVGPath {
         
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
@@ -41,16 +41,16 @@ struct CrenelMove {
         let buttsStartLength: Float = buttsTotalLength/2
         let buttsEndLength: Float = buttsTotalLength - buttsStartLength
 
-        let buttStartMove: SVGAbstractPathComponent = .axis(.main, buttsStartLength - offsetStart, .relative)
-        let crenelMove: [SVGAbstractPathComponent] = [
-            .axis(.secondary, crenelConfig.depth * direction, .relative),
-            .axis(.main, crenelActualLength, .relative),
-            .axis(.secondary, -crenelConfig.depth * direction, .relative),
+        let buttStartMove: SVGPathComponent = .axis(.horizontal, buttsStartLength - offsetStart, .relative)
+        let crenelMove: [SVGPathComponent] = [
+            .axis(.vertical, crenelConfig.depth * direction, .relative),
+            .axis(.horizontal, crenelActualLength, .relative),
+            .axis(.vertical, -crenelConfig.depth * direction, .relative),
         ]
-        let antiCrenelMove: SVGAbstractPathComponent = .axis(.main, antiCrenelActualLength, .relative)
-        let buttEndMove: SVGAbstractPathComponent = .axis(.main, buttsEndLength + offsetEnd, .relative)
+        let antiCrenelMove: SVGPathComponent = .axis(.horizontal, antiCrenelActualLength, .relative)
+        let buttEndMove: SVGPathComponent = .axis(.horizontal, buttsEndLength + offsetEnd, .relative)
 
-        var pathComponents: [SVGAbstractPathComponent] = []
+        var pathComponents: [SVGPathComponent] = []
         
         pathComponents.append(buttStartMove)
         if numberOfCrenels > 1 {
@@ -64,6 +64,6 @@ struct CrenelMove {
         }
         pathComponents.append(buttEndMove)
         
-        return SVGAbstractPath(components: pathComponents)
+        return SVGPath(components: pathComponents)
     }
 }

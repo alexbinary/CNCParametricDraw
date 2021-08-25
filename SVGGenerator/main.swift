@@ -17,17 +17,17 @@ let offsetStart: Float = 5
 let offsetEnd: Float = 5
 
 let abstractSVGPaths = [
-    SVGAbstractPath(components: [
-        .move(SVGAbstractCoordinate(mainAxisValue: 10, secondaryAxisValue: 20), .relative),
-        .line(SVGAbstractCoordinate(mainAxisValue: 30, secondaryAxisValue: 40), .relative),
-        .axis(.main, 50, .relative),
-        .axis(.secondary, 60, .relative),
+    SVGPath(components: [
+        .move(SVGCoordinate(x: 10, y: 20), .relative),
+        .line(SVGCoordinate(x: 30, y: 40), .relative),
+        .axis(.horizontal, 50, .relative),
+        .axis(.vertical, 60, .relative),
         .close,
-        .move(SVGAbstractCoordinate(mainAxisValue: 100, secondaryAxisValue: 0), .absolute),
-        .axis(.secondary, 50, .relative),
+        .move(SVGCoordinate(x: 100, y: 0), .absolute),
+        .axis(.vertical, 50, .relative),
     ]),
-    SVGAbstractPath(components: [
-        .move(SVGAbstractCoordinate(mainAxisValue: offsetStart, secondaryAxisValue: 0), .relative)
+    SVGPath(components: [
+        .move(SVGCoordinate(x: offsetStart, y: 0), .relative)
     ]).appending(CrenelMove(
         totalLength: 100,
         numberOfCrenels: 2,
@@ -58,17 +58,17 @@ let pathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;s
 
 let nodes = [
     SVGPathNode(
-        path: abstractSVGPaths[0].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 2, y: 3)),
+        path: abstractSVGPaths[0].starting(at: SVGCoordinate(x: 2, y: 3)),
         pathStyle: pathStyle,
         nodeId: "n1"
     ),
     SVGPathNode(
-        path: abstractSVGPaths[1].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 0, y: 30)),
+        path: abstractSVGPaths[1].starting(at: SVGCoordinate(x: 0, y: 30)),
         pathStyle: pathStyle,
         nodeId: "cren1"
     ),
     SVGPathNode(
-        path: abstractSVGPaths[2].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 0, y: 40)),
+        path: abstractSVGPaths[2].starting(at: SVGCoordinate(x: 0, y: 40)),
         pathStyle: pathStyle,
         nodeId: "cren2"
     )
