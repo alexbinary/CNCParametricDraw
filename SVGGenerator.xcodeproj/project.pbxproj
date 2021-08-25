@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
-		29247C5C26D18931007238C8 /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
 		29A34F1526D6DA1600BE13BB /* Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* Draw.swift */; };
+		29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1D26D6E4E300BE13BB /* DrawTest.swift */; };
+		29A34F2726D6E72800BE13BB /* Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* Draw.swift */; };
+		29A34F2C26D6E73F00BE13BB /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
+		29A34F2F26D6E74000BE13BB /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,10 +34,20 @@
 		29247C5B26D18931007238C8 /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
 		29247C5E26D190BC007238C8 /* crenel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crenel.swift; sourceTree = "<group>"; };
 		29A34F1426D6DA1600BE13BB /* Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw.swift; sourceTree = "<group>"; };
+		29A34F1B26D6E4E300BE13BB /* SVGGeneratorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGGeneratorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29A34F1D26D6E4E300BE13BB /* DrawTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawTest.swift; sourceTree = "<group>"; };
+		29A34F1F26D6E4E300BE13BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		29247C4D26D183A7007238C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29A34F1826D6E4E300BE13BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -48,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				29247C5226D183A7007238C8 /* SVGGenerator */,
+				29A34F1C26D6E4E300BE13BB /* SVGGeneratorTest */,
 				29247C5126D183A7007238C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				29247C5026D183A7007238C8 /* SVGGenerator */,
+				29A34F1B26D6E4E300BE13BB /* SVGGeneratorTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +84,15 @@
 				29A34F1426D6DA1600BE13BB /* Draw.swift */,
 			);
 			path = SVGGenerator;
+			sourceTree = "<group>";
+		};
+		29A34F1C26D6E4E300BE13BB /* SVGGeneratorTest */ = {
+			isa = PBXGroup;
+			children = (
+				29A34F1D26D6E4E300BE13BB /* DrawTest.swift */,
+				29A34F1F26D6E4E300BE13BB /* Info.plist */,
+			);
+			path = SVGGeneratorTest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -91,6 +115,23 @@
 			productReference = 29247C5026D183A7007238C8 /* SVGGenerator */;
 			productType = "com.apple.product-type.tool";
 		};
+		29A34F1A26D6E4E300BE13BB /* SVGGeneratorTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29A34F2026D6E4E300BE13BB /* Build configuration list for PBXNativeTarget "SVGGeneratorTest" */;
+			buildPhases = (
+				29A34F1726D6E4E300BE13BB /* Sources */,
+				29A34F1826D6E4E300BE13BB /* Frameworks */,
+				29A34F1926D6E4E300BE13BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SVGGeneratorTest;
+			productName = SVGGeneratorTest;
+			productReference = 29A34F1B26D6E4E300BE13BB /* SVGGeneratorTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,6 +142,9 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					29247C4F26D183A7007238C8 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					29A34F1A26D6E4E300BE13BB = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -119,19 +163,40 @@
 			projectRoot = "";
 			targets = (
 				29247C4F26D183A7007238C8 /* SVGGenerator */,
+				29A34F1A26D6E4E300BE13BB /* SVGGeneratorTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		29A34F1926D6E4E300BE13BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		29247C4C26D183A7007238C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29247C5C26D18931007238C8 /* SVG.swift in Sources */,
+				29A34F2F26D6E74000BE13BB /* SVG.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* Draw.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29A34F1726D6E4E300BE13BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29A34F2C26D6E73F00BE13BB /* SVG.swift in Sources */,
+				29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */,
+				29A34F2726D6E72800BE13BB /* Draw.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +340,42 @@
 			};
 			name = Release;
 		};
+		29A34F2126D6E4E300BE13BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2N6DR3R99K;
+				INFOPLIST_FILE = SVGGeneratorTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bintz.SVGGeneratorTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		29A34F2226D6E4E300BE13BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2N6DR3R99K;
+				INFOPLIST_FILE = SVGGeneratorTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.bintz.SVGGeneratorTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -292,6 +393,15 @@
 			buildConfigurations = (
 				29247C5826D183A7007238C8 /* Debug */,
 				29247C5926D183A7007238C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		29A34F2026D6E4E300BE13BB /* Build configuration list for PBXNativeTarget "SVGGeneratorTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29A34F2126D6E4E300BE13BB /* Debug */,
+				29A34F2226D6E4E300BE13BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -3,10 +3,15 @@ import Foundation
 
 
 
-struct Coordinate {
+struct Coordinate: Equatable {
     
     let x: Float
     let y: Float
+    
+    mutating func add(_ other: Coordinate) {
+        
+        self = Coordinate(x: x + other.x, y: y + other.y)
+    }
 }
 
 enum PathCommand {
@@ -20,12 +25,41 @@ protocol Path {
     
     var commands: [PathCommand] { get }
     
+    var endPoint: Coordinate { get }
+    
     var svgPathCommands: [SVGPathCommand] { get }
 }
+
+extension Path {
     
-struct SinglePath: Path {
-    
-    let commands: [PathCommand]
+    var endPoint: Coordinate {
+        
+        var currentCoordinate = Coordinate(x: 0, y: 0)
+        var firstShapePoint: Coordinate? = nil
+        
+        commands.forEach { command in
+            
+            switch command {
+            
+            case .moveTo(let coordinate):
+                
+                currentCoordinate.add(coordinate)
+                
+            case .lineTo(let coordinate):
+                
+                if firstShapePoint == nil {
+                    firstShapePoint = currentCoordinate
+                }
+                currentCoordinate.add(coordinate)
+                
+            case .close:
+                
+                currentCoordinate = firstShapePoint!
+            }
+        }
+        
+        return currentCoordinate
+    }
     
     var svgPathCommands: [SVGPathCommand] {
         
@@ -47,6 +81,11 @@ struct SinglePath: Path {
         return svgPathCommands
     }
 }
+    
+struct SinglePath: Path {
+    
+    let commands: [PathCommand]
+}
 
 struct PathGroup: Path {
     
@@ -61,10 +100,5 @@ struct PathGroup: Path {
         }
         
         return commands
-    }
-    
-    var svgPathCommands: [SVGPathCommand] {
-        
-        return SinglePath(commands: commands).svgPathCommands
     }
 }
