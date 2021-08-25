@@ -9,13 +9,23 @@ enum SVGCoordinateRef {
     case absolute
 }
 
-enum SVGConcreteAxis {
+enum SVGAxis {
     
     case vertical
     case horizontal
+    
+    func flip() -> SVGAxis {
+        
+        switch self {
+        case .vertical:
+            return .horizontal
+        case .horizontal:
+            return .vertical
+        }
+    }
 }
 
-struct SVGConcreteCoordinate {
+struct SVGCoordinate {
     
     let x: Float
     let y: Float
@@ -26,11 +36,11 @@ struct SVGConcreteCoordinate {
     }
 }
 
-enum SVGConcretePathComponent {
+enum SVGPathComponent {
     
-    case move(SVGConcreteCoordinate, SVGCoordinateRef)
-    case line(SVGConcreteCoordinate, SVGCoordinateRef)
-    case axis(SVGConcreteAxis, Float, SVGCoordinateRef)
+    case move(SVGCoordinate, SVGCoordinateRef)
+    case line(SVGCoordinate, SVGCoordinateRef)
+    case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
     
     func render() -> String {
@@ -49,16 +59,16 @@ enum SVGConcretePathComponent {
     }
 }
 
-struct SVGConcretePath {
+struct SVGPath {
     
-    let components: [SVGConcretePathComponent]
+    let components: [SVGPathComponent]
     
-    func starting(at point: SVGConcreteCoordinate) -> SVGConcretePath {
+    func starting(at point: SVGCoordinate) -> SVGPath {
         
         var completedComponents = components
         completedComponents.insert(.move(point, .absolute), at: 0)
         
-        return SVGConcretePath(components: completedComponents)
+        return SVGPath(components: completedComponents)
     }
     
     func render() -> String {
@@ -75,7 +85,7 @@ enum SVGAbstractAxis {
     case main
     case secondary
     
-    func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcreteAxis {
+    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGAxis {
         
         switch mainAxis {
         case .horizontal:
@@ -101,13 +111,13 @@ struct SVGAbstractCoordinate {
     let mainAxisValue: Float
     let secondaryAxisValue: Float
     
-    func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcreteCoordinate {
+    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGCoordinate {
         
         switch mainAxis {
         case .horizontal:
-            return SVGConcreteCoordinate(x: mainAxisValue, y: secondaryAxisValue)
+            return SVGCoordinate(x: mainAxisValue, y: secondaryAxisValue)
         case .vertical:
-            return SVGConcreteCoordinate(x: secondaryAxisValue, y: mainAxisValue)
+            return SVGCoordinate(x: secondaryAxisValue, y: mainAxisValue)
         }
     }
 }
@@ -119,7 +129,7 @@ enum SVGAbstractPathComponent {
     case axis(SVGAbstractAxis, Float, SVGCoordinateRef)
     case close
     
-    func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcretePathComponent {
+    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGPathComponent {
         
         switch self {
         case .move(let coordinate, let coordinateRef):
@@ -146,9 +156,9 @@ struct SVGAbstractPath {
         return SVGAbstractPath(components: allComponents)
     }
     
-    func resolve(usingAsMainAxis mainAxis: SVGConcreteAxis) -> SVGConcretePath {
+    func resolve(usingAsMainAxis mainAxis: SVGAxis) -> SVGPath {
         
-        return SVGConcretePath(components: components.map { $0.resolve(usingAsMainAxis: mainAxis) })
+        return SVGPath(components: components.map { $0.resolve(usingAsMainAxis: mainAxis) })
     }
 }
 
@@ -156,7 +166,7 @@ struct SVGAbstractPath {
 
 struct SVGPathNode {
 
-    let path: SVGConcretePath
+    let path: SVGPath
     let pathStyle: String
     let nodeId: String
     

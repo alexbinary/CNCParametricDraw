@@ -58,17 +58,17 @@ let pathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;s
 
 let nodes = [
     SVGPathNode(
-        path: abstractSVGPaths[0].resolve(usingAsMainAxis: .horizontal).starting(at: SVGConcreteCoordinate(x: 2, y: 3)),
+        path: abstractSVGPaths[0].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 2, y: 3)),
         pathStyle: pathStyle,
         nodeId: "n1"
     ),
     SVGPathNode(
-        path: abstractSVGPaths[1].resolve(usingAsMainAxis: .horizontal).starting(at: SVGConcreteCoordinate(x: 0, y: 30)),
+        path: abstractSVGPaths[1].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 0, y: 30)),
         pathStyle: pathStyle,
         nodeId: "cren1"
     ),
     SVGPathNode(
-        path: abstractSVGPaths[2].resolve(usingAsMainAxis: .horizontal).starting(at: SVGConcreteCoordinate(x: 0, y: 40)),
+        path: abstractSVGPaths[2].resolve(usingAsMainAxis: .horizontal).starting(at: SVGCoordinate(x: 0, y: 40)),
         pathStyle: pathStyle,
         nodeId: "cren2"
     )
