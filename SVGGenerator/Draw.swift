@@ -16,7 +16,14 @@ enum PathCommand {
     case close
 }
 
-struct Path {
+protocol Path {
+    
+    var commands: [PathCommand] { get }
+    
+    var svgPathCommands: [SVGPathCommand] { get }
+}
+    
+struct SinglePath: Path {
     
     let commands: [PathCommand]
     
@@ -38,5 +45,26 @@ struct Path {
         }
         
         return svgPathCommands
+    }
+}
+
+struct PathGroup: Path {
+    
+    let paths: [Path]
+    
+    var commands: [PathCommand] {
+        
+        let commands: [PathCommand] = paths.reduce([PathCommand]()) { result, path in
+            var expandedResult = result
+            expandedResult.append(contentsOf: path.commands)
+            return expandedResult
+        }
+        
+        return commands
+    }
+    
+    var svgPathCommands: [SVGPathCommand] {
+        
+        return SinglePath(commands: commands).svgPathCommands
     }
 }
