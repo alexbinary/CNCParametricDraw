@@ -30,8 +30,8 @@ struct Box: Equatable {
 
 enum PathCommand {
     
-    case moveTo(Coordinate)
-    case lineTo(Coordinate)
+    case moveToRelative(Coordinate)
+    case lineToRelative(Coordinate)
     case close
 }
 
@@ -58,10 +58,10 @@ extension PathProtocol {
             
             switch pathCommand {
             
-            case .moveTo(let coordinate):
+            case .moveToRelative(let coordinate):
                 return .moveTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
                 
-            case .lineTo(let coordinate):
+            case .lineToRelative(let coordinate):
                 return .lineTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
                 
             case .close:
@@ -85,11 +85,11 @@ extension PathProtocol {
             
             switch command {
             
-            case .moveTo(let coordinate):
+            case .moveToRelative(let coordinate):
                 
                 currentCoordinate.add(coordinate)
                 
-            case .lineTo(let coordinate):
+            case .lineToRelative(let coordinate):
                 
                 if firstShapePoint == nil {
                     firstShapePoint = currentCoordinate
