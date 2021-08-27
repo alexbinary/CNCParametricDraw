@@ -61,7 +61,9 @@ protocol PathProtocol {
     
     func enumerateCoordinates(block: (Coordinate) -> Void)
     
-    func withCommandsTransformedWith(block: (PathCommand) -> PathCommand) -> Path
+    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path
+    
+    func withCommandsCoordinatesTransformedWith(transform: (Coordinate) -> Coordinate) -> Path
 }
 
 extension PathProtocol {
@@ -166,12 +168,12 @@ extension PathProtocol {
         return Box(origin: origin, size: size)
     }
     
-    func withCommandsTransformedWith(block: (PathCommand) -> PathCommand) -> Path {
+    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path {
     
-        return Path(commands: commands.map(block))
+        return Path(commands: commands.map(transform))
     }
     
-    var flipped: Path {
+    func withCommandsCoordinatesTransformedWith(transform: (Coordinate) -> Coordinate) -> Path {
         
         return self.withCommandsTransformedWith { command in
             
@@ -179,11 +181,11 @@ extension PathProtocol {
             
             case .moveToRelative(let coordinate):
                 
-                return .moveToRelative(coordinate.flipped)
+                return .moveToRelative(transform(coordinate))
                 
             case .lineToRelative(let coordinate):
                 
-                return .lineToRelative(coordinate.flipped)
+                return .lineToRelative(transform(coordinate))
                 
             case .close:
                 
@@ -192,47 +194,11 @@ extension PathProtocol {
         }
     }
     
-    var mirrorX: Path {
-        
-        return self.withCommandsTransformedWith { command in
-            
-            switch command {
-            
-            case .moveToRelative(let coordinate):
-                
-                return .moveToRelative(coordinate.mirrorX)
-                
-            case .lineToRelative(let coordinate):
-                
-                return .lineToRelative(coordinate.mirrorX)
-                
-            case .close:
-                
-                return .close
-            }
-        }
-    }
+    var flipped: Path { self.withCommandsCoordinatesTransformedWith { $0.flipped } }
     
-    var mirrorY: Path {
-        
-        return self.withCommandsTransformedWith  { command in
-            
-            switch command {
-            
-            case .moveToRelative(let coordinate):
-                
-                return .moveToRelative(coordinate.mirrorY)
-                
-            case .lineToRelative(let coordinate):
-                
-                return .lineToRelative(coordinate.mirrorY)
-                
-            case .close:
-                
-                return .close
-            }
-        }
-    }
+    var mirrorX: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorX } }
+    
+    var mirrorY: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
 }
 
 struct Path: PathProtocol {
