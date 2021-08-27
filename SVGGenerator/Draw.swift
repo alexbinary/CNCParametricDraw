@@ -35,9 +35,20 @@ enum PathCommand {
     case close
 }
 
-struct Path {
+protocol PathProtocol {
     
-    let commands: [PathCommand]
+    var commands: [PathCommand] { get }
+    
+    var svgCommands: [SVGPathCommand] { get }
+    
+    func enumerateCoordinates(block: (Coordinate) -> Void)
+    
+    var endPoint: Coordinate { get }
+    
+    var boundingBox: Box { get }
+}
+
+extension PathProtocol {
     
     var svgCommands: [SVGPathCommand] {
         
@@ -136,4 +147,9 @@ struct Path {
         
         return Box(origin: origin, size: size)
     }
+}
+
+struct Path: PathProtocol {
+    
+    let commands: [PathCommand]
 }
