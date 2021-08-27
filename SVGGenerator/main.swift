@@ -39,8 +39,8 @@ let abstractSVGPaths = [
         direction: .normal,
         offsetStart: offsetStart,
         offsetEnd: offsetEnd
-    ).makePath().commands),
-    CrenelMove(
+    ).svgCommands),
+    SVGPath(commands: CrenelMove(
         totalLength: 100,
         numberOfCrenels: 5,
         crenelConfig: CrenelConfig(
@@ -51,7 +51,7 @@ let abstractSVGPaths = [
         direction: .normal,
         offsetStart: 0,
         offsetEnd: 0
-    ).makePath()
+    ).svgCommands)
 ]
 
 let pathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

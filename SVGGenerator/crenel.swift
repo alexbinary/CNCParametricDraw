@@ -21,7 +21,7 @@ struct CrenelConfig {
     let depth: Float
 }
 
-struct CrenelMove {
+struct CrenelMove: PathProtocol {
     
     let totalLength: Float
     let numberOfCrenels: UInt
@@ -30,7 +30,7 @@ struct CrenelMove {
     let offsetStart: Float
     let offsetEnd: Float
     
-    func makePath() -> SVGPath {
+    var commands: [PathCommand] {
         
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
@@ -41,29 +41,28 @@ struct CrenelMove {
         let buttsStartLength: Float = buttsTotalLength/2
         let buttsEndLength: Float = buttsTotalLength - buttsStartLength
 
-        let buttStartMove: SVGPathCommand = .axis(.horizontal, buttsStartLength - offsetStart, .relative)
-        let crenelMove: [SVGPathCommand] = [
-            .axis(.vertical, crenelConfig.depth * direction, .relative),
-            .axis(.horizontal, crenelActualLength, .relative),
-            .axis(.vertical, -crenelConfig.depth * direction, .relative),
+        let buttStartMove: PathCommand = .lineTo(Coordinate(x: buttsStartLength - offsetStart, y: 0))
+        let crenelMove: [PathCommand] = [
+            .lineTo(Coordinate(x: 0, y: crenelConfig.depth * direction)),
+            .lineTo(Coordinate(x: crenelActualLength, y: 0)),
+            .lineTo(Coordinate(x: 0, y: -crenelConfig.depth * direction)),
         ]
-        let antiCrenelMove: SVGPathCommand = .axis(.horizontal, antiCrenelActualLength, .relative)
-        let buttEndMove: SVGPathCommand = .axis(.horizontal, buttsEndLength + offsetEnd, .relative)
+        let antiCrenelMove: PathCommand = .lineTo(Coordinate(x: antiCrenelActualLength, y: 0))
+        let buttEndMove: PathCommand = .lineTo(Coordinate(x: buttsEndLength + offsetEnd, y: 0))
 
-        var pathComponents: [SVGPathCommand] = []
-        
-        pathComponents.append(buttStartMove)
+        var commands: [PathCommand] = []
+        commands.append(buttStartMove)
         if numberOfCrenels > 1 {
             for _ in 1..<numberOfCrenels {
-                pathComponents.append(contentsOf: crenelMove)
-                pathComponents.append(antiCrenelMove)
+                commands.append(contentsOf: crenelMove)
+                commands.append(antiCrenelMove)
             }
         }
         if numberOfCrenels > 0 {
-            pathComponents.append(contentsOf: crenelMove)
+            commands.append(contentsOf: crenelMove)
         }
-        pathComponents.append(buttEndMove)
+        commands.append(buttEndMove)
         
-        return SVGPath(commands: pathComponents)
+        return commands
     }
 }
