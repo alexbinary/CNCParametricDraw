@@ -14,6 +14,10 @@ struct Coordinate: Equatable {
     }
     
     var flipped: Coordinate { Coordinate(x: -x, y: -y) }
+    
+    var mirrorX: Coordinate { Coordinate(x: -x, y: y) }
+    
+    var mirrorY: Coordinate { Coordinate(x: x, y: -y) }
 }
 
 struct Size: Equatable {
@@ -45,13 +49,19 @@ protocol PathProtocol {
     
     var svgPath: SVGPath { get }
     
-    func enumerateCoordinates(block: (Coordinate) -> Void)
-    
     var endPoint: Coordinate { get }
     
     var boundingBox: Box { get }
     
     var flipped: Path { get }
+    
+    var mirrorX: Path { get }
+    
+    var mirrorY: Path { get }
+    
+    func enumerateCoordinates(block: (Coordinate) -> Void)
+    
+    func withCommandsTransformedWith(block: (PathCommand) -> PathCommand) -> Path
 }
 
 extension PathProtocol {
@@ -156,9 +166,14 @@ extension PathProtocol {
         return Box(origin: origin, size: size)
     }
     
+    func withCommandsTransformedWith(block: (PathCommand) -> PathCommand) -> Path {
+    
+        return Path(commands: commands.map(block))
+    }
+    
     var flipped: Path {
         
-        return Path(commands: commands.map { command in
+        return self.withCommandsTransformedWith { command in
             
             switch command {
             
@@ -174,7 +189,49 @@ extension PathProtocol {
                 
                 return .close
             }
-        })
+        }
+    }
+    
+    var mirrorX: Path {
+        
+        return self.withCommandsTransformedWith { command in
+            
+            switch command {
+            
+            case .moveToRelative(let coordinate):
+                
+                return .moveToRelative(coordinate.mirrorX)
+                
+            case .lineToRelative(let coordinate):
+                
+                return .lineToRelative(coordinate.mirrorX)
+                
+            case .close:
+                
+                return .close
+            }
+        }
+    }
+    
+    var mirrorY: Path {
+        
+        return self.withCommandsTransformedWith  { command in
+            
+            switch command {
+            
+            case .moveToRelative(let coordinate):
+                
+                return .moveToRelative(coordinate.mirrorY)
+                
+            case .lineToRelative(let coordinate):
+                
+                return .lineToRelative(coordinate.mirrorY)
+                
+            case .close:
+                
+                return .close
+            }
+        }
     }
 }
 
