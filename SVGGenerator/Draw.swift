@@ -12,6 +12,8 @@ struct Coordinate: Equatable {
         
         self = Coordinate(x: x + other.x, y: y + other.y)
     }
+    
+    var flipped: Coordinate { Coordinate(x: -x, y: -y) }
 }
 
 struct Size: Equatable {
@@ -41,13 +43,15 @@ protocol PathProtocol {
     
     var svgCommands: [SVGPathCommand] { get }
     
-    var svgPath: SVGPath { get }
+    var svgPath: SVGPath { get }
     
     func enumerateCoordinates(block: (Coordinate) -> Void)
     
     var endPoint: Coordinate { get }
     
     var boundingBox: Box { get }
+    
+    var flipped: Path { get }
 }
 
 extension PathProtocol {
@@ -72,7 +76,7 @@ extension PathProtocol {
         return svgPathCommands
     }
     
-    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
+    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
     
     func enumerateCoordinates(block: (Coordinate) -> Void) {
         
@@ -150,6 +154,27 @@ extension PathProtocol {
         let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
         
         return Box(origin: origin, size: size)
+    }
+    
+    var flipped: Path {
+        
+        return Path(commands: commands.map { command in
+            
+            switch command {
+            
+            case .moveToRelative(let coordinate):
+                
+                return .moveToRelative(coordinate.flipped)
+                
+            case .lineToRelative(let coordinate):
+                
+                return .lineToRelative(coordinate.flipped)
+                
+            case .close:
+                
+                return .close
+            }
+        })
     }
 }
 
