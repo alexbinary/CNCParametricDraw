@@ -21,7 +21,7 @@ struct CrenelConfig {
     let depth: Float
 }
 
-struct CrenelMove: PathProtocol {
+struct CrenelPath: PathProtocol {
     
     let totalLength: Float
     let numberOfCrenels: UInt

@@ -28,7 +28,7 @@ let abstractSVGPaths = [
     ]),
     SVGPath(withCommands: [
         .moveTo(SVGCoordinate(x: offsetStart, y: 0), .relative)
-    ]).appending(CrenelMove(
+    ]).appending(CrenelPath(
         totalLength: 100,
         numberOfCrenels: 2,
         crenelConfig: CrenelConfig(
@@ -40,7 +40,7 @@ let abstractSVGPaths = [
         offsetStart: offsetStart,
         offsetEnd: offsetEnd
     )),
-    CrenelMove(
+    CrenelPath(
         totalLength: 100,
         numberOfCrenels: 5,
         crenelConfig: CrenelConfig(
