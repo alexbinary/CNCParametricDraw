@@ -13,7 +13,7 @@ struct Coordinate: Equatable {
         self = Coordinate(x: x + other.x, y: y + other.y)
     }
     
-    var flipped: Coordinate { Coordinate(x: -x, y: -y) }
+    var flipped: Coordinate { Coordinate(x: y, y: x) }
     
     var mirrorX: Coordinate { Coordinate(x: -x, y: y) }
     
@@ -58,6 +58,8 @@ protocol PathProtocol {
     var mirrorX: Path { get }
     
     var mirrorY: Path { get }
+    
+    var rotated90DegreesClockWise: Path { get }
     
     func enumerateCoordinates(block: (Coordinate) -> Void)
     
@@ -170,7 +172,7 @@ extension PathProtocol {
     
     func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path {
     
-        return Path(commands: commands.map(transform))
+        return Path(withCommands: commands.map(transform))
     }
     
     func withCommandsCoordinatesTransformedWith(transform: (Coordinate) -> Coordinate) -> Path {
@@ -199,9 +201,16 @@ extension PathProtocol {
     var mirrorX: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorX } }
     
     var mirrorY: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
+    
+    var rotated90DegreesClockWise: Path { self.flipped.mirrorX }
 }
 
 struct Path: PathProtocol {
+    
+    init(withCommands commands: [PathCommand]) {
+        
+        self.commands = commands
+    }
     
     let commands: [PathCommand]
 }
