@@ -22,7 +22,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_line() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .lineTo(Coordinate(x: 1, y: 2)),
         ])
         
@@ -31,7 +31,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_move() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .moveTo(Coordinate(x: 1, y: 2)),
         ])
         
@@ -40,7 +40,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_lineClose() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .lineTo(Coordinate(x: 1, y: 2)),
             .close,
         ])
@@ -50,7 +50,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_lineCloseLine() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .lineTo(Coordinate(x: 1, y: 2)),
             .close,
             .lineTo(Coordinate(x: 3, y: 4)),
@@ -61,7 +61,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_moveLineClose() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .moveTo(Coordinate(x: 1, y: 2)),
             .lineTo(Coordinate(x: 3, y: 4)),
             .close,
@@ -72,7 +72,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_moveLineCloseLine() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .moveTo(Coordinate(x: 1, y: 2)),
             .lineTo(Coordinate(x: 3, y: 4)),
             .close,
@@ -84,7 +84,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_lineMoveLine() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .lineTo(Coordinate(x: 1, y: 2)),
             .moveTo(Coordinate(x: 3, y: 4)),
             .lineTo(Coordinate(x: 5, y: 6)),
@@ -95,7 +95,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_lineMoveLineClose() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .lineTo(Coordinate(x: 1, y: 2)),
             .moveTo(Coordinate(x: 3, y: 4)),
             .lineTo(Coordinate(x: 5, y: 6)),
@@ -107,7 +107,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_moveLineMove() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .moveTo(Coordinate(x: 1, y: 2)),
             .lineTo(Coordinate(x: 3, y: 4)),
             .moveTo(Coordinate(x: 5, y: 6)),
@@ -118,7 +118,7 @@ class DrawTest: XCTestCase {
     
     func test_Path_endPoint_moveLineMoveClose() {
         
-        let path = SinglePath(commands: [
+        let path = Path(commands: [
             .moveTo(Coordinate(x: 1, y: 2)),
             .lineTo(Coordinate(x: 3, y: 4)),
             .moveTo(Coordinate(x: 5, y: 6)),

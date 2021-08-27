@@ -21,16 +21,29 @@ enum PathCommand {
     case close
 }
 
-protocol Path {
+struct Path {
     
-    var commands: [PathCommand] { get }
+    let commands: [PathCommand]
     
-    var endPoint: Coordinate { get }
-    
-    var svgPathCommands: [SVGPathCommand] { get }
-}
-
-extension Path {
+    var svgCommands: [SVGPathCommand] {
+        
+        let svgPathCommands: [SVGPathCommand] = commands.map { pathCommand in
+            
+            switch pathCommand {
+            
+            case .moveTo(let coordinate):
+                return .moveTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
+                
+            case .lineTo(let coordinate):
+                return .lineTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
+                
+            case .close:
+                return .close
+            }
+        }
+        
+        return svgPathCommands
+    }
     
     var endPoint: Coordinate {
         
@@ -59,46 +72,5 @@ extension Path {
         }
         
         return currentCoordinate
-    }
-    
-    var svgPathCommands: [SVGPathCommand] {
-        
-        let svgPathCommands: [SVGPathCommand] = commands.map { pathCommand in
-            
-            switch pathCommand {
-            
-            case .moveTo(let coordinate):
-                return .moveTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
-                
-            case .lineTo(let coordinate):
-                return .lineTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
-                
-            case .close:
-                return .close
-            }
-        }
-        
-        return svgPathCommands
-    }
-}
-    
-struct SinglePath: Path {
-    
-    let commands: [PathCommand]
-}
-
-struct PathGroup: Path {
-    
-    let paths: [Path]
-    
-    var commands: [PathCommand] {
-        
-        let commands: [PathCommand] = paths.reduce([PathCommand]()) { result, path in
-            var expandedResult = result
-            expandedResult.append(contentsOf: path.commands)
-            return expandedResult
-        }
-        
-        return commands
     }
 }
