@@ -17,7 +17,7 @@ let offsetStart: Float = 5
 let offsetEnd: Float = 5
 
 let abstractSVGPaths = [
-    SVGPath(commands: [
+    SVGPath(withCommands: [
         .moveTo(SVGCoordinate(x: 10, y: 20), .relative),
         .lineTo(SVGCoordinate(x: 30, y: 40), .relative),
         .axis(.horizontal, 50, .relative),
@@ -26,7 +26,7 @@ let abstractSVGPaths = [
         .moveTo(SVGCoordinate(x: 100, y: 0), .absolute),
         .axis(.vertical, 50, .relative),
     ]),
-    SVGPath(commands: [
+    SVGPath(withCommands: [
         .moveTo(SVGCoordinate(x: offsetStart, y: 0), .relative)
     ]).appending(CrenelMove(
         totalLength: 100,
@@ -39,8 +39,8 @@ let abstractSVGPaths = [
         direction: .normal,
         offsetStart: offsetStart,
         offsetEnd: offsetEnd
-    ).svgCommands),
-    SVGPath(commands: CrenelMove(
+    )),
+    CrenelMove(
         totalLength: 100,
         numberOfCrenels: 5,
         crenelConfig: CrenelConfig(
@@ -51,7 +51,7 @@ let abstractSVGPaths = [
         direction: .normal,
         offsetStart: 0,
         offsetEnd: 0
-    ).svgCommands)
+    ).svgPath
 ]
 
 let pathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

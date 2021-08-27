@@ -61,6 +61,16 @@ enum SVGPathCommand {
 
 struct SVGPath {
     
+    init(withCommands commands: [SVGPathCommand]) {
+        
+        self.commands = commands
+    }
+    
+    init(fromPath path: PathProtocol) {
+        
+        self.init(withCommands: path.svgCommands)
+    }
+    
     let commands: [SVGPathCommand]
     
     func starting(at point: SVGCoordinate) -> SVGPath {
@@ -68,7 +78,7 @@ struct SVGPath {
         var completedCommands = commands
         completedCommands.insert(.moveTo(point, .absolute), at: 0)
         
-        return SVGPath(commands: completedCommands)
+        return SVGPath(withCommands: completedCommands)
     }
     
     func render() -> String {
@@ -81,7 +91,17 @@ struct SVGPath {
         var allCommands = commands
         allCommands.append(contentsOf: additionalCommands)
 
-        return SVGPath(commands: allCommands)
+        return SVGPath(withCommands: allCommands)
+    }
+    
+    func appending(_ svgPath: SVGPath) -> SVGPath {
+    
+        return self.appending(svgPath.commands)
+    }
+    
+    func appending(_ path: PathProtocol) -> SVGPath {
+    
+        return self.appending(path.svgPath)
     }
 }
 

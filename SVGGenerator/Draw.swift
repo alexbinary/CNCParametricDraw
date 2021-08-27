@@ -41,6 +41,8 @@ protocol PathProtocol {
     
     var svgCommands: [SVGPathCommand] { get }
     
+    var svgPath: SVGPath { get }
+    
     func enumerateCoordinates(block: (Coordinate) -> Void)
     
     var endPoint: Coordinate { get }
@@ -69,6 +71,8 @@ extension PathProtocol {
         
         return svgPathCommands
     }
+    
+    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
     
     func enumerateCoordinates(block: (Coordinate) -> Void) {
         
