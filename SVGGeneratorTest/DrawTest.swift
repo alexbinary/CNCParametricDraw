@@ -19,6 +19,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(coordinate, Coordinate(x: 4, y: 6))
         XCTAssertEqual(coordinateCopy, Coordinate(x: 1, y: 2))
     }
+
     
     func test_Path_endPoint_line() {
         
@@ -126,5 +127,53 @@ class DrawTest: XCTestCase {
         ])
         
         XCTAssertEqual(path.endPoint, Coordinate(x: 1, y: 2))
+    }
+    
+    
+    func test_Path_boundingBox_line() {
+        
+        let path = Path(commands: [
+            .lineTo(Coordinate(x: 1, y: 2)),
+        ])
+        
+        XCTAssertEqual(path.boundingBox, Box(origin: Coordinate(x: 0, y: 0), size: Size(width: 1, height: 2)))
+    }
+    
+    func test_Path_boundingBox_line_negative() {
+        
+        let path = Path(commands: [
+            .lineTo(Coordinate(x: -1, y: -2)),
+        ])
+        
+        XCTAssertEqual(path.boundingBox, Box(origin: Coordinate(x: -1, y: -2), size: Size(width: 1, height: 2)))
+    }
+    
+    func test_Path_boundingBox_move() {
+        
+        let path = Path(commands: [
+            .moveTo(Coordinate(x: 1, y: 2)),
+        ])
+        
+        XCTAssertEqual(path.boundingBox, Box(origin: Coordinate(x: 0, y: 0), size: Size(width: 1, height: 2)))
+    }
+    
+    func test_Path_boundingBox_move_nagative() {
+        
+        let path = Path(commands: [
+            .moveTo(Coordinate(x: -1, y: -2)),
+        ])
+        
+        XCTAssertEqual(path.boundingBox, Box(origin: Coordinate(x: -1, y: -2), size: Size(width: 1, height: 2)))
+    }
+    
+    func test_Path_boundingBox_lineMoveLine() {
+        
+        let path = Path(commands: [
+            .lineTo(Coordinate(x: 1, y: 2)),
+            .moveTo(Coordinate(x: 3, y: 4)),
+            .lineTo(Coordinate(x: -5, y: -6)),
+        ])
+        
+        XCTAssertEqual(path.boundingBox, Box(origin: Coordinate(x: -1, y: 0), size: Size(width: 5, height: 6)))
     }
 }

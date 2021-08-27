@@ -5,13 +5,27 @@ import Foundation
 
 struct Coordinate: Equatable {
     
-    let x: Float
-    let y: Float
+    var x: Float
+    var y: Float
     
     mutating func add(_ other: Coordinate) {
         
         self = Coordinate(x: x + other.x, y: y + other.y)
     }
+}
+
+struct Size: Equatable {
+    
+    var width: Float
+    var height: Float
+    
+    static var zero: Size { Size(width: 0, height: 0) }
+}
+
+struct Box: Equatable {
+    
+    var origin: Coordinate
+    var size: Size
 }
 
 enum PathCommand {
@@ -45,10 +59,12 @@ struct Path {
         return svgPathCommands
     }
     
-    var endPoint: Coordinate {
+    func enumerateCoordinates(block: (Coordinate) -> Void) {
         
         var currentCoordinate = Coordinate(x: 0, y: 0)
         var firstShapePoint: Coordinate? = nil
+        
+        block(currentCoordinate)
         
         commands.forEach { command in
             
@@ -69,8 +85,55 @@ struct Path {
                 
                 currentCoordinate = firstShapePoint!
             }
+            
+            block(currentCoordinate)
+        }
+    }
+    
+    var endPoint: Coordinate {
+    
+        var currentCoordinate = Coordinate(x: 0, y: 0)
+        
+        enumerateCoordinates { coordinate in
+            
+            currentCoordinate = coordinate
         }
         
         return currentCoordinate
+    }
+    
+    var boundingBox: Box {
+        
+        var smallestCoordinate: Coordinate! = nil
+        var biggestCoordinate: Coordinate! = nil
+        
+        enumerateCoordinates { coordinate in
+        
+            if smallestCoordinate == nil {
+                smallestCoordinate = coordinate
+            }
+            if biggestCoordinate == nil {
+                biggestCoordinate = coordinate
+            }
+            
+            if coordinate.x > biggestCoordinate.x {
+                biggestCoordinate.x = coordinate.x
+            }
+            if coordinate.y > biggestCoordinate.y {
+                biggestCoordinate.y = coordinate.y
+            }
+            
+            if coordinate.x < smallestCoordinate.x {
+                smallestCoordinate.x = coordinate.x
+            }
+            if coordinate.y < smallestCoordinate.y {
+                smallestCoordinate.y = coordinate.y
+            }
+        }
+        
+        let origin: Coordinate! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Coordinate(x: 0, y: 0)
+        let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
+        
+        return Box(origin: origin, size: size)
     }
 }
