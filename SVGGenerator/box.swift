@@ -12,12 +12,12 @@ enum BoxCrenelDirection {
 
 
 
-struct BoxCrenelConfig {
+struct BoxFaceCrenelConfig {
 
     
-    var direction: BoxCrenelDirection
     var crenelConfig: CrenelConfig
     var numberOfCrenels: UInt
+    var direction: BoxCrenelDirection
 }
 
 
@@ -28,10 +28,10 @@ class BoxFace: Path {
     init(
         width boxWidth: Float,
         height boxHeight: Float,
-        leftCrenelConfig: BoxCrenelConfig?,
-        rightCrenelConfig: BoxCrenelConfig?,
-        topCrenelConfig: BoxCrenelConfig?,
-        bottomCrenelConfig: BoxCrenelConfig?
+        leftCrenelConfig: BoxFaceCrenelConfig?,
+        rightCrenelConfig: BoxFaceCrenelConfig?,
+        topCrenelConfig: BoxFaceCrenelConfig?,
+        bottomCrenelConfig: BoxFaceCrenelConfig?
     ) {
          
         let totalPath: Path = .empty
@@ -129,15 +129,120 @@ class BoxFace: Path {
 
 
 
-//class Box: Path {
-//    
-//    
-//    init(
-//        size: Size,
-//        leftCrenelConfig: BoxCrenelConfig?,
-//        rightCrenelConfig: BoxCrenelConfig?,
-//        topCrenelConfig: BoxCrenelConfig?,
-//        bottomCrenelConfig: BoxCrenelConfig?
-//    ) {
-//    }
-//}
+struct BoxCrenelConfig {
+
+    
+    var crenelConfig: CrenelConfig
+    var numberOfCrenels: UInt
+}
+
+
+
+class Box: PathGroup {
+    
+    
+    let bottomFace: Path
+    
+    let frontFace: Path
+    let backFace: Path
+    
+    let leftFace: Path
+    let rightFace: Path
+    
+    
+    init(
+        width boxWidth: Float,
+        height boxHeight: Float,
+        length boxLength: Float,
+        widthCrenelConfig: BoxCrenelConfig,
+        heightCrenelConfig: BoxCrenelConfig,
+        lengthCrenelConfig: BoxCrenelConfig
+    ) {
+        var paths: [Path] = []
+        
+        self.bottomFace = BoxFace(
+            
+            width: boxLength,
+            height: boxWidth,
+            
+            leftCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: widthCrenelConfig.crenelConfig,
+                numberOfCrenels: widthCrenelConfig.numberOfCrenels,
+                direction: .internal
+            ),
+            rightCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: widthCrenelConfig.crenelConfig,
+                numberOfCrenels: widthCrenelConfig.numberOfCrenels,
+                direction: .internal
+            ),
+            topCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: lengthCrenelConfig.crenelConfig,
+                numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
+                direction: .internal
+            ),
+            bottomCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: lengthCrenelConfig.crenelConfig,
+                numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
+                direction: .internal
+            )
+        )
+        
+        self.frontFace = BoxFace(
+            
+            width: boxLength,
+            height: boxHeight,
+            
+            leftCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: heightCrenelConfig.crenelConfig,
+                numberOfCrenels: heightCrenelConfig.numberOfCrenels,
+                direction: .internal
+            ),
+            rightCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: heightCrenelConfig.crenelConfig,
+                numberOfCrenels: heightCrenelConfig.numberOfCrenels,
+                direction: .external
+            ),
+            topCrenelConfig: nil,
+            bottomCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: lengthCrenelConfig.crenelConfig,
+                numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
+                direction: .external
+            )
+        )
+        
+        self.backFace = self.frontFace.copy
+        
+        self.leftFace = BoxFace(
+            
+            width: boxWidth,
+            height: boxHeight,
+            
+            leftCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: heightCrenelConfig.crenelConfig,
+                numberOfCrenels: heightCrenelConfig.numberOfCrenels,
+                direction: .internal
+            ),
+            rightCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: heightCrenelConfig.crenelConfig,
+                numberOfCrenels: heightCrenelConfig.numberOfCrenels,
+                direction: .external
+            ),
+            topCrenelConfig: nil,
+            bottomCrenelConfig: BoxFaceCrenelConfig(
+                crenelConfig: widthCrenelConfig.crenelConfig,
+                numberOfCrenels: widthCrenelConfig.numberOfCrenels,
+                direction: .external
+            )
+        )
+        
+        self.rightFace = self.leftFace.copy
+        
+        paths.append(bottomFace)
+        paths.append(frontFace)
+        paths.append(backFace)
+        paths.append(leftFace)
+        paths.append(rightFace)
+        
+        super.init(withPaths: paths)
+    }
+}

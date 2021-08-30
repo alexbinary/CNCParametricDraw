@@ -77,6 +77,9 @@ class Path {
     static var empty: Path { Path(withCommands: []) }
     
     
+    var copy: Path { Path(fromPath: self) }
+    
+    
     func append(_ command: PathCommand) {
         
         commands.append(command)
@@ -243,4 +246,18 @@ class Path {
     var rotated90DegreesClockWise: Path { self.flipped.transformedMirrorX }
     var rotated180DegreesClockWise: Path { self.rotated90DegreesClockWise.rotated90DegreesClockWise }
     var rotated270DegreesClockWise: Path { self.rotated180DegreesClockWise.rotated90DegreesClockWise }
+}
+
+
+
+class PathGroup {
+    
+    
+    let paths: [Path]
+    
+    
+    init(withPaths paths: [Path]) {
+        
+        self.paths = paths
+    }
 }
