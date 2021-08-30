@@ -29,14 +29,14 @@ struct CrenelPath: PathProtocol {
         let buttsStartLength: Float = buttsTotalLength/2
         let buttsEndLength: Float = buttsTotalLength - buttsStartLength
 
-        let buttStartMove: PathCommand = .lineToRelative(Coordinate(x: buttsStartLength - offsetStart, y: 0))
+        let buttStartMove: PathCommand = .lineToRelative(Coordinates(x: buttsStartLength - offsetStart, y: 0))
         let crenelMove: [PathCommand] = [
-            .lineToRelative(Coordinate(x: 0, y: crenelConfig.depth)),
-            .lineToRelative(Coordinate(x: crenelActualLength, y: 0)),
-            .lineToRelative(Coordinate(x: 0, y: -crenelConfig.depth)),
+            .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth)),
+            .lineToRelative(Coordinates(x: crenelActualLength, y: 0)),
+            .lineToRelative(Coordinates(x: 0, y: -crenelConfig.depth)),
         ]
-        let antiCrenelMove: PathCommand = .lineToRelative(Coordinate(x: antiCrenelActualLength, y: 0))
-        let buttEndMove: PathCommand = .lineToRelative(Coordinate(x: buttsEndLength + offsetEnd, y: 0))
+        let antiCrenelMove: PathCommand = .lineToRelative(Coordinates(x: antiCrenelActualLength, y: 0))
+        let buttEndMove: PathCommand = .lineToRelative(Coordinates(x: buttsEndLength + offsetEnd, y: 0))
 
         var commands: [PathCommand] = []
         commands.append(buttStartMove)
