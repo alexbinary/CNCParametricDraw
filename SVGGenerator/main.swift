@@ -10,7 +10,8 @@ let defaultPathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap
 let nodes = [
     SVGPathNode(
         path: BoxFace(
-            size: BoxFaceSize(width: 100, height: 100),
+            width: 100,
+            height: 100,
             leftCrenelConfig: BoxCrenelConfig(
                 direction: .external,
                 crenelConfig: CrenelConfig(

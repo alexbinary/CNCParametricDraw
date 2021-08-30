@@ -22,20 +22,12 @@ struct BoxCrenelConfig {
 
 
 
-struct BoxFaceSize: Equatable {
-
-    
-    var width: Float
-    var height: Float
-}
-
-
-
 class BoxFace: Path {
         
     
     init(
-        size: BoxFaceSize,
+        width boxWidth: Float,
+        height boxHeight: Float,
         leftCrenelConfig: BoxCrenelConfig?,
         rightCrenelConfig: BoxCrenelConfig?,
         topCrenelConfig: BoxCrenelConfig?,
@@ -52,13 +44,13 @@ class BoxFace: Path {
         
         totalPath.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
-        let horizontalLength = size.width - offsetLeft - offsetRight
-        let verticalLength = size.height - offsetTop - offsetBottom
+        let horizontalLength = boxWidth - offsetLeft - offsetRight
+        let verticalLength = boxHeight - offsetTop - offsetBottom
         
         if let crenelConfig = leftCrenelConfig {
             
             let crenelPath = CrenelPath(
-                totalLength: size.height,
+                totalLength: boxHeight,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetTop,
@@ -77,7 +69,7 @@ class BoxFace: Path {
         if let crenelConfig = bottomCrenelConfig {
             
             let crenelPath: Path = CrenelPath(
-                totalLength: size.width,
+                totalLength: boxWidth,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetLeft,
@@ -96,7 +88,7 @@ class BoxFace: Path {
         if let crenelConfig = rightCrenelConfig {
             
             let crenelPath = CrenelPath(
-                totalLength: size.height,
+                totalLength: boxHeight,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetBottom,
@@ -115,7 +107,7 @@ class BoxFace: Path {
         if let crenelConfig = topCrenelConfig {
             
             let crenelPath: Path = CrenelPath(
-                totalLength: size.width,
+                totalLength: boxWidth,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetRight,
@@ -133,16 +125,6 @@ class BoxFace: Path {
         
         super.init(fromPath: totalPath)
     }
-}
-
-
-
-struct BoxSize: Equatable {
-
-    
-    var width: Float
-    var height: Float
-    var length: Float
 }
 
 
