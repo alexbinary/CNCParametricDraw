@@ -56,7 +56,7 @@ enum PathCommand {
 
 
 
-protocol PathProtocol {
+protocol Path {
     
     
     var commands: [PathCommand] { get }
@@ -80,7 +80,7 @@ protocol PathProtocol {
 
 
 
-extension PathProtocol {
+extension Path {
     
     
     func enumerateCoordinates(block: (Coordinates) -> Void) {
@@ -166,7 +166,7 @@ extension PathProtocol {
     
     func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path {
     
-        return Path(withCommands: commands.map(transform))
+        return ExplicitPath(withCommands: commands.map(transform))
     }
     
     
@@ -204,7 +204,7 @@ extension PathProtocol {
 
 
 
-struct Path: PathProtocol {
+struct ExplicitPath: Path {
     
     
     let commands: [PathCommand]

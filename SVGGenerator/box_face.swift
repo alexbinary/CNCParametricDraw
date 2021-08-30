@@ -18,7 +18,7 @@ struct BoxCrenelConfig {
 }
 
 
-struct BoxFace: PathProtocol {
+struct BoxFace: Path {
         
     let size: Size
     
@@ -63,7 +63,7 @@ struct BoxFace: PathProtocol {
         
         if let crenelConfig = bottomCrenelConfig {
             
-            var path: PathProtocol = CrenelPath(
+            var path: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -101,7 +101,7 @@ struct BoxFace: PathProtocol {
         
         if let crenelConfig = topCrenelConfig {
             
-            var path: PathProtocol = CrenelPath(
+            var path: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,

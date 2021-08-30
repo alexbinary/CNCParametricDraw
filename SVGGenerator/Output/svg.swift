@@ -137,7 +137,7 @@ struct SVGFile {
 
 
 
-extension PathProtocol {
+extension Path {
     
     
     var svgCommands: [SVGPathCommand] {
