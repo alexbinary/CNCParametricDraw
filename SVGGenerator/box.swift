@@ -35,7 +35,7 @@ struct BoxFace: Path {
     
     var commands: [PathCommand] {
         
-        var commands: [PathCommand] = []
+        var path = ExplicitPath.empty
         
         let offsetLeft = leftCrenelConfig != nil && leftCrenelConfig!.direction == .external ? leftCrenelConfig!.crenelConfig.depth : 0
         let offsetRight = rightCrenelConfig != nil && rightCrenelConfig!.direction == .external ? rightCrenelConfig!.crenelConfig.depth : 0
@@ -43,14 +43,14 @@ struct BoxFace: Path {
         let offsetTop = topCrenelConfig != nil && topCrenelConfig!.direction == .external ? topCrenelConfig!.crenelConfig.depth : 0
         let offsetBottom = bottomCrenelConfig != nil && bottomCrenelConfig!.direction == .external ? bottomCrenelConfig!.crenelConfig.depth : 0
         
-        commands.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
+        path.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
         let horizontalLength = size.width - offsetLeft - offsetRight
         let verticalLength = size.height - offsetTop - offsetBottom
         
         if let crenelConfig = leftCrenelConfig {
             
-            var path = CrenelPath(
+            var crenelPath = CrenelPath(
                 totalLength: size.height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -59,17 +59,17 @@ struct BoxFace: Path {
             ).rotated90DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                path = path.mirrorX
+                crenelPath = crenelPath.mirrorX
             }
             
-            commands.append(contentsOf:path.commands)
+            path.append(crenelPath)
         } else {
-            commands.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
+            path.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = bottomCrenelConfig {
             
-            var path: Path = CrenelPath(
+            var crenelPath: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -78,17 +78,17 @@ struct BoxFace: Path {
             )
             
             if crenelConfig.direction == .internal {
-                path = path.mirrorY
+                crenelPath = crenelPath.mirrorY
             }
             
-            commands.append(contentsOf: path.commands)
+            path.append(crenelPath)
         } else {
-            commands.append(.lineToRelative(Coordinates(x: horizontalLength, y: 0)))
+            path.append(.lineToRelative(Coordinates(x: horizontalLength, y: 0)))
         }
         
         if let crenelConfig = rightCrenelConfig {
             
-            var path = CrenelPath(
+            var crenelPath = CrenelPath(
                 totalLength: size.height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -97,17 +97,17 @@ struct BoxFace: Path {
             ).rotated270DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                path = path.mirrorX
+                crenelPath = crenelPath.mirrorX
             }
             
-            commands.append(contentsOf:path.commands)
+            path.append(crenelPath)
         } else {
-            commands.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
+            path.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = topCrenelConfig {
             
-            var path: Path = CrenelPath(
+            var crenelPath: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -116,14 +116,14 @@ struct BoxFace: Path {
             ).rotated180DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                path = path.mirrorY
+                crenelPath = crenelPath.mirrorY
             }
             
-            commands.append(contentsOf: path.commands)
+            path.append(crenelPath)
         } else {
-            commands.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
+            path.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
         }
         
-        return commands
+        return path.commands
     }
 }

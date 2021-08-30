@@ -64,18 +64,20 @@ protocol Path {
     var endPoint: Coordinates { get }
     var boundingBox: CoordinatesBox { get }
     
-    var flipped: Path { get }
-    var mirrorX: Path { get }
-    var mirrorY: Path { get }
+    var flipped: ExplicitPath { get }
+    var mirrorX: ExplicitPath { get }
+    var mirrorY: ExplicitPath { get }
     
-    var rotated90DegreesClockWise: Path { get }
+    var rotated90DegreesClockWise: ExplicitPath { get }
+    var rotated180DegreesClockWise: ExplicitPath { get }
+    var rotated270DegreesClockWise: ExplicitPath { get }
     
     
     func enumerateCoordinates(block: (Coordinates) -> Void)
     
-    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path
+    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> ExplicitPath
     
-    func withCommandsCoordinatesTransformedWith(transform: (Coordinates) -> Coordinates) -> Path
+    func withCommandsCoordinatesTransformedWith(transform: (Coordinates) -> Coordinates) -> ExplicitPath
 }
 
 
@@ -164,13 +166,13 @@ extension Path {
     }
     
     
-    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path {
+    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> ExplicitPath {
     
         return ExplicitPath(withCommands: commands.map(transform))
     }
     
     
-    func withCommandsCoordinatesTransformedWith(transform: (Coordinates) -> Coordinates) -> Path {
+    func withCommandsCoordinatesTransformedWith(transform: (Coordinates) -> Coordinates) -> ExplicitPath {
         
         return self.withCommandsTransformedWith { command in
             
@@ -192,14 +194,14 @@ extension Path {
     }
     
     
-    var flipped: Path { self.withCommandsCoordinatesTransformedWith { $0.flipped } }
+    var flipped: ExplicitPath { self.withCommandsCoordinatesTransformedWith { $0.flipped } }
     
-    var mirrorX: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorX } }
-    var mirrorY: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
+    var mirrorX: ExplicitPath { self.withCommandsCoordinatesTransformedWith { $0.mirrorX } }
+    var mirrorY: ExplicitPath { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
     
-    var rotated90DegreesClockWise: Path { self.flipped.mirrorX }
-    var rotated180DegreesClockWise: Path { self.rotated90DegreesClockWise.rotated90DegreesClockWise }
-    var rotated270DegreesClockWise: Path { self.rotated180DegreesClockWise.rotated90DegreesClockWise }
+    var rotated90DegreesClockWise: ExplicitPath { self.flipped.mirrorX }
+    var rotated180DegreesClockWise: ExplicitPath { self.rotated90DegreesClockWise.rotated90DegreesClockWise }
+    var rotated270DegreesClockWise: ExplicitPath { self.rotated180DegreesClockWise.rotated90DegreesClockWise }
 }
 
 
@@ -207,11 +209,20 @@ extension Path {
 struct ExplicitPath: Path {
     
     
-    let commands: [PathCommand]
+    var commands: [PathCommand]
     
     
     init(withCommands commands: [PathCommand]) {
         
         self.commands = commands
     }
+    
+    
+    static var empty: ExplicitPath { ExplicitPath(withCommands: []) }
+    
+    
+    mutating func append(_ command: PathCommand) { commands.append(command) }
+    
+    mutating func append(_ path: Path) { commands.append(contentsOf: path.commands) }
 }
+
