@@ -13,18 +13,17 @@ struct CrenelConfig {
 
 
 
-struct CrenelPath: Path {
+class CrenelPath: Path {
 
     
-    let totalLength: Float
-    let numberOfCrenels: UInt
-    let crenelConfig: CrenelConfig
-    let offsetStart: Float
-    let offsetEnd: Float
-    
-    
-    var commands: [PathCommand] {
-        
+    init(
+        totalLength: Float,
+        numberOfCrenels: UInt,
+        crenelConfig: CrenelConfig,
+        offsetStart: Float,
+        offsetEnd: Float
+    ) {
+     
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
@@ -34,28 +33,28 @@ struct CrenelPath: Path {
         let buttsStartLength: Float = buttsTotalLength/2
         let buttsEndLength: Float = buttsTotalLength - buttsStartLength
 
-        let buttStartMove: PathCommand = .lineToRelative(Coordinates(x: buttsStartLength - offsetStart, y: 0))
-        let crenelMove: [PathCommand] = [
+        let buttStartPath = Path(withCommands: [.lineToRelative(Coordinates(x: buttsStartLength - offsetStart, y: 0))])
+        let crenelPath = Path(withCommands: [
             .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth)),
             .lineToRelative(Coordinates(x: crenelActualLength, y: 0)),
             .lineToRelative(Coordinates(x: 0, y: -crenelConfig.depth)),
-        ]
-        let antiCrenelMove: PathCommand = .lineToRelative(Coordinates(x: antiCrenelActualLength, y: 0))
-        let buttEndMove: PathCommand = .lineToRelative(Coordinates(x: buttsEndLength + offsetEnd, y: 0))
+        ])
+        let antiCrenelPath = Path(withCommands: [.lineToRelative(Coordinates(x: antiCrenelActualLength, y: 0))])
+        let buttEndPath = Path(withCommands: [.lineToRelative(Coordinates(x: buttsEndLength + offsetEnd, y: 0))])
 
-        var commands: [PathCommand] = []
-        commands.append(buttStartMove)
+        let totalPath: Path = .empty
+        totalPath.append(buttStartPath)
         if numberOfCrenels > 1 {
             for _ in 1..<numberOfCrenels {
-                commands.append(contentsOf: crenelMove)
-                commands.append(antiCrenelMove)
+                totalPath.append(crenelPath)
+                totalPath.append(antiCrenelPath)
             }
         }
         if numberOfCrenels > 0 {
-            commands.append(contentsOf: crenelMove)
+            totalPath.append(crenelPath)
         }
-        commands.append(buttEndMove)
+        totalPath.append(buttEndPath)
         
-        return commands
+        super.init(fromPath: totalPath)
     }
 }

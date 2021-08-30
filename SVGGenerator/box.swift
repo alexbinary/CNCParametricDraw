@@ -22,20 +22,18 @@ struct BoxCrenelConfig {
 
 
 
-struct BoxFace: Path {
+class BoxFace: Path {
         
     
-    let size: Size
-    
-    let leftCrenelConfig: BoxCrenelConfig?
-    let rightCrenelConfig: BoxCrenelConfig?
-    let topCrenelConfig: BoxCrenelConfig?
-    let bottomCrenelConfig: BoxCrenelConfig?
-    
-    
-    var commands: [PathCommand] {
-        
-        var path = ExplicitPath.empty
+    init(
+        size: Size,
+        leftCrenelConfig: BoxCrenelConfig?,
+        rightCrenelConfig: BoxCrenelConfig?,
+        topCrenelConfig: BoxCrenelConfig?,
+        bottomCrenelConfig: BoxCrenelConfig?
+    ) {
+         
+        let totalPath: Path = .empty
         
         let offsetLeft = leftCrenelConfig != nil && leftCrenelConfig!.direction == .external ? leftCrenelConfig!.crenelConfig.depth : 0
         let offsetRight = rightCrenelConfig != nil && rightCrenelConfig!.direction == .external ? rightCrenelConfig!.crenelConfig.depth : 0
@@ -43,7 +41,7 @@ struct BoxFace: Path {
         let offsetTop = topCrenelConfig != nil && topCrenelConfig!.direction == .external ? topCrenelConfig!.crenelConfig.depth : 0
         let offsetBottom = bottomCrenelConfig != nil && bottomCrenelConfig!.direction == .external ? bottomCrenelConfig!.crenelConfig.depth : 0
         
-        path.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
+        totalPath.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
         let horizontalLength = size.width - offsetLeft - offsetRight
         let verticalLength = size.height - offsetTop - offsetBottom
@@ -62,9 +60,9 @@ struct BoxFace: Path {
                 crenelPath = crenelPath.mirrorX
             }
             
-            path.append(crenelPath)
+            totalPath.append(crenelPath)
         } else {
-            path.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
+            totalPath.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = bottomCrenelConfig {
@@ -81,9 +79,9 @@ struct BoxFace: Path {
                 crenelPath = crenelPath.mirrorY
             }
             
-            path.append(crenelPath)
+            totalPath.append(crenelPath)
         } else {
-            path.append(.lineToRelative(Coordinates(x: horizontalLength, y: 0)))
+            totalPath.append(.lineToRelative(Coordinates(x: horizontalLength, y: 0)))
         }
         
         if let crenelConfig = rightCrenelConfig {
@@ -100,9 +98,9 @@ struct BoxFace: Path {
                 crenelPath = crenelPath.mirrorX
             }
             
-            path.append(crenelPath)
+            totalPath.append(crenelPath)
         } else {
-            path.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
+            totalPath.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = topCrenelConfig {
@@ -119,11 +117,11 @@ struct BoxFace: Path {
                 crenelPath = crenelPath.mirrorY
             }
             
-            path.append(crenelPath)
+            totalPath.append(crenelPath)
         } else {
-            path.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
+            totalPath.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
         }
         
-        return path.commands
+        super.init(fromPath: totalPath)
     }
 }
