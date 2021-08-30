@@ -136,6 +136,25 @@ struct SVGFile {
 }
 
 
+struct SVGRenderer {
+    
+    
+    let defaultPathStyle: String
+    
+    
+    init(defaultPathStyle: String) {
+        
+        self.defaultPathStyle = defaultPathStyle
+    }
+    
+    
+    func renderFile(withPaths paths: [Path]) -> String {
+        
+        return SVGFile(pathNodes: paths.map { SVGPathNode(path: $0.svgPath, pathStyle: defaultPathStyle, nodeId: "") }).render()
+    }
+}
+
+
 
 extension Path {
     

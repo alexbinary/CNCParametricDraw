@@ -5,8 +5,6 @@ import Foundation
 
 let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("generated.svg")
 
-let defaultPathStyle = "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-
 let box = Box(
     
     width: 100,
@@ -41,7 +39,7 @@ let box = Box(
 
 
 
-let nodes = box.paths.map { SVGPathNode(path: $0.svgPath, pathStyle: defaultPathStyle, nodeId: "") }
+let paths = box.paths
     
 //    [
 //    SVGPathNode(
@@ -82,5 +80,7 @@ let nodes = box.paths.map { SVGPathNode(path: $0.svgPath, pathStyle: defaultPath
 //    ),
 //]
 
+let svgRenderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
+let svgFileContent = svgRenderer.renderFile(withPaths: paths)
 
-write(SVGFile(pathNodes: nodes).render(), to: outputFileURL)
+write(svgFileContent, to: outputFileURL)
