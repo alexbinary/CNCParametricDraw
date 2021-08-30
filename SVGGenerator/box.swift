@@ -27,7 +27,6 @@ struct BoxFace: PathProtocol {
                                     totalLength: totalLengthVertical,
                                     numberOfCrenels: 5,
                                     crenelConfig: leftCrenelConfig,
-                                    direction: .normal,
                                     offsetStart: 0,
                                     offsetEnd: 0
                                 ).commands
@@ -42,7 +41,6 @@ struct BoxFace: PathProtocol {
                                     totalLength: size.width,
                                     numberOfCrenels: 5,
                                     crenelConfig: bottomCrenelConfig,
-                                    direction: .normal,
                                     offsetStart: leftCrenelConfig?.depth ?? 0,
                                     offsetEnd: -(rightCrenelConfig?.depth ?? 0)
                                 ).commands
