@@ -5,18 +5,23 @@ import Foundation
 
 struct CrenelConfig {
     
+    
     let baseLength: Float
     let lengthAdjustment: Float
     let depth: Float
 }
 
+
+
 struct CrenelPath: Path {
+
     
     let totalLength: Float
     let numberOfCrenels: UInt
     let crenelConfig: CrenelConfig
     let offsetStart: Float
     let offsetEnd: Float
+    
     
     var commands: [PathCommand] {
         
