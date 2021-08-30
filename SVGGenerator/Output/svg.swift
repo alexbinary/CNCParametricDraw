@@ -134,3 +134,35 @@ struct SVGFile {
             """
     }
 }
+
+
+
+extension PathProtocol {
+    
+    
+    var svgCommands: [SVGPathCommand] {
+        
+        let svgCommands: [SVGPathCommand] = commands.map { command in
+            
+            switch command {
+            
+            case .moveToRelative(let coordinate):
+                
+                return .moveTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
+                
+            case .lineToRelative(let coordinate):
+                
+                return .lineTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
+                
+            case .close:
+                
+                return .close
+            }
+        }
+        
+        return svgCommands
+    }
+    
+    
+    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
+}

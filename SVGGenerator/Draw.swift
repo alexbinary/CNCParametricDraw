@@ -45,10 +45,6 @@ protocol PathProtocol {
     
     var commands: [PathCommand] { get }
     
-    var svgCommands: [SVGPathCommand] { get }
-    
-    var svgPath: SVGPath { get }
-    
     var endPoint: Coordinate { get }
     
     var boundingBox: Box { get }
@@ -69,28 +65,6 @@ protocol PathProtocol {
 }
 
 extension PathProtocol {
-    
-    var svgCommands: [SVGPathCommand] {
-        
-        let svgPathCommands: [SVGPathCommand] = commands.map { pathCommand in
-            
-            switch pathCommand {
-            
-            case .moveToRelative(let coordinate):
-                return .moveTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
-                
-            case .lineToRelative(let coordinate):
-                return .lineTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
-                
-            case .close:
-                return .close
-            }
-        }
-        
-        return svgPathCommands
-    }
-    
-    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
     
     func enumerateCoordinates(block: (Coordinate) -> Void) {
         
