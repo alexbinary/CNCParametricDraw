@@ -77,10 +77,10 @@ extension PathProtocol {
             switch pathCommand {
             
             case .moveToRelative(let coordinate):
-                return .moveTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
+                return .moveTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
                 
             case .lineToRelative(let coordinate):
-                return .lineTo(SVGCoordinate(x: coordinate.x, y: coordinate.y), .relative)
+                return .lineTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
                 
             case .close:
                 return .close

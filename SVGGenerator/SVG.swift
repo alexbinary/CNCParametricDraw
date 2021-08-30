@@ -4,31 +4,27 @@ import Foundation
 
 
 enum SVGCoordinateRef {
-    
+
     case relative
     case absolute
 }
+
+
 
 enum SVGAxis {
     
     case vertical
     case horizontal
-    
-    func flip() -> SVGAxis {
-        
-        switch self {
-        case .vertical:
-            return .horizontal
-        case .horizontal:
-            return .vertical
-        }
-    }
 }
 
-struct SVGCoordinate {
+
+
+struct SVGCoordinates {
+
     
     let x: Float
     let y: Float
+    
     
     func render() -> String {
         
@@ -36,80 +32,79 @@ struct SVGCoordinate {
     }
 }
 
+
+
 enum SVGPathCommand {
+
     
-    case moveTo(SVGCoordinate, SVGCoordinateRef)
-    case lineTo(SVGCoordinate, SVGCoordinateRef)
+    case moveTo(SVGCoordinates, SVGCoordinateRef)
+    case lineTo(SVGCoordinates, SVGCoordinateRef)
     case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
+    
     
     func render() -> String {
         
         switch self {
+        
         case .moveTo(let coordinate, let coordinateRef):
+            
             return "\(coordinateRef == .absolute ? "M" : "m")\(coordinate.render())"
+            
         case .lineTo(let coordinate, let coordinateRef):
+            
             return "\(coordinateRef == .absolute ? "L" : "l")\(coordinate.render())"
+            
         case .axis(let axis, let value, let coordinateRef):
+            
             let opCode = axis == .horizontal ? "h" : "v"
             return "\(coordinateRef == .absolute ? opCode.uppercased() : opCode)\(value)"
+            
         case .close:
+            
             return "Z"
         }
     }
 }
 
+
+
 struct SVGPath {
+    
+    
+    let commands: [SVGPathCommand]
+    
     
     init(withCommands commands: [SVGPathCommand]) {
         
         self.commands = commands
     }
     
-    init(fromPath path: PathProtocol) {
-        
-        self.init(withCommands: path.svgCommands)
-    }
     
-    let commands: [SVGPathCommand]
-    
-    func starting(at point: SVGCoordinate) -> SVGPath {
+    func withInitialAbsoluteMove(to coordinates: SVGCoordinates) -> SVGPath {
         
         var completedCommands = commands
-        completedCommands.insert(.moveTo(point, .absolute), at: 0)
+        completedCommands.insert(.moveTo(coordinates, .absolute), at: 0)
         
         return SVGPath(withCommands: completedCommands)
     }
+    
     
     func render() -> String {
         
         return commands.map { $0.render() }.joined()
     }
-    
-    func appending(_ additionalCommands: [SVGPathCommand]) -> SVGPath {
-    
-        var allCommands = commands
-        allCommands.append(contentsOf: additionalCommands)
-
-        return SVGPath(withCommands: allCommands)
-    }
-    
-    func appending(_ svgPath: SVGPath) -> SVGPath {
-    
-        return self.appending(svgPath.commands)
-    }
-    
-    func appending(_ path: PathProtocol) -> SVGPath {
-    
-        return self.appending(path.svgPath)
-    }
 }
+
+
 
 struct SVGPathNode {
 
+    
     let path: SVGPath
     let pathStyle: String
     let nodeId: String
+    
     
     func render() -> String {
     
@@ -122,15 +117,19 @@ struct SVGPathNode {
     }
 }
 
+
+
 struct SVGFile {
+
     
-    let pathsNodes: [SVGPathNode]
+    let pathNodes: [SVGPathNode]
+    
     
     func render() -> String {
     
         return """
             <svg viewBox="0 0 3178.5827 4493.8583">
-                \(pathsNodes.map { $0.render() } .joined(separator: "\n") )
+                \(pathNodes.map { $0.render() } .joined(separator: "\n") )
             </svg>
             """
     }

@@ -70,7 +70,7 @@ let nodes = [
 ]
 
 let svgContentString = SVGFile(
-    pathsNodes: nodes
+    pathNodes: nodes
 ).render()
 
 
