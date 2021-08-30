@@ -37,7 +37,7 @@ struct BoxFace: PathProtocol {
         let offsetTop = topCrenelConfig != nil && topCrenelConfig!.direction == .external ? topCrenelConfig!.crenelConfig.depth : 0
         let offsetBottom = bottomCrenelConfig != nil && bottomCrenelConfig!.direction == .external ? bottomCrenelConfig!.crenelConfig.depth : 0
         
-        commands.append(.moveToRelative(Coordinate(x: offsetLeft, y: offsetTop)))
+        commands.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
         let horizontalLength = size.width - offsetLeft - offsetRight
         let verticalLength = size.height - offsetTop - offsetBottom
@@ -58,7 +58,7 @@ struct BoxFace: PathProtocol {
             
             commands.append(contentsOf:path.commands)
         } else {
-            commands.append(.lineToRelative(Coordinate(x: 0, y: verticalLength)))
+            commands.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = bottomCrenelConfig {
@@ -77,7 +77,7 @@ struct BoxFace: PathProtocol {
             
             commands.append(contentsOf: path.commands)
         } else {
-            commands.append(.lineToRelative(Coordinate(x: horizontalLength, y: 0)))
+            commands.append(.lineToRelative(Coordinates(x: horizontalLength, y: 0)))
         }
         
         if let crenelConfig = rightCrenelConfig {
@@ -96,7 +96,7 @@ struct BoxFace: PathProtocol {
             
             commands.append(contentsOf:path.commands)
         } else {
-            commands.append(.lineToRelative(Coordinate(x: 0, y: verticalLength)))
+            commands.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
         }
         
         if let crenelConfig = topCrenelConfig {
@@ -115,7 +115,7 @@ struct BoxFace: PathProtocol {
             
             commands.append(contentsOf: path.commands)
         } else {
-            commands.append(.lineToRelative(Coordinate(x: -horizontalLength, y: 0)))
+            commands.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
         }
         
         return commands

@@ -37,7 +37,7 @@ struct Size: Equatable {
 
 
 
-struct Box: Equatable {
+struct CoordinatesBox: Equatable {
 
     
     var origin: Coordinates
@@ -62,7 +62,7 @@ protocol PathProtocol {
     var commands: [PathCommand] { get }
     
     var endPoint: Coordinates { get }
-    var boundingBox: Box { get }
+    var boundingBox: CoordinatesBox { get }
     
     var flipped: Path { get }
     var mirrorX: Path { get }
@@ -128,7 +128,7 @@ extension PathProtocol {
     }
     
     
-    var boundingBox: Box {
+    var boundingBox: CoordinatesBox {
         
         var smallestCoordinate: Coordinates! = nil
         var biggestCoordinate: Coordinates! = nil
@@ -160,7 +160,7 @@ extension PathProtocol {
         let origin: Coordinates! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Coordinates(x: 0, y: 0)
         let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
         
-        return Box(origin: origin, size: size)
+        return CoordinatesBox(origin: origin, size: size)
     }
     
     
