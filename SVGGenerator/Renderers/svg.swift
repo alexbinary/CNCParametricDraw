@@ -150,18 +150,21 @@ struct SVGRenderer: Renderer {
     
     func renderFile(withPaths paths: [Path]) -> String {
         
-        return SVGFile(pathNodes: paths.map { SVGPathNode(path: $0.svgPath, pathStyle: defaultPathStyle, nodeId: "") }).render()
+        return SVGFile(
+            pathNodes: paths.map { path in
+                SVGPathNode(
+                    path: svgPath(from: path),
+                    pathStyle: defaultPathStyle,
+                    nodeId: ""
+                )
+            }
+        ).render()
     }
-}
-
-
-
-extension Path {
     
     
-    var svgCommands: [SVGPathCommand] {
+    func svgPath(from path: Path) -> SVGPath {
         
-        let svgCommands: [SVGPathCommand] = commands.map { command in
+        return SVGPath(withCommands: path.commands.map { command in
             
             switch command {
             
@@ -177,11 +180,6 @@ extension Path {
                 
                 return .close
             }
-        }
-        
-        return svgCommands
+        })
     }
-    
-    
-    var svgPath: SVGPath { SVGPath(withCommands: svgCommands) }
 }
