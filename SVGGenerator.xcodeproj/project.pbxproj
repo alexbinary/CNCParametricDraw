@@ -13,8 +13,9 @@
 		29A34F1526D6DA1600BE13BB /* Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* Draw.swift */; };
 		29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1D26D6E4E300BE13BB /* DrawTest.swift */; };
 		29A34F2726D6E72800BE13BB /* Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* Draw.swift */; };
-		29A34F2C26D6E73F00BE13BB /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
-		29A34F2F26D6E74000BE13BB /* SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* SVG.swift */; };
+		29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* svg.swift */; };
+		29A34F2F26D6E74000BE13BB /* svg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* svg.swift */; };
+		29E30E7E26DD3B220048D1FD /* file_utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E30E7D26DD3B220048D1FD /* file_utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,12 +34,13 @@
 		291EAB8126D973A9009A8DB0 /* box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = box.swift; sourceTree = "<group>"; };
 		29247C5026D183A7007238C8 /* SVGGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SVGGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		29247C5B26D18931007238C8 /* SVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVG.swift; sourceTree = "<group>"; };
+		29247C5B26D18931007238C8 /* svg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svg.swift; sourceTree = "<group>"; };
 		29247C5E26D190BC007238C8 /* crenel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crenel.swift; sourceTree = "<group>"; };
 		29A34F1426D6DA1600BE13BB /* Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draw.swift; sourceTree = "<group>"; };
 		29A34F1B26D6E4E300BE13BB /* SVGGeneratorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGGeneratorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A34F1D26D6E4E300BE13BB /* DrawTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawTest.swift; sourceTree = "<group>"; };
 		29A34F1F26D6E4E300BE13BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29E30E7D26DD3B220048D1FD /* file_utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = file_utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +83,10 @@
 			isa = PBXGroup;
 			children = (
 				29247C5326D183A7007238C8 /* main.swift */,
-				29247C5B26D18931007238C8 /* SVG.swift */,
 				29247C5E26D190BC007238C8 /* crenel.swift */,
 				291EAB8126D973A9009A8DB0 /* box.swift */,
 				29A34F1426D6DA1600BE13BB /* Draw.swift */,
+				29E30E7826DD3AFC0048D1FD /* Output */,
 			);
 			path = SVGGenerator;
 			sourceTree = "<group>";
@@ -96,6 +98,15 @@
 				29A34F1F26D6E4E300BE13BB /* Info.plist */,
 			);
 			path = SVGGeneratorTest;
+			sourceTree = "<group>";
+		};
+		29E30E7826DD3AFC0048D1FD /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
+				29247C5B26D18931007238C8 /* svg.swift */,
+			);
+			path = Output;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,11 +197,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29A34F2F26D6E74000BE13BB /* SVG.swift in Sources */,
+				29A34F2F26D6E74000BE13BB /* svg.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
 				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* Draw.swift in Sources */,
+				29E30E7E26DD3B220048D1FD /* file_utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29A34F2C26D6E73F00BE13BB /* SVG.swift in Sources */,
+				29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */,
 				29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */,
 				29A34F2726D6E72800BE13BB /* Draw.swift in Sources */,
 			);
