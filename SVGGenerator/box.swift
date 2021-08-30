@@ -5,12 +5,15 @@ import Foundation
 
 enum BoxCrenelDirection {
     
+    
     case external
     case `internal`
 }
 
 
+
 struct BoxCrenelConfig {
+
     
     var direction: BoxCrenelDirection
     var crenelConfig: CrenelConfig
@@ -18,14 +21,17 @@ struct BoxCrenelConfig {
 }
 
 
+
 struct BoxFace: Path {
         
+    
     let size: Size
     
     let leftCrenelConfig: BoxCrenelConfig?
     let rightCrenelConfig: BoxCrenelConfig?
     let topCrenelConfig: BoxCrenelConfig?
     let bottomCrenelConfig: BoxCrenelConfig?
+    
     
     var commands: [PathCommand] {
         

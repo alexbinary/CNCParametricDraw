@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		291EAB8226D973A9009A8DB0 /* box_face.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* box_face.swift */; };
+		291EAB8226D973A9009A8DB0 /* box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* box.swift */; };
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
 		29A34F1526D6DA1600BE13BB /* draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* draw.swift */; };
@@ -31,7 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		291EAB8126D973A9009A8DB0 /* box_face.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = box_face.swift; sourceTree = "<group>"; };
+		291EAB8126D973A9009A8DB0 /* box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = box.swift; sourceTree = "<group>"; };
 		29247C5026D183A7007238C8 /* SVGGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SVGGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29247C5B26D18931007238C8 /* svg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svg.swift; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 				29247C5326D183A7007238C8 /* main.swift */,
 				29A34F1426D6DA1600BE13BB /* draw.swift */,
 				29247C5E26D190BC007238C8 /* crenel.swift */,
-				291EAB8126D973A9009A8DB0 /* box_face.swift */,
+				291EAB8126D973A9009A8DB0 /* box.swift */,
 				29E30E7826DD3AFC0048D1FD /* Output */,
 			);
 			path = SVGGenerator;
@@ -199,7 +199,7 @@
 			files = (
 				29A34F2F26D6E74000BE13BB /* svg.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
-				291EAB8226D973A9009A8DB0 /* box_face.swift in Sources */,
+				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* draw.swift in Sources */,
 				29E30E7E26DD3B220048D1FD /* file_utils.swift in Sources */,
