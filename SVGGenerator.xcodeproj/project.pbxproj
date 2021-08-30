@@ -86,7 +86,7 @@
 				29A34F1426D6DA1600BE13BB /* path.swift */,
 				29247C5E26D190BC007238C8 /* crenel.swift */,
 				291EAB8126D973A9009A8DB0 /* box.swift */,
-				29E30E7826DD3AFC0048D1FD /* Output */,
+				29E30E7826DD3AFC0048D1FD /* Renderers */,
 			);
 			path = SVGGenerator;
 			sourceTree = "<group>";
@@ -100,13 +100,13 @@
 			path = SVGGeneratorTest;
 			sourceTree = "<group>";
 		};
-		29E30E7826DD3AFC0048D1FD /* Output */ = {
+		29E30E7826DD3AFC0048D1FD /* Renderers */ = {
 			isa = PBXGroup;
 			children = (
 				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
 				29247C5B26D18931007238C8 /* svg.swift */,
 			);
-			path = Output;
+			path = Renderers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
