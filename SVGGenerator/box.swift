@@ -22,11 +22,20 @@ struct BoxCrenelConfig {
 
 
 
+struct BoxFaceSize: Equatable {
+
+    
+    var width: Float
+    var height: Float
+}
+
+
+
 class BoxFace: Path {
         
     
     init(
-        size: Size,
+        size: BoxFaceSize,
         leftCrenelConfig: BoxCrenelConfig?,
         rightCrenelConfig: BoxCrenelConfig?,
         topCrenelConfig: BoxCrenelConfig?,
@@ -125,3 +134,28 @@ class BoxFace: Path {
         super.init(fromPath: totalPath)
     }
 }
+
+
+
+struct BoxSize: Equatable {
+
+    
+    var width: Float
+    var height: Float
+    var length: Float
+}
+
+
+
+//class Box: Path {
+//    
+//    
+//    init(
+//        size: Size,
+//        leftCrenelConfig: BoxCrenelConfig?,
+//        rightCrenelConfig: BoxCrenelConfig?,
+//        topCrenelConfig: BoxCrenelConfig?,
+//        bottomCrenelConfig: BoxCrenelConfig?
+//    ) {
+//    }
+//}
