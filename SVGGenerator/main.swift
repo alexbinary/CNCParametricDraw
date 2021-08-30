@@ -80,7 +80,7 @@ let paths = box.paths
 //    ),
 //]
 
-let svgRenderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
-let svgFileContent = svgRenderer.renderFile(withPaths: paths)
+let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
+let fileContent = renderer.renderFile(withPaths: paths)
 
-write(svgFileContent, to: outputFileURL)
+write(fileContent, to: outputFileURL)

@@ -136,7 +136,7 @@ struct SVGFile {
 }
 
 
-struct SVGRenderer {
+struct SVGRenderer: Renderer {
     
     
     let defaultPathStyle: String
