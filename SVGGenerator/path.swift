@@ -170,15 +170,15 @@ class Path {
     }
     
     
-    func withCommandsTransformedWith(transform: (PathCommand) -> PathCommand) -> Path {
+    func transformCommandsWith(transform: (PathCommand) -> PathCommand) {
     
-        return Path(withCommands: commands.map(transform))
+        commands = commands.map(transform)
     }
     
     
-    func withCommandsCoordinatesTransformedWith(transform: (Coordinates) -> Coordinates) -> Path {
+    func transformCommandsCoordinatesWith(transform: (Coordinates) -> Coordinates) {
         
-        return self.withCommandsTransformedWith { command in
+        transformCommandsWith { command in
             
             switch command {
             
@@ -198,13 +198,49 @@ class Path {
     }
     
     
-    var flipped: Path { self.withCommandsCoordinatesTransformedWith { $0.flipped } }
+    func flip() {
+        
+        self.transformCommandsCoordinatesWith { $0.flipped }
+    }
     
-    var mirrorX: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorX } }
-    var mirrorY: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
     
-    var rotated90DegreesClockWise: Path { self.flipped.mirrorX }
+    var flipped: Path {
+        
+        let path = Path(fromPath: self)
+        path.flip()
+        return path
+    }
+    
+    
+    func mirrorX() {
+        
+        self.transformCommandsCoordinatesWith { $0.mirrorX }
+    }
+    
+    
+    func mirrorY() {
+        
+        self.transformCommandsCoordinatesWith { $0.mirrorY }
+    }
+    
+    
+    var transformedMirrorX: Path {
+        
+        let path = Path(fromPath: self)
+        path.mirrorX()
+        return path
+    }
+    
+    
+    var transformedMirrorY: Path {
+        
+        let path = Path(fromPath: self)
+        path.mirrorY()
+        return path
+    }
+    
+    
+    var rotated90DegreesClockWise: Path { self.flipped.transformedMirrorX }
     var rotated180DegreesClockWise: Path { self.rotated90DegreesClockWise.rotated90DegreesClockWise }
     var rotated270DegreesClockWise: Path { self.rotated180DegreesClockWise.rotated90DegreesClockWise }
 }
-

@@ -48,7 +48,7 @@ class BoxFace: Path {
         
         if let crenelConfig = leftCrenelConfig {
             
-            var crenelPath = CrenelPath(
+            let crenelPath = CrenelPath(
                 totalLength: size.height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -57,7 +57,7 @@ class BoxFace: Path {
             ).rotated90DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                crenelPath = crenelPath.mirrorX
+                crenelPath.mirrorX()
             }
             
             totalPath.append(crenelPath)
@@ -67,7 +67,7 @@ class BoxFace: Path {
         
         if let crenelConfig = bottomCrenelConfig {
             
-            var crenelPath: Path = CrenelPath(
+            let crenelPath: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -76,7 +76,7 @@ class BoxFace: Path {
             )
             
             if crenelConfig.direction == .internal {
-                crenelPath = crenelPath.mirrorY
+                crenelPath.mirrorY()
             }
             
             totalPath.append(crenelPath)
@@ -86,7 +86,7 @@ class BoxFace: Path {
         
         if let crenelConfig = rightCrenelConfig {
             
-            var crenelPath = CrenelPath(
+            let crenelPath = CrenelPath(
                 totalLength: size.height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -95,7 +95,7 @@ class BoxFace: Path {
             ).rotated270DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                crenelPath = crenelPath.mirrorX
+                crenelPath.mirrorX()
             }
             
             totalPath.append(crenelPath)
@@ -105,7 +105,7 @@ class BoxFace: Path {
         
         if let crenelConfig = topCrenelConfig {
             
-            var crenelPath: Path = CrenelPath(
+            let crenelPath: Path = CrenelPath(
                 totalLength: size.width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
@@ -114,7 +114,7 @@ class BoxFace: Path {
             ).rotated180DegreesClockWise
             
             if crenelConfig.direction == .internal {
-                crenelPath = crenelPath.mirrorY
+                crenelPath.mirrorY()
             }
             
             totalPath.append(crenelPath)
