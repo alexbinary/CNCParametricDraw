@@ -203,6 +203,10 @@ extension PathProtocol {
     var mirrorY: Path { self.withCommandsCoordinatesTransformedWith { $0.mirrorY } }
     
     var rotated90DegreesClockWise: Path { self.flipped.mirrorX }
+    
+    var rotated180DegreesClockWise: Path { self.rotated90DegreesClockWise.rotated90DegreesClockWise }
+    
+    var rotated270DegreesClockWise: Path { self.rotated180DegreesClockWise.rotated90DegreesClockWise }
 }
 
 struct Path: PathProtocol {
