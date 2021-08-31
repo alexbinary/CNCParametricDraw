@@ -229,9 +229,9 @@ struct CrenelBox: PathsLayoutRepresentable {
         
         return PathsLayout(withVerticallyAlignedPaths: [
                             bottomFace.path(withName: "bottom"),
-                            frontBackFace.path(withName: "front"),
+                            frontBackFace.path(withName: "front").transformedMirrorY,
                             frontBackFace.path(withName: "back"),
-                            leftRightFace.path(withName: "left"),
+                            leftRightFace.path(withName: "left").transformedMirrorY,
                             leftRightFace.path(withName: "right"),
         ])
     }
