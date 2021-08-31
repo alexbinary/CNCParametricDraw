@@ -5,35 +5,21 @@ import Foundation
 
 let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("generated.svg")
 
-let box = Box(
+
+let legoUnitLength: Float = 15
+
+let box = LegoCrenelBox(
     
-    width: 100,
-    height: 100,
-    length: 100,
+    legoUnitLength: legoUnitLength,
     
-    widthCrenelConfig: BoxCrenelConfig(
-        crenelConfig: CrenelConfig(
-            baseLength: 5,
-            lengthAdjustment: 0,
-            depth: 3
-        ),
-        numberOfCrenels: 5
-    ),
-    heightCrenelConfig: BoxCrenelConfig(
-        crenelConfig: CrenelConfig(
-            baseLength: 5,
-            lengthAdjustment: 0,
-            depth: 3
-        ),
-        numberOfCrenels: 5
-    ),
-    lengthCrenelConfig: BoxCrenelConfig(
-        crenelConfig: CrenelConfig(
-            baseLength: 5,
-            lengthAdjustment: 0,
-            depth: 3
-        ),
-        numberOfCrenels: 5
+    numberOfStudsWidth: 2,
+    numberOfStudsLength: 2,
+    numberOfPlatesHeight: 3,
+    
+    crenelConfig: CrenelConfig(
+        baseLength: 5,
+        lengthAdjustment: 0,
+        depth: 3
     )
 )
 

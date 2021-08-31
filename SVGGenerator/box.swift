@@ -140,16 +140,16 @@ struct BoxCrenelConfig {
 
 
 
-struct Box: PathsLayoutRepresentable {
+struct CrenelBox: PathsLayoutRepresentable {
     
     
     var width: Float
-    var height: Float
     var length: Float
+    var height: Float
     
     var widthCrenelConfig: BoxCrenelConfig
-    var heightCrenelConfig: BoxCrenelConfig
     var lengthCrenelConfig: BoxCrenelConfig
+    var heightCrenelConfig: BoxCrenelConfig
     
     
     var pathsLayout: PathsLayout {
@@ -234,5 +234,38 @@ struct Box: PathsLayoutRepresentable {
                             leftRightFace.path(withName: "left"),
                             leftRightFace.path(withName: "right"),
         ])
+    }
+}
+
+
+
+struct LegoCrenelBox: PathsLayoutRepresentable {
+    
+    
+    let legoUnitLength: Float
+    
+    let numberOfStudsWidth: Float
+    let numberOfStudsLength: Float
+    let numberOfPlatesHeight: Float
+    
+    let crenelConfig: CrenelConfig
+    
+    
+    var pathsLayout: PathsLayout {
+        
+        let box = CrenelBox(
+            
+            width: numberOfStudsWidth * legoUnitLength * 2.5,
+            length: numberOfStudsLength * legoUnitLength * 2.5,
+            
+            height: numberOfPlatesHeight * legoUnitLength,
+            
+            widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5),
+            lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5),
+            
+            heightCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5)
+        )
+        
+        return box.pathsLayout
     }
 }
