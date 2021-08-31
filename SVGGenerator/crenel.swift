@@ -13,17 +13,18 @@ struct CrenelConfig {
 
 
 
-class CrenelPath: Path {
+struct CrenelSegment: PathRepresentable {
 
     
-    init(
-        totalLength: Float,
-        numberOfCrenels: UInt,
-        crenelConfig: CrenelConfig,
-        offsetStart: Float,
-        offsetEnd: Float
-    ) {
-     
+    var totalLength: Float
+    var numberOfCrenels: UInt
+    var crenelConfig: CrenelConfig
+    var offsetStart: Float
+    var offsetEnd: Float
+    
+    
+    var path: Path {
+        
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
@@ -42,7 +43,7 @@ class CrenelPath: Path {
         let antiCrenelPath = Path(withCommands: [.lineToRelative(Coordinates(x: antiCrenelActualLength, y: 0))])
         let buttEndPath = Path(withCommands: [.lineToRelative(Coordinates(x: buttsEndLength + offsetEnd, y: 0))])
 
-        let totalPath: Path = .empty
+        var totalPath: Path = .empty
         totalPath.append(buttStartPath)
         if numberOfCrenels > 1 {
             for _ in 1..<numberOfCrenels {
@@ -55,6 +56,6 @@ class CrenelPath: Path {
         }
         totalPath.append(buttEndPath)
         
-        super.init(fromPath: totalPath)
+        return totalPath
     }
 }

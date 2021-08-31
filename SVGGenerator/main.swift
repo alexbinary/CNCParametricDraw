@@ -37,9 +37,6 @@ let box = Box(
     )
 )
 
-
-
-let paths = box.paths
     
 //    [
 //    SVGPathNode(
@@ -81,6 +78,6 @@ let paths = box.paths
 //]
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
-let fileContent = renderer.renderFile(withPaths: paths)
+let fileContent = renderer.renderFile(withRootPathsLayout: box.pathsLayout)
 
 write(fileContent, to: outputFileURL)

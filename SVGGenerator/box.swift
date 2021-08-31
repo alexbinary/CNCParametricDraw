@@ -22,19 +22,21 @@ struct BoxFaceCrenelConfig {
 
 
 
-class BoxFace: Path {
+struct BoxFace: PathRepresentable {
         
     
-    init(
-        width boxWidth: Float,
-        height boxHeight: Float,
-        leftCrenelConfig: BoxFaceCrenelConfig?,
-        rightCrenelConfig: BoxFaceCrenelConfig?,
-        topCrenelConfig: BoxFaceCrenelConfig?,
-        bottomCrenelConfig: BoxFaceCrenelConfig?
-    ) {
+    var width: Float
+    var height: Float
+    
+    var leftCrenelConfig: BoxFaceCrenelConfig?
+    var rightCrenelConfig: BoxFaceCrenelConfig?
+    var topCrenelConfig: BoxFaceCrenelConfig?
+    var bottomCrenelConfig: BoxFaceCrenelConfig?
+    
+    
+    var path: Path {
          
-        let totalPath: Path = .empty
+        var totalPath: Path = .empty
         
         let offsetLeft = leftCrenelConfig != nil && leftCrenelConfig!.direction == .external ? leftCrenelConfig!.crenelConfig.depth : 0
         let offsetRight = rightCrenelConfig != nil && rightCrenelConfig!.direction == .external ? rightCrenelConfig!.crenelConfig.depth : 0
@@ -44,18 +46,18 @@ class BoxFace: Path {
         
         totalPath.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
-        let horizontalLength = boxWidth - offsetLeft - offsetRight
-        let verticalLength = boxHeight - offsetTop - offsetBottom
+        let horizontalLength = width - offsetLeft - offsetRight
+        let verticalLength = height - offsetTop - offsetBottom
         
         if let crenelConfig = leftCrenelConfig {
             
-            let crenelPath = CrenelPath(
-                totalLength: boxHeight,
+            var crenelPath = CrenelSegment(
+                totalLength: height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetTop,
                 offsetEnd: -offsetBottom
-            ).rotated90DegreesClockWise
+            ).path.rotated90DegreesClockWise
             
             if crenelConfig.direction == .internal {
                 crenelPath.mirrorX()
@@ -68,13 +70,13 @@ class BoxFace: Path {
         
         if let crenelConfig = bottomCrenelConfig {
             
-            let crenelPath: Path = CrenelPath(
-                totalLength: boxWidth,
+            var crenelPath = CrenelSegment(
+                totalLength: width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetLeft,
                 offsetEnd: -offsetRight
-            )
+            ).path
             
             if crenelConfig.direction == .internal {
                 crenelPath.mirrorY()
@@ -87,13 +89,13 @@ class BoxFace: Path {
         
         if let crenelConfig = rightCrenelConfig {
             
-            let crenelPath = CrenelPath(
-                totalLength: boxHeight,
+            var crenelPath = CrenelSegment(
+                totalLength: height,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetBottom,
                 offsetEnd: -offsetTop
-            ).rotated270DegreesClockWise
+            ).path.rotated270DegreesClockWise
             
             if crenelConfig.direction == .internal {
                 crenelPath.mirrorX()
@@ -106,13 +108,13 @@ class BoxFace: Path {
         
         if let crenelConfig = topCrenelConfig {
             
-            let crenelPath: Path = CrenelPath(
-                totalLength: boxWidth,
+            var crenelPath = CrenelSegment(
+                totalLength: width,
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: offsetRight,
                 offsetEnd: -offsetLeft
-            ).rotated180DegreesClockWise
+            ).path.rotated180DegreesClockWise
             
             if crenelConfig.direction == .internal {
                 crenelPath.mirrorY()
@@ -123,7 +125,7 @@ class BoxFace: Path {
             totalPath.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
         }
         
-        super.init(fromPath: totalPath)
+        return totalPath
     }
 }
 
@@ -138,32 +140,26 @@ struct BoxCrenelConfig {
 
 
 
-class Box: PathGroup {
+struct Box: PathsLayoutRepresentable {
     
     
-    let bottomFace: Path
+    var width: Float
+    var height: Float
+    var length: Float
     
-    let frontFace: Path
-    let backFace: Path
-    
-    let leftFace: Path
-    let rightFace: Path
+    var widthCrenelConfig: BoxCrenelConfig
+    var heightCrenelConfig: BoxCrenelConfig
+    var lengthCrenelConfig: BoxCrenelConfig
     
     
-    init(
-        width boxWidth: Float,
-        height boxHeight: Float,
-        length boxLength: Float,
-        widthCrenelConfig: BoxCrenelConfig,
-        heightCrenelConfig: BoxCrenelConfig,
-        lengthCrenelConfig: BoxCrenelConfig
-    ) {
-        var paths: [Path] = []
+    var pathsLayout: PathsLayout {
         
-        self.bottomFace = BoxFace(
+        var pathsPositions: [PathsLayoutElement] = []
+        
+        let bottomFace = BoxFace(
             
-            width: boxLength,
-            height: boxWidth,
+            width: length,
+            height: width,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
                 crenelConfig: widthCrenelConfig.crenelConfig,
@@ -187,10 +183,10 @@ class Box: PathGroup {
             )
         )
         
-        self.frontFace = BoxFace(
+        let frontBackFace = BoxFace(
             
-            width: boxLength,
-            height: boxHeight,
+            width: length,
+            height: height,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
                 crenelConfig: heightCrenelConfig.crenelConfig,
@@ -210,12 +206,10 @@ class Box: PathGroup {
             )
         )
         
-        self.backFace = self.frontFace.copy
-        
-        self.leftFace = BoxFace(
+        let leftRightFace = BoxFace(
             
-            width: boxWidth,
-            height: boxHeight,
+            width: width,
+            height: height,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
                 crenelConfig: heightCrenelConfig.crenelConfig,
@@ -235,14 +229,12 @@ class Box: PathGroup {
             )
         )
         
-        self.rightFace = self.leftFace.copy
+        pathsPositions.append((item: .path(bottomFace.path), position: .zero))
+        pathsPositions.append((item: .path(frontBackFace.path), position: Coordinates(x: 0, y: 100)))
+        pathsPositions.append((item: .path(frontBackFace.path), position: Coordinates(x: 0, y: 200)))
+        pathsPositions.append((item: .path(leftRightFace.path), position: Coordinates(x: 0, y: 300)))
+        pathsPositions.append((item: .path(leftRightFace.path), position: Coordinates(x: 0, y: 400)))
         
-        paths.append(bottomFace)
-        paths.append(frontFace)
-        paths.append(backFace)
-        paths.append(leftFace)
-        paths.append(rightFace)
-        
-        super.init(withPaths: paths)
+        return PathsLayout(items: pathsPositions)
     }
 }

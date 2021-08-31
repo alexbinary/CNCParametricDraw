@@ -19,12 +19,8 @@ enum SVGAxis {
 
 
 
-struct SVGCoordinates {
+extension Coordinates {
 
-    
-    let x: Float
-    let y: Float
-    
     
     func render() -> String {
         
@@ -37,8 +33,8 @@ struct SVGCoordinates {
 enum SVGPathCommand {
 
     
-    case moveTo(SVGCoordinates, SVGCoordinateRef)
-    case lineTo(SVGCoordinates, SVGCoordinateRef)
+    case moveTo(Coordinates, SVGCoordinateRef)
+    case lineTo(Coordinates, SVGCoordinateRef)
     case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
     
@@ -81,7 +77,7 @@ struct SVGPath {
     }
     
     
-    func withInitialAbsoluteMove(to coordinates: SVGCoordinates) -> SVGPath {
+    func withInitialAbsoluteMove(to coordinates: Coordinates) -> SVGPath {
         
         var completedCommands = commands
         completedCommands.insert(.moveTo(coordinates, .absolute), at: 0)
@@ -148,33 +144,54 @@ struct SVGRenderer: Renderer {
     }
     
     
-    func renderFile(withPaths paths: [Path]) -> String {
+    func renderFile(withRootPathsLayout pathsLayout: PathsLayout) -> String {
         
-        return SVGFile(
-            pathNodes: paths.map { path in
-                SVGPathNode(
-                    path: svgPath(from: path),
-                    pathStyle: defaultPathStyle,
-                    nodeId: ""
-                )
-            }
-        ).render()
+        return SVGFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
     }
     
     
-    func svgPath(from path: Path) -> SVGPath {
+    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SVGPathNode] {
+        
+        return pathsLayout.items.reduce(into: []) { (nodes, element) in
+            
+            switch element.item {
+            
+            case .path(let path):
+                
+                nodes.append(svgPathNode(renderedFromPath: path, at: element.position))
+                
+            case .layout(let layout):
+                
+                nodes.append(contentsOf: svgPathNodes(renderedFromLayout: layout, at: element.position))
+            }
+        }
+    }
+    
+    
+    func svgPathNode(renderedFromPath path: Path, at coordinates: Coordinates) -> SVGPathNode {
+        
+        return SVGPathNode(
+            
+            path: svgPath(renderedFromPath: path).withInitialAbsoluteMove(to: coordinates),
+            pathStyle: defaultPathStyle,
+            nodeId: ""
+        )
+    }
+    
+    
+    func svgPath(renderedFromPath path: Path) -> SVGPath {
         
         return SVGPath(withCommands: path.commands.map { command in
             
             switch command {
             
-            case .moveToRelative(let coordinate):
+            case .moveToRelative(let coordinates):
                 
-                return .moveTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
+                return .moveTo(coordinates, .relative)
                 
-            case .lineToRelative(let coordinate):
+            case .lineToRelative(let coordinates):
                 
-                return .lineTo(SVGCoordinates(x: coordinate.x, y: coordinate.y), .relative)
+                return .lineTo(coordinates, .relative)
                 
             case .close:
                 

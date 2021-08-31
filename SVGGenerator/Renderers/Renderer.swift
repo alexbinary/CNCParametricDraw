@@ -6,5 +6,5 @@ import Foundation
 protocol Renderer {
     
     
-    func renderFile(withPaths paths: [Path]) -> String
+    func renderFile(withRootPathsLayout pathsLayout: PathsLayout) -> String
 }

@@ -3,49 +3,6 @@ import Foundation
 
 
 
-struct Coordinates: Equatable {
-
-    
-    var x: Float
-    var y: Float
-    
-    
-    mutating func add(_ other: Coordinates) {
-        
-        self = Coordinates(x: x + other.x, y: y + other.y)
-    }
-    
-    
-    var flipped: Coordinates { Coordinates(x: y, y: x) }
-    
-    var mirrorX: Coordinates { Coordinates(x: -x, y: y) }
-    
-    var mirrorY: Coordinates { Coordinates(x: x, y: -y) }
-}
-
-
-
-struct Size: Equatable {
-
-    
-    var width: Float
-    var height: Float
-    
-    
-    static var zero: Size { Size(width: 0, height: 0) }
-}
-
-
-
-struct CoordinatesBox: Equatable {
-
-    
-    var origin: Coordinates
-    var size: Size
-}
-
-
-
 enum PathCommand {
 
     
@@ -56,7 +13,7 @@ enum PathCommand {
 
 
 
-class Path {
+struct Path {
     
     
     var commands: [PathCommand]
@@ -80,13 +37,13 @@ class Path {
     var copy: Path { Path(fromPath: self) }
     
     
-    func append(_ command: PathCommand) {
+    mutating func append(_ command: PathCommand) {
         
         commands.append(command)
     }
     
     
-    func append(_ path: Path) {
+    mutating func append(_ path: Path) {
         
         commands.append(contentsOf: path.commands)
     }
@@ -173,13 +130,13 @@ class Path {
     }
     
     
-    func transformCommandsWith(transform: (PathCommand) -> PathCommand) {
+    mutating func transformCommandsWith(transform: (PathCommand) -> PathCommand) {
     
         commands = commands.map(transform)
     }
     
     
-    func transformCommandsCoordinatesWith(transform: (Coordinates) -> Coordinates) {
+    mutating func transformCommandsCoordinatesWith(transform: (Coordinates) -> Coordinates) {
         
         transformCommandsWith { command in
             
@@ -201,7 +158,7 @@ class Path {
     }
     
     
-    func flip() {
+    mutating func flip() {
         
         self.transformCommandsCoordinatesWith { $0.flipped }
     }
@@ -209,19 +166,19 @@ class Path {
     
     var flipped: Path {
         
-        let path = Path(fromPath: self)
+        var path = Path(fromPath: self)
         path.flip()
         return path
     }
     
     
-    func mirrorX() {
+    mutating func mirrorX() {
         
         self.transformCommandsCoordinatesWith { $0.mirrorX }
     }
     
     
-    func mirrorY() {
+    mutating func mirrorY() {
         
         self.transformCommandsCoordinatesWith { $0.mirrorY }
     }
@@ -229,7 +186,7 @@ class Path {
     
     var transformedMirrorX: Path {
         
-        let path = Path(fromPath: self)
+        var path = Path(fromPath: self)
         path.mirrorX()
         return path
     }
@@ -237,7 +194,7 @@ class Path {
     
     var transformedMirrorY: Path {
         
-        let path = Path(fromPath: self)
+        var path = Path(fromPath: self)
         path.mirrorY()
         return path
     }
@@ -250,14 +207,36 @@ class Path {
 
 
 
-class PathGroup {
+protocol PathRepresentable {
     
     
-    let paths: [Path]
+    var path: Path { get }
+}
+
+
+
+enum PathsLayoutItem {
     
     
-    init(withPaths paths: [Path]) {
-        
-        self.paths = paths
-    }
+    case path(Path)
+    case layout(PathsLayout)
+}
+
+
+
+typealias PathsLayoutElement = (item: PathsLayoutItem, position: Coordinates)
+
+
+struct PathsLayout {
+    
+    
+    var items: [PathsLayoutElement]
+}
+
+
+
+protocol PathsLayoutRepresentable {
+    
+    
+    var pathsLayout: PathsLayout { get }
 }
