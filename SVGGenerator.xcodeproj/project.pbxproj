@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		291CC6B126DEBFFC0035A118 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291CC6B026DEBFFC0035A118 /* utils.swift */; };
+		291CC6B726DED2440035A118 /* cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291CC6B626DED2440035A118 /* cabinet.swift */; };
 		291EAB8226D973A9009A8DB0 /* box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* box.swift */; };
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		291CC6B026DEBFFC0035A118 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		291CC6B626DED2440035A118 /* cabinet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cabinet.swift; sourceTree = "<group>"; };
 		291EAB8126D973A9009A8DB0 /* box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = box.swift; sourceTree = "<group>"; };
 		29247C5026D183A7007238C8 /* SVGGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SVGGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				291CC6B026DEBFFC0035A118 /* utils.swift */,
 				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
 				29E30E7826DD3AFC0048D1FD /* Renderers */,
+				291CC6B626DED2440035A118 /* cabinet.swift */,
 			);
 			path = SVGGenerator;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			files = (
 				29A34F2F26D6E74000BE13BB /* svg.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
+				291CC6B726DED2440035A118 /* cabinet.swift in Sources */,
 				29E30E8E26DD774C0048D1FD /* Renderer.swift in Sources */,
 				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,

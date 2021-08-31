@@ -10,23 +10,23 @@ let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPat
 let legoUnitLength: Float = 15
 let materialThickness: Float = 3
 
+let standardCrenelConfig = CrenelConfig(
+    baseLength: 5,
+    lengthAdjustment: 0,
+    depth: 3
+)
 
-let box = LegoCrenelBoxCase(
+
+let cabinet = Cabinet(
     
-    legoUnitLength: legoUnitLength,
+    width: 100,
+    depth: 100,
     
-    materialThickness: materialThickness,
-    margin: 5,
+    shelveHeights: [50, 50, 50],
     
-    numberOfStudsWidth: 2,
-    numberOfStudsLength: 2,
-    numberOfPlatesHeight: 3,
+    crenelConfig: standardCrenelConfig,
     
-    crenelConfig: CrenelConfig(
-        baseLength: 5,
-        lengthAdjustment: 0,
-        depth: 3
-    )
+    materialThickness: materialThickness
 )
 
     
@@ -70,6 +70,6 @@ let box = LegoCrenelBoxCase(
 //]
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
-let fileContent = renderer.renderFile(withRootPathsLayout: box.pathsLayout)
+let fileContent = renderer.renderFile(withRootPathsLayout: cabinet.pathsLayout)
 
 write(fileContent, to: outputFileURL)

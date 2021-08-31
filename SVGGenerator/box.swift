@@ -33,6 +33,9 @@ struct BoxFace: PathRepresentable {
     var topCrenelConfig: BoxFaceCrenelConfig?
     var bottomCrenelConfig: BoxFaceCrenelConfig?
     
+    var punchLinesPositionYStartingFromBottom: [Float] = []
+    var punchLinesCrenelConfig: CrenelConfig? = nil
+    
     
     var path: Path {
          
@@ -103,7 +106,7 @@ struct BoxFace: PathRepresentable {
             
             totalPath.append(crenelPath)
         } else {
-            totalPath.append(.lineToRelative(Coordinates(x: 0, y: verticalLength)))
+            totalPath.append(.lineToRelative(Coordinates(x: 0, y: -verticalLength)))
         }
         
         if let crenelConfig = topCrenelConfig {
@@ -123,6 +126,26 @@ struct BoxFace: PathRepresentable {
             totalPath.append(crenelPath)
         } else {
             totalPath.append(.lineToRelative(Coordinates(x: -horizontalLength, y: 0)))
+        }
+        
+        if !punchLinesPositionYStartingFromBottom.isEmpty {
+            
+            totalPath.append(.moveToRelative(Coordinates(x: -offsetLeft, y: -offsetTop + height)))
+            
+            punchLinesPositionYStartingFromBottom.dropLast().forEach { h in
+                
+                let punchPath = PunchesSegment(
+                    totalLength: width,
+                    numberOfPunches: .auto,
+                    crenelConfig: punchLinesCrenelConfig!,
+                    offsetStart: 0,
+                    offsetEnd: 0
+                ).path
+                
+                totalPath.append(.moveToRelative(Coordinates(x: 0, y: -h)))
+                totalPath.append(punchPath)
+                totalPath.append(.moveToRelative(Coordinates(x: -width, y: 0)))
+            }
         }
         
         return totalPath
