@@ -6,11 +6,17 @@ import Foundation
 let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("generated.svg")
 
 
-let legoUnitLength: Float = 15
 
-let box = LegoCrenelBox(
+let legoUnitLength: Float = 15
+let materialThickness: Float = 3
+
+
+let box = LegoCrenelBoxCase(
     
     legoUnitLength: legoUnitLength,
+    
+    materialThickness: materialThickness,
+    margin: 5,
     
     numberOfStudsWidth: 2,
     numberOfStudsLength: 2,
