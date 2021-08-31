@@ -13,11 +13,20 @@ struct CrenelConfig {
 
 
 
+enum NumerOfCrenelsEnum {
+    
+    
+    case manual(UInt)
+    case auto
+}
+
+
+
 struct CrenelSegment: PathRepresentable {
 
     
     var totalLength: Float
-    var numberOfCrenels: UInt
+    var numberOfCrenels: NumerOfCrenelsEnum
     var crenelConfig: CrenelConfig
     var offsetStart: Float
     var offsetEnd: Float
@@ -25,10 +34,19 @@ struct CrenelSegment: PathRepresentable {
     
     var path: Path {
         
+        var actualNumberOfCrenels: UInt = 0
+        
+        switch numberOfCrenels {
+        case .auto:
+            actualNumberOfCrenels = UInt(max((totalLength - offsetStart + offsetEnd) / crenelConfig.baseLength / 2 - 1, 0))
+        case .manual(let n):
+            actualNumberOfCrenels = n
+        }
+        
         let crenelActualLength: Float = crenelConfig.baseLength + crenelConfig.lengthAdjustment
         let antiCrenelActualLength: Float = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
-        let totalCrenelationLength: Float = Float(numberOfCrenels) * crenelActualLength + max(Float(numberOfCrenels) - 1, 0) * antiCrenelActualLength
+        let totalCrenelationLength: Float = Float(actualNumberOfCrenels) * crenelActualLength + max(Float(actualNumberOfCrenels) - 1, 0) * antiCrenelActualLength
         
         let buttsTotalLength: Float = totalLength - totalCrenelationLength
         let buttsStartLength: Float = buttsTotalLength/2
@@ -45,13 +63,13 @@ struct CrenelSegment: PathRepresentable {
 
         var totalPath: Path = .empty
         totalPath.append(buttStartPath)
-        if numberOfCrenels > 1 {
-            for _ in 1..<numberOfCrenels {
+        if actualNumberOfCrenels > 1 {
+            for _ in 1..<actualNumberOfCrenels {
                 totalPath.append(crenelPath)
                 totalPath.append(antiCrenelPath)
             }
         }
-        if numberOfCrenels > 0 {
+        if actualNumberOfCrenels > 0 {
             totalPath.append(crenelPath)
         }
         totalPath.append(buttEndPath)

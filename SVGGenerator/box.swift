@@ -16,7 +16,7 @@ struct BoxFaceCrenelConfig {
 
     
     var crenelConfig: CrenelConfig
-    var numberOfCrenels: UInt
+    var numberOfCrenels: NumerOfCrenelsEnum
     var direction: BoxCrenelDirection
 }
 
@@ -135,7 +135,7 @@ struct BoxCrenelConfig {
 
     
     var crenelConfig: CrenelConfig
-    var numberOfCrenels: UInt
+    var numberOfCrenels: NumerOfCrenelsEnum
 }
 
 
@@ -250,6 +250,10 @@ struct LegoCrenelBox: PathsLayoutRepresentable {
     
     let crenelConfig: CrenelConfig
     
+    let numberOfCrenelsWidth: NumerOfCrenelsEnum = .auto
+    let numberOfCrenelsLength: NumerOfCrenelsEnum = .auto
+    let numberOfCrenelsHeight: NumerOfCrenelsEnum = .auto
+    
     
     var pathsLayout: PathsLayout {
         
@@ -257,13 +261,11 @@ struct LegoCrenelBox: PathsLayoutRepresentable {
             
             width: numberOfStudsWidth * legoUnitLength * 2.5,
             length: numberOfStudsLength * legoUnitLength * 2.5,
-            
             height: numberOfPlatesHeight * legoUnitLength,
             
-            widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5),
-            lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5),
-            
-            heightCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: 5)
+            widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsWidth),
+            lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsLength),
+            heightCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsHeight)
         )
         
         return box.pathsLayout
