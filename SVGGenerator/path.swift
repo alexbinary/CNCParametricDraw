@@ -230,7 +230,20 @@ typealias PathsLayoutElement = (item: PathsLayoutItem, position: Coordinates)
 struct PathsLayout {
     
     
-    var items: [PathsLayoutElement]
+    var elements: [PathsLayoutElement]
+    
+    
+    init(withVerticallyAlignedPaths paths: [Path]) {
+        
+        var currentPosition: Coordinates = .zero
+        
+        self.elements = paths.reduce(into: []) { elements, path in
+            
+            elements.append((item: .path(path), position: currentPosition - path.boundingBox.origin))
+            
+            currentPosition += Coordinates(x: 0, y: path.boundingBox.size.height)
+        }
+    }
 }
 
 

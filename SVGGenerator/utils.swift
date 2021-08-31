@@ -15,7 +15,7 @@ struct Coordinates: Equatable {
     
     mutating func add(_ other: Coordinates) {
         
-        self = Coordinates(x: x + other.x, y: y + other.y)
+        self += other
     }
     
     
@@ -25,6 +25,25 @@ struct Coordinates: Equatable {
     
     var mirrorY: Coordinates { Coordinates(x: x, y: -y) }
 }
+
+
+func +(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
+    
+    return Coordinates(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+
+
+func -(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
+    
+    return Coordinates(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+}
+
+
+func +=(lhs: inout Coordinates, rhs: Coordinates) {
+    
+    lhs = lhs + rhs
+}
+
 
 
 

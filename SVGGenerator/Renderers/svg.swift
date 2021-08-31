@@ -152,7 +152,7 @@ struct SVGRenderer: Renderer {
     
     func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SVGPathNode] {
         
-        return pathsLayout.items.reduce(into: []) { (nodes, element) in
+        return pathsLayout.elements.reduce(into: []) { (nodes, element) in
             
             switch element.item {
             

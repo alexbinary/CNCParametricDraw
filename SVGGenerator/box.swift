@@ -154,8 +154,6 @@ struct Box: PathsLayoutRepresentable {
     
     var pathsLayout: PathsLayout {
         
-        var pathsPositions: [PathsLayoutElement] = []
-        
         let bottomFace = BoxFace(
             
             width: length,
@@ -229,12 +227,12 @@ struct Box: PathsLayoutRepresentable {
             )
         )
         
-        pathsPositions.append((item: .path(bottomFace.path), position: .zero))
-        pathsPositions.append((item: .path(frontBackFace.path), position: Coordinates(x: 0, y: 100)))
-        pathsPositions.append((item: .path(frontBackFace.path), position: Coordinates(x: 0, y: 200)))
-        pathsPositions.append((item: .path(leftRightFace.path), position: Coordinates(x: 0, y: 300)))
-        pathsPositions.append((item: .path(leftRightFace.path), position: Coordinates(x: 0, y: 400)))
-        
-        return PathsLayout(items: pathsPositions)
+        return PathsLayout(withVerticallyAlignedPaths: [
+                            bottomFace.path,
+                            frontBackFace.path,
+                            frontBackFace.path,
+                            leftRightFace.path,
+                            leftRightFace.path
+        ])
     }
 }
