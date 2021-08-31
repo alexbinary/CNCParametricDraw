@@ -174,7 +174,7 @@ struct SVGRenderer: Renderer {
             
             path: svgPath(renderedFromPath: path).withInitialAbsoluteMove(to: coordinates),
             pathStyle: defaultPathStyle,
-            nodeId: ""
+            nodeId: path.name
         )
     }
     

@@ -228,11 +228,11 @@ struct Box: PathsLayoutRepresentable {
         )
         
         return PathsLayout(withVerticallyAlignedPaths: [
-                            bottomFace.path,
-                            frontBackFace.path,
-                            frontBackFace.path,
-                            leftRightFace.path,
-                            leftRightFace.path
+                            bottomFace.path(withName: "bottom"),
+                            frontBackFace.path(withName: "front"),
+                            frontBackFace.path(withName: "back"),
+                            leftRightFace.path(withName: "left"),
+                            leftRightFace.path(withName: "right"),
         ])
     }
 }

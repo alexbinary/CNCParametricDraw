@@ -18,20 +18,23 @@ struct Path {
     
     var commands: [PathCommand]
     
+    var name: String
     
-    init(withCommands commands: [PathCommand]) {
+    
+    init(withCommands commands: [PathCommand], name: String? = nil) {
         
         self.commands = commands
+        self.name = name ?? ""
     }
     
     
-    init(fromPath path: Path) {
+    init(fromPath path: Path, withName name: String? = nil) {
         
-        self.commands = path.commands
+        self.init(withCommands: path.commands, name: name)
     }
     
     
-    static var empty: Path { Path(withCommands: []) }
+    static var empty: Path { Path(withCommands: [], name: "") }
     
     
     var copy: Path { Path(fromPath: self) }
@@ -211,6 +214,18 @@ protocol PathRepresentable {
     
     
     var path: Path { get }
+    
+    func path(withName: String) -> Path
+}
+
+
+extension PathRepresentable {
+    
+    
+    func path(withName name: String) -> Path {
+    
+        return Path(fromPath: path, withName: name)
+    }
 }
 
 
