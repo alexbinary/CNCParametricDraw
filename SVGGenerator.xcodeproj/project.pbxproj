@@ -13,8 +13,9 @@
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
 		297AD85426E8BBFB008C2547 /* CoordinatesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */; };
+		297AD85B26E8BD7D008C2547 /* draw_utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291CC6B026DEBFFC0035A118 /* draw_utils.swift */; };
+		297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E30E8D26DD774C0048D1FD /* Renderer.swift */; };
 		29A34F1526D6DA1600BE13BB /* path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* path.swift */; };
-		29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1D26D6E4E300BE13BB /* DrawTest.swift */; };
 		29A34F2726D6E72800BE13BB /* path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* path.swift */; };
 		29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* svg.swift */; };
 		29A34F2F26D6E74000BE13BB /* svg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* svg.swift */; };
@@ -226,8 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */,
-				29A34F1E26D6E4E300BE13BB /* DrawTest.swift in Sources */,
+				297AD85B26E8BD7D008C2547 /* draw_utils.swift in Sources */,
 				29A34F2726D6E72800BE13BB /* path.swift in Sources */,
+				297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */,
 				297AD85426E8BBFB008C2547 /* CoordinatesTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

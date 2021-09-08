@@ -11,7 +11,7 @@ class DrawTest: XCTestCase {
     func test_Path_endPoint_line() {
         
         let path = Path(commands: [
-            .lineTo(Coordinate(x: 1, y: 2)),
+            .lineTo(Coordinates(x: 1, y: 2)),
         ])
         
         XCTAssertEqual(path.endPoint, Coordinate(x: 1, y: 2))
