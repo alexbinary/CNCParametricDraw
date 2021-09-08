@@ -21,6 +21,8 @@
 		297AD87626E92F77008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
 		297AD87B26E92F89008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
 		297AD87E26E92F8C008C2547 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87126E92F5C008C2547 /* Size.swift */; };
+		297AD88726E9355A008C2547 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD88626E9355A008C2547 /* PathCommand.swift */; };
+		297AD88A26E93570008C2547 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD88626E9355A008C2547 /* PathCommand.swift */; };
 		29A34F1526D6DA1600BE13BB /* path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* path.swift */; };
 		29A34F2726D6E72800BE13BB /* path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A34F1426D6DA1600BE13BB /* path.swift */; };
 		29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5B26D18931007238C8 /* svg.swift */; };
@@ -54,6 +56,7 @@
 		297AD86A26E92F27008C2547 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		297AD87126E92F5C008C2547 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		297AD87526E92F77008C2547 /* CoordinatesBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesBox.swift; sourceTree = "<group>"; };
+		297AD88626E9355A008C2547 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
 		29A34F1426D6DA1600BE13BB /* path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = path.swift; sourceTree = "<group>"; };
 		29A34F1B26D6E4E300BE13BB /* SVGGeneratorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGGeneratorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A34F1D26D6E4E300BE13BB /* DrawTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawTest.swift; sourceTree = "<group>"; };
@@ -107,6 +110,7 @@
 				291EAB8126D973A9009A8DB0 /* box.swift */,
 				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
 				297AD86926E92F12008C2547 /* Draw Utils */,
+				297AD88526E93543008C2547 /* Path */,
 				29E30E7826DD3AFC0048D1FD /* Renderers */,
 				291CC6B626DED2440035A118 /* cabinet.swift */,
 			);
@@ -121,6 +125,14 @@
 				297AD87526E92F77008C2547 /* CoordinatesBox.swift */,
 			);
 			path = "Draw Utils";
+			sourceTree = "<group>";
+		};
+		297AD88526E93543008C2547 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				297AD88626E9355A008C2547 /* PathCommand.swift */,
+			);
+			path = Path;
 			sourceTree = "<group>";
 		};
 		29A34F1C26D6E4E300BE13BB /* SVGGeneratorTest */ = {
@@ -236,6 +248,7 @@
 				29A34F2F26D6E74000BE13BB /* svg.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
 				291CC6B726DED2440035A118 /* cabinet.swift in Sources */,
+				297AD88726E9355A008C2547 /* PathCommand.swift in Sources */,
 				29E30E8E26DD774C0048D1FD /* Renderer.swift in Sources */,
 				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,
@@ -258,6 +271,7 @@
 				297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */,
 				297AD86226E8C109008C2547 /* SizeTest.swift in Sources */,
 				297AD85426E8BBFB008C2547 /* VectorTest.swift in Sources */,
+				297AD88A26E93570008C2547 /* PathCommand.swift in Sources */,
 				297AD86E26E92F3C008C2547 /* Vector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
