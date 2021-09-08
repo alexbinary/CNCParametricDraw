@@ -12,7 +12,7 @@ struct Rect: Equatable {
     
     /// The rectangle's origin.
     ///
-    var origin: Point
+    var origin: Coordinates
     
     /// The rectangle's size.
     ///
@@ -23,9 +23,9 @@ struct Rect: Equatable {
     ///
     /// In a top-left coordinates space, the rectangle's end point is its bottom-right corner.
     ///
-    var endPoint: Point {
+    var endPoint: Coordinates {
         
-        return Point(x: origin.x + size.width, y: origin.y + size.height)
+        return Coordinates(x: origin.x + size.width, y: origin.y + size.height)
     }
     
     
@@ -35,7 +35,7 @@ struct Rect: Equatable {
     ///
     /// - Returns: A rectangle with same size but with the origin moved by the given offset.
     ///
-    func offsetBy(_ offset: Offset) -> Rect {
+    func offsetBy(_ offset: Coordinates) -> Rect {
         
         return Rect(origin: self.origin + offset, size: size)
     }

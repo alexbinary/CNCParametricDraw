@@ -19,7 +19,7 @@ enum SVGAxis {
 
 
 
-extension Point {
+extension Coordinates {
 
     
     func render() -> String {
@@ -33,8 +33,8 @@ extension Point {
 enum SVGPathCommand {
 
     
-    case moveTo(Point, SVGCoordinateRef)
-    case lineTo(Point, SVGCoordinateRef)
+    case moveTo(Coordinates, SVGCoordinateRef)
+    case lineTo(Coordinates, SVGCoordinateRef)
     case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
     
@@ -77,7 +77,7 @@ struct SVGPath {
     }
     
     
-    func withInitialAbsoluteMove(to coordinates: Point) -> SVGPath {
+    func withInitialAbsoluteMove(to coordinates: Coordinates) -> SVGPath {
         
         var completedCommands = commands
         completedCommands.insert(.moveTo(coordinates, .absolute), at: 0)
@@ -150,7 +150,7 @@ struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Point) -> [SVGPathNode] {
+    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SVGPathNode] {
         
         return pathsLayout.elements.reduce(into: []) { (nodes, element) in
             
@@ -168,7 +168,7 @@ struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNode(renderedFromPath path: Path, at coordinates: Point) -> SVGPathNode {
+    func svgPathNode(renderedFromPath path: Path, at coordinates: Coordinates) -> SVGPathNode {
         
         return SVGPathNode(
             
@@ -185,11 +185,11 @@ struct SVGRenderer: Renderer {
             
             switch command {
             
-            case .moveBy(let coordinates):
+            case .moveToRelative(let coordinates):
                 
                 return .moveTo(coordinates, .relative)
                 
-            case .lineByMovingBy(let coordinates):
+            case .lineToRelative(let coordinates):
                 
                 return .lineTo(coordinates, .relative)
                 

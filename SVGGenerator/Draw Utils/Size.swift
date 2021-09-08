@@ -33,7 +33,7 @@ struct Size: Equatable {
     
     /// Creates a size that measures the distance between two points.
     ///
-    init(from point1: Point, to point2: Point) {
+    init(from point1: Coordinates, to point2: Coordinates) {
         
         self.width = point2.x - point1.x
         self.height = point2.y - point1.y

@@ -43,41 +43,41 @@ struct Path {
     }
     
     
-    func enumerateCoordinates(block: (Point) -> Void) {
+    func enumerateCoordinates(block: (Coordinates) -> Void) {
         
-        var currentCoordinate = Point(x: 0, y: 0)
-        var firstShapePoint: Point? = nil
+        var currentPoint = Coordinates(x: 0, y: 0)
+        var firstShapePoint: Coordinates? = nil
         
-        block(currentCoordinate)
+        block(currentPoint)
         
         commands.forEach { command in
             
             switch command {
             
-            case .moveBy(let coordinate):
+            case .moveToRelative(let coordinates):
                 
-                currentCoordinate.add(coordinate)
+                currentPoint += coordinates
                 
-            case .lineByMovingBy(let coordinate):
+            case .lineToRelative(let coordinates):
                 
                 if firstShapePoint == nil {
-                    firstShapePoint = currentCoordinate
+                    firstShapePoint = currentPoint
                 }
-                currentCoordinate.add(coordinate)
+                currentPoint += coordinates
                 
             case .close:
                 
-                currentCoordinate = firstShapePoint!
+                currentPoint = firstShapePoint!
             }
             
-            block(currentCoordinate)
+            block(currentPoint)
         }
     }
     
     
-    var endPoint: Point {
+    var endPoint: Coordinates {
     
-        var currentCoordinate = Point(x: 0, y: 0)
+        var currentCoordinate = Coordinates(x: 0, y: 0)
         
         enumerateCoordinates { coordinate in
             
@@ -90,8 +90,8 @@ struct Path {
     
     var boundingBox: Rect {
         
-        var smallestCoordinate: Point! = nil
-        var biggestCoordinate: Point! = nil
+        var smallestCoordinate: Coordinates! = nil
+        var biggestCoordinate: Coordinates! = nil
         
         enumerateCoordinates { coordinate in
         
@@ -117,7 +117,7 @@ struct Path {
             }
         }
         
-        let origin: Point! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Point(x: 0, y: 0)
+        let origin: Coordinates! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Coordinates(x: 0, y: 0)
         let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
         
         return Rect(origin: origin, size: size)
@@ -130,19 +130,19 @@ struct Path {
     }
     
     
-    mutating func transformCommandsCoordinatesWith(transform: (Point) -> Point) {
+    mutating func transformCommandsCoordinatesWith(transform: (Coordinates) -> Coordinates) {
         
         transformCommandsWith { command in
             
             switch command {
             
-            case .moveBy(let coordinate):
+            case .moveToRelative(let coordinates):
                 
-                return .moveBy(transform(coordinate))
+                return .moveToRelative(transform(coordinates))
                 
-            case .lineByMovingBy(let coordinate):
+            case .lineToRelative(let coordinates):
                 
-                return .lineByMovingBy(transform(coordinate))
+                return .lineToRelative(transform(coordinates))
                 
             case .close:
                 
@@ -243,7 +243,7 @@ enum PathsLayoutItem {
 
 
 
-typealias PathsLayoutElement = (item: PathsLayoutItem, position: Point)
+typealias PathsLayoutElement = (item: PathsLayoutItem, position: Coordinates)
 
 
 struct PathsLayout {
@@ -254,13 +254,13 @@ struct PathsLayout {
     
     init(withVerticallyAlignedItems items: [PathsLayoutItem]) {
         
-        var currentPosition: Point = .zero
+        var currentPosition: Coordinates = .zero
         
         self.elements = items.reduce(into: []) { elements, item in
             
             elements.append((item: item, position: currentPosition - item.boundingBox.origin))
             
-            currentPosition += Point(x: 0, y: item.boundingBox.size.height)
+            currentPosition += Coordinates(x: 0, y: item.boundingBox.size.height)
         }
     }
     
@@ -279,8 +279,8 @@ struct PathsLayout {
     
     var boundingBox: Rect {
      
-        var smallestOrigin: Point! = nil
-        var biggestEndPoint: Point! = nil
+        var smallestOrigin: Coordinates! = nil
+        var biggestEndPoint: Coordinates! = nil
         
         elements.forEach { (item, position) in
             
