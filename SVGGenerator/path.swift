@@ -235,6 +235,19 @@ enum PathsLayoutItem {
     
     case path(Path)
     case layout(PathsLayout)
+    
+    
+    var boundingBox: CoordinatesBox {
+        
+        switch self {
+        
+        case .path(let path):
+            return path.boundingBox
+            
+        case .layout(let layout):
+            return layout.boundingBox
+        }
+    }
 }
 
 
@@ -248,16 +261,60 @@ struct PathsLayout {
     var elements: [PathsLayoutElement]
     
     
-    init(withVerticallyAlignedPaths paths: [Path]) {
+    init(withVerticallyAlignedItems items: [PathsLayoutItem]) {
         
         var currentPosition: Coordinates = .zero
         
-        self.elements = paths.reduce(into: []) { elements, path in
+        self.elements = items.reduce(into: []) { elements, item in
             
-            elements.append((item: .path(path), position: currentPosition - path.boundingBox.origin))
+            elements.append((item: item, position: currentPosition - item.boundingBox.origin))
             
-            currentPosition += Coordinates(x: 0, y: path.boundingBox.size.height)
+            currentPosition += Coordinates(x: 0, y: item.boundingBox.size.height)
         }
+    }
+    
+    
+    init(withVerticallyAlignedPaths paths: [Path]) {
+        
+        self.init(withVerticallyAlignedItems: paths.map { .path($0) })
+    }
+    
+    
+    init(withVerticallyAlignedLayouts layouts: [PathsLayout]) {
+        
+        self.init(withVerticallyAlignedItems: layouts.map { .layout($0) })
+    }
+    
+    
+    var boundingBox: CoordinatesBox {
+     
+        var smallestOrigin: Coordinates! = nil
+        var biggestEndPoint: Coordinates! = nil
+        
+        elements.forEach { (item, position) in
+            
+            let adjustedBoundingBox = item.boundingBox.offsetBy(position)
+            
+            if smallestOrigin == nil {
+                smallestOrigin = adjustedBoundingBox.origin
+            }
+            if biggestEndPoint == nil {
+                biggestEndPoint = adjustedBoundingBox.endPoint
+            }
+            
+            if adjustedBoundingBox.origin.x < smallestOrigin.x || adjustedBoundingBox.origin.y < smallestOrigin.y {
+                smallestOrigin = adjustedBoundingBox.origin
+            }
+            if adjustedBoundingBox.endPoint.x > biggestEndPoint.x || adjustedBoundingBox.endPoint.y > biggestEndPoint.y {
+                biggestEndPoint = adjustedBoundingBox.endPoint
+            }
+        }
+        
+        let origin = smallestOrigin!
+        let endPoint = biggestEndPoint!
+        let size = Size(from: origin, to: endPoint)
+        
+        return CoordinatesBox(origin: origin, size: size)
     }
 }
 

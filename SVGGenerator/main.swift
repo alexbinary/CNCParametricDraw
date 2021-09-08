@@ -24,13 +24,55 @@ let cabinet = LegoCabinet(
     
     margin: 5,
     
-    numberOfStudsWidth: 8,
-    numberOfStudsDepth: 8,
+    numberOfStudsWidth: 2,
+    numberOfStudsDepth: 2,
     
     shelvesNumberOfPlatesHeightsFromBottomToTop: [3, 2, 1],
     
     crenelConfig: standardCrenelConfig
 )
+
+let boxH1 = LegoCrenelBox(
+    
+    legoUnitLength: legoUnitLength,
+    
+    numberOfStudsWidth: 2,
+    numberOfStudsLength: 2,
+    numberOfPlatesHeight: 1,
+    
+    crenelConfig: standardCrenelConfig
+)
+
+let boxH2 = LegoCrenelBox(
+    
+    legoUnitLength: legoUnitLength,
+    
+    numberOfStudsWidth: 2,
+    numberOfStudsLength: 2,
+    numberOfPlatesHeight: 2,
+    
+    crenelConfig: standardCrenelConfig
+)
+
+
+let boxH3 = LegoCrenelBox(
+    
+    legoUnitLength: legoUnitLength,
+    
+    numberOfStudsWidth: 2,
+    numberOfStudsLength: 2,
+    numberOfPlatesHeight: 3,
+    
+    crenelConfig: standardCrenelConfig
+)
+
+let layout = PathsLayout(withVerticallyAlignedLayouts: [
+                            
+                            cabinet.pathsLayout,
+                            boxH1.pathsLayout,
+                            boxH2.pathsLayout,
+                            boxH3.pathsLayout
+])
 
     
 //    [
@@ -73,6 +115,6 @@ let cabinet = LegoCabinet(
 //]
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
-let fileContent = renderer.renderFile(withRootPathsLayout: cabinet.pathsLayout)
+let fileContent = renderer.renderFile(withRootPathsLayout: layout)
 
 write(fileContent, to: outputFileURL)

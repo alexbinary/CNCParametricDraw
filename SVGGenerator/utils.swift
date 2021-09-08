@@ -55,6 +55,19 @@ struct Size: Equatable {
     
     
     static var zero: Size { Size(width: 0, height: 0) }
+    
+    
+    init(width: Float, height: Float) {
+        
+        self.width = width
+        self.height = height
+    }
+    
+    init(from point1: Coordinates, to point2: Coordinates) {
+        
+        self.width = point2.x - point1.x
+        self.height = point2.y - point1.y
+    }
 }
 
 
@@ -64,4 +77,16 @@ struct CoordinatesBox: Equatable {
     
     var origin: Coordinates
     var size: Size
+    
+    
+    var endPoint: Coordinates {
+        
+        return Coordinates(x: origin.x + size.width, y: origin.y + size.height)
+    }
+    
+    
+    func offsetBy(_ offset: Coordinates) -> CoordinatesBox {
+        
+        return CoordinatesBox(origin: self.origin + offset, size: size)
+    }
 }
