@@ -81,9 +81,3 @@ func +=(lhs: inout Vector, rhs: Vector) {
     
     lhs = lhs + rhs
 }
-
-
-
-
-typealias Coordinates = Vector
-typealias Offset = Vector
