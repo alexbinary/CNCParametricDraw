@@ -3,11 +3,23 @@ import Foundation
 
 
 
+/// The elementary component of a path.
+///
 enum PathCommand {
 
+   
+    /// Instructs a move of the drawing head without actually drawing something by the given X and Y components relative to the current position.
+    ///
+    case moveBy(Offset)
     
-    case moveToRelative(Coordinates)
-    case lineToRelative(Coordinates)
+    
+    /// Instructs the drawing of the a line between the current position and the current position offset by the given X and Y components.
+    ///
+    case lineByMovingBy(Offset)
+    
+    
+    /// Instructs to close the path, i.e. draw a line from the current position to the starting point of the first line in the path.
+    ///
     case close
 }
 
@@ -63,11 +75,11 @@ struct Path {
             
             switch command {
             
-            case .moveToRelative(let coordinate):
+            case .moveBy(let coordinate):
                 
                 currentCoordinate.add(coordinate)
                 
-            case .lineToRelative(let coordinate):
+            case .lineByMovingBy(let coordinate):
                 
                 if firstShapePoint == nil {
                     firstShapePoint = currentCoordinate
@@ -145,13 +157,13 @@ struct Path {
             
             switch command {
             
-            case .moveToRelative(let coordinate):
+            case .moveBy(let coordinate):
                 
-                return .moveToRelative(transform(coordinate))
+                return .moveBy(transform(coordinate))
                 
-            case .lineToRelative(let coordinate):
+            case .lineByMovingBy(let coordinate):
                 
-                return .lineToRelative(transform(coordinate))
+                return .lineByMovingBy(transform(coordinate))
                 
             case .close:
                 

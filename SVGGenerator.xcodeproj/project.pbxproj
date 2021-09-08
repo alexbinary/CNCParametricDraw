@@ -11,12 +11,12 @@
 		291EAB8226D973A9009A8DB0 /* box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* box.swift */; };
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
-		297AD85426E8BBFB008C2547 /* CoordinatesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */; };
+		297AD85426E8BBFB008C2547 /* VectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD85326E8BBFB008C2547 /* VectorTest.swift */; };
 		297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E30E8D26DD774C0048D1FD /* Renderer.swift */; };
 		297AD86226E8C109008C2547 /* SizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86126E8C109008C2547 /* SizeTest.swift */; };
 		297AD86626E8C4DF008C2547 /* CoordinatesBoxTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86526E8C4DF008C2547 /* CoordinatesBoxTest.swift */; };
-		297AD86B26E92F27008C2547 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Coordinates.swift */; };
-		297AD86E26E92F3C008C2547 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Coordinates.swift */; };
+		297AD86B26E92F27008C2547 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Vector.swift */; };
+		297AD86E26E92F3C008C2547 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Vector.swift */; };
 		297AD87226E92F5C008C2547 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87126E92F5C008C2547 /* Size.swift */; };
 		297AD87626E92F77008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
 		297AD87B26E92F89008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
@@ -48,10 +48,10 @@
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29247C5B26D18931007238C8 /* svg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svg.swift; sourceTree = "<group>"; };
 		29247C5E26D190BC007238C8 /* crenel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crenel.swift; sourceTree = "<group>"; };
-		297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatesTest.swift; sourceTree = "<group>"; };
+		297AD85326E8BBFB008C2547 /* VectorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorTest.swift; sourceTree = "<group>"; };
 		297AD86126E8C109008C2547 /* SizeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; };
 		297AD86526E8C4DF008C2547 /* CoordinatesBoxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatesBoxTest.swift; sourceTree = "<group>"; };
-		297AD86A26E92F27008C2547 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		297AD86A26E92F27008C2547 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		297AD87126E92F5C008C2547 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		297AD87526E92F77008C2547 /* CoordinatesBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesBox.swift; sourceTree = "<group>"; };
 		29A34F1426D6DA1600BE13BB /* path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = path.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		297AD86926E92F12008C2547 /* Draw Utils */ = {
 			isa = PBXGroup;
 			children = (
-				297AD86A26E92F27008C2547 /* Coordinates.swift */,
+				297AD86A26E92F27008C2547 /* Vector.swift */,
 				297AD87126E92F5C008C2547 /* Size.swift */,
 				297AD87526E92F77008C2547 /* CoordinatesBox.swift */,
 			);
@@ -126,7 +126,7 @@
 		29A34F1C26D6E4E300BE13BB /* SVGGeneratorTest */ = {
 			isa = PBXGroup;
 			children = (
-				297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */,
+				297AD85326E8BBFB008C2547 /* VectorTest.swift */,
 				297AD86126E8C109008C2547 /* SizeTest.swift */,
 				297AD86526E8C4DF008C2547 /* CoordinatesBoxTest.swift */,
 				29A34F1D26D6E4E300BE13BB /* DrawTest.swift */,
@@ -242,7 +242,7 @@
 				297AD87626E92F77008C2547 /* CoordinatesBox.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* path.swift in Sources */,
 				29E30E7E26DD3B220048D1FD /* file_utils.swift in Sources */,
-				297AD86B26E92F27008C2547 /* Coordinates.swift in Sources */,
+				297AD86B26E92F27008C2547 /* Vector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +257,8 @@
 				297AD87E26E92F8C008C2547 /* Size.swift in Sources */,
 				297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */,
 				297AD86226E8C109008C2547 /* SizeTest.swift in Sources */,
-				297AD85426E8BBFB008C2547 /* CoordinatesTest.swift in Sources */,
-				297AD86E26E92F3C008C2547 /* Coordinates.swift in Sources */,
+				297AD85426E8BBFB008C2547 /* VectorTest.swift in Sources */,
+				297AD86E26E92F3C008C2547 /* Vector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

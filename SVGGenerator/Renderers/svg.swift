@@ -185,11 +185,11 @@ struct SVGRenderer: Renderer {
             
             switch command {
             
-            case .moveToRelative(let coordinates):
+            case .moveBy(let coordinates):
                 
                 return .moveTo(coordinates, .relative)
                 
-            case .lineToRelative(let coordinates):
+            case .lineByMovingBy(let coordinates):
                 
                 return .lineTo(coordinates, .relative)
                 

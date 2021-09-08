@@ -5,7 +5,7 @@ import Foundation
 
 /// A set of 2D coordinates, composed of an X and Y component.
 ///
-struct Coordinates: Equatable {
+struct Vector: Equatable {
 
     
     /// The X component of the coordinates set.
@@ -19,7 +19,7 @@ struct Coordinates: Equatable {
     
     /// A set of coordinates that has both its X and Y components set to 0.
     ///
-    static var zero: Coordinates { Coordinates(x: 0, y: 0) }
+    static var zero: Vector { Coordinates(x: 0, y: 0) }
     
     
     /// Mutates the components of the set by adding the components of another set.
@@ -29,7 +29,7 @@ struct Coordinates: Equatable {
     ///
     /// - Parameter other: The set whose component should be added to those of the set.
     ///
-    mutating func add(_ other: Coordinates) {
+    mutating func add(_ other: Vector) {
         
         self += other
     }
@@ -37,17 +37,17 @@ struct Coordinates: Equatable {
     
     /// A set of coordinates whose X component is equal to the Y component of the set and vice-versa.
     ///
-    var flipped: Coordinates { Coordinates(x: y, y: x) }
+    var flipped: Vector { Vector(x: y, y: x) }
     
     
     /// A set of coordinates whose X component is equal to the opposite of the X component (i.e. -x) of the set and vice-versa.
     ///
-    var mirrorX: Coordinates { Coordinates(x: -x, y: y) }
+    var mirrorX: Vector { Vector(x: -x, y: y) }
     
     
     /// A set of coordinates whose Y component is equal to the opposite of the Y component (i.e. -x) of the set and vice-versa.
     ///
-    var mirrorY: Coordinates { Coordinates(x: x, y: -y) }
+    var mirrorY: Vector { Vector(x: x, y: -y) }
 }
 
 
@@ -56,7 +56,7 @@ struct Coordinates: Equatable {
 ///
 /// - Returns A coordinates set whose X and Y components are respectively the sum of the two coordinates' X and Y components.
 ///
-func +(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
+func +(lhs: Vector, rhs: Vector) -> Coordinates {
     
     return Coordinates(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
 }
@@ -66,7 +66,7 @@ func +(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
 ///
 /// - Returns A coordinates set whose X and Y components are respectively the difference of the two coordinates' X and Y components.
 ///
-func -(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
+func -(lhs: Vector, rhs: Vector) -> Vector {
     
     return Coordinates(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
@@ -77,7 +77,13 @@ func -(lhs: Coordinates, rhs: Coordinates) -> Coordinates {
 /// The X component of the second set is added to the X component of the first set.
 /// The Y component of the second set is added to the Y component of the first set.
 ///
-func +=(lhs: inout Coordinates, rhs: Coordinates) {
+func +=(lhs: inout Vector, rhs: Vector) {
     
     lhs = lhs + rhs
 }
+
+
+
+
+typealias Coordinates = Vector
+typealias Offset = Vector
