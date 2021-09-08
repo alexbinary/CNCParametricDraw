@@ -80,3 +80,37 @@ struct Cabinet: PathsLayoutRepresentable {
         return PathsLayout(withVerticallyAlignedPaths: paths)
     }
 }
+
+
+struct LegoCabinet {
+    
+    
+    let legoUnitLength: Float
+    
+    let materialThickness: Float
+    let margin: Float
+    
+    
+    let numberOfStudsWidth: Float
+    let numberOfStudsDepth: Float
+    
+    let shelvesNumberOfPlatesHeightsFromBottomToTop: [Float]
+    
+    let crenelConfig: CrenelConfig
+    
+    
+    var pathsLayout: PathsLayout {
+        
+        let cabinet = Cabinet(
+            
+            width: numberOfStudsWidth * legoUnitLength * 2.5 + 2 * materialThickness + margin + margin + 2 * materialThickness,
+            depth: numberOfStudsDepth * legoUnitLength * 2.5 + 2 * materialThickness + margin,
+            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { $0 * legoUnitLength + materialThickness + margin + margin },
+            
+            crenelConfig: crenelConfig,
+            materialThickness: materialThickness
+        )
+        
+        return cabinet.pathsLayout
+    }
+}

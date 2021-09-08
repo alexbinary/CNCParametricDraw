@@ -17,16 +17,19 @@ let standardCrenelConfig = CrenelConfig(
 )
 
 
-let cabinet = Cabinet(
+let cabinet = LegoCabinet(
     
-    width: 100,
-    depth: 100,
+    legoUnitLength: legoUnitLength,
+    materialThickness: materialThickness,
     
-    shelveHeights: [50, 50, 50],
+    margin: 5,
     
-    crenelConfig: standardCrenelConfig,
+    numberOfStudsWidth: 8,
+    numberOfStudsDepth: 8,
     
-    materialThickness: materialThickness
+    shelvesNumberOfPlatesHeightsFromBottomToTop: [3, 2, 1],
+    
+    crenelConfig: standardCrenelConfig
 )
 
     
