@@ -19,7 +19,7 @@ enum SVGAxis {
 
 
 
-extension Coordinates {
+extension Point {
 
     
     func render() -> String {
