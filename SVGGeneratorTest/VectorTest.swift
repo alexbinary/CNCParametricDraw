@@ -83,7 +83,7 @@ class VectorTest: XCTestCase {
     
     func test_flipped() {
 
-        let c1 = Coordinates(x: 1, y: 2)
+        let c1 = Point(x: 1, y: 2)
         let c2 = c1.flipped
         
         XCTAssertEqual(c1, Vector(x: 1, y: 2))

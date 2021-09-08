@@ -19,7 +19,7 @@ class SizeTest: XCTestCase {
     
     func test_init_points() {
 
-        let size = Size(from: Coordinates(x: 1, y: 2), to: Coordinates(x: 3, y: 4))
+        let size = Size(from: Point(x: 1, y: 2), to: Point(x: 3, y: 4))
         
         XCTAssertEqual(size.width, 2)
         XCTAssertEqual(size.height, 2)

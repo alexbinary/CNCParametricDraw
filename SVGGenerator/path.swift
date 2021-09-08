@@ -43,10 +43,10 @@ struct Path {
     }
     
     
-    func enumerateCoordinates(block: (Coordinates) -> Void) {
+    func enumerateCoordinates(block: (Point) -> Void) {
         
-        var currentCoordinate = Coordinates(x: 0, y: 0)
-        var firstShapePoint: Coordinates? = nil
+        var currentCoordinate = Point(x: 0, y: 0)
+        var firstShapePoint: Point? = nil
         
         block(currentCoordinate)
         
@@ -75,9 +75,9 @@ struct Path {
     }
     
     
-    var endPoint: Coordinates {
+    var endPoint: Point {
     
-        var currentCoordinate = Coordinates(x: 0, y: 0)
+        var currentCoordinate = Point(x: 0, y: 0)
         
         enumerateCoordinates { coordinate in
             
@@ -90,8 +90,8 @@ struct Path {
     
     var boundingBox: CoordinatesBox {
         
-        var smallestCoordinate: Coordinates! = nil
-        var biggestCoordinate: Coordinates! = nil
+        var smallestCoordinate: Point! = nil
+        var biggestCoordinate: Point! = nil
         
         enumerateCoordinates { coordinate in
         
@@ -117,7 +117,7 @@ struct Path {
             }
         }
         
-        let origin: Coordinates! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Coordinates(x: 0, y: 0)
+        let origin: Point! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Point(x: 0, y: 0)
         let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
         
         return CoordinatesBox(origin: origin, size: size)
@@ -130,7 +130,7 @@ struct Path {
     }
     
     
-    mutating func transformCommandsCoordinatesWith(transform: (Coordinates) -> Coordinates) {
+    mutating func transformCommandsCoordinatesWith(transform: (Point) -> Point) {
         
         transformCommandsWith { command in
             
@@ -243,7 +243,7 @@ enum PathsLayoutItem {
 
 
 
-typealias PathsLayoutElement = (item: PathsLayoutItem, position: Coordinates)
+typealias PathsLayoutElement = (item: PathsLayoutItem, position: Point)
 
 
 struct PathsLayout {
@@ -254,13 +254,13 @@ struct PathsLayout {
     
     init(withVerticallyAlignedItems items: [PathsLayoutItem]) {
         
-        var currentPosition: Coordinates = .zero
+        var currentPosition: Point = .zero
         
         self.elements = items.reduce(into: []) { elements, item in
             
             elements.append((item: item, position: currentPosition - item.boundingBox.origin))
             
-            currentPosition += Coordinates(x: 0, y: item.boundingBox.size.height)
+            currentPosition += Point(x: 0, y: item.boundingBox.size.height)
         }
     }
     
@@ -279,8 +279,8 @@ struct PathsLayout {
     
     var boundingBox: CoordinatesBox {
      
-        var smallestOrigin: Coordinates! = nil
-        var biggestEndPoint: Coordinates! = nil
+        var smallestOrigin: Point! = nil
+        var biggestEndPoint: Point! = nil
         
         elements.forEach { (item, position) in
             

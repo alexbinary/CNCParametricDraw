@@ -15,7 +15,7 @@ struct CoordinatesBox: Equatable {
     ///
     /// By convention, a box always has a positive size, such that in a top-left coordinate space, the box' origin is its the top-left corner.
     ///
-    var origin: Coordinates
+    var origin: Point
     
     /// The box' size.
     ///
@@ -28,9 +28,9 @@ struct CoordinatesBox: Equatable {
     ///
     /// In a top-left coordinates space, the box' end point is its bottom-right corner.
     ///
-    var endPoint: Coordinates {
+    var endPoint: Point {
         
-        return Coordinates(x: origin.x + size.width, y: origin.y + size.height)
+        return Point(x: origin.x + size.width, y: origin.y + size.height)
     }
     
     
@@ -40,7 +40,7 @@ struct CoordinatesBox: Equatable {
     ///
     /// - Returns: A box with same size but with the origin moved by the given offset.
     ///
-    func offsetBy(_ offset: Coordinates) -> CoordinatesBox {
+    func offsetBy(_ offset: Point) -> CoordinatesBox {
         
         return CoordinatesBox(origin: self.origin + offset, size: size)
     }

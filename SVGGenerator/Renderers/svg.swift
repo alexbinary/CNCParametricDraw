@@ -33,8 +33,8 @@ extension Coordinates {
 enum SVGPathCommand {
 
     
-    case moveTo(Coordinates, SVGCoordinateRef)
-    case lineTo(Coordinates, SVGCoordinateRef)
+    case moveTo(Point, SVGCoordinateRef)
+    case lineTo(Point, SVGCoordinateRef)
     case axis(SVGAxis, Float, SVGCoordinateRef)
     case close
     
@@ -77,7 +77,7 @@ struct SVGPath {
     }
     
     
-    func withInitialAbsoluteMove(to coordinates: Coordinates) -> SVGPath {
+    func withInitialAbsoluteMove(to coordinates: Point) -> SVGPath {
         
         var completedCommands = commands
         completedCommands.insert(.moveTo(coordinates, .absolute), at: 0)
@@ -150,7 +150,7 @@ struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SVGPathNode] {
+    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Point) -> [SVGPathNode] {
         
         return pathsLayout.elements.reduce(into: []) { (nodes, element) in
             
@@ -168,7 +168,7 @@ struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNode(renderedFromPath path: Path, at coordinates: Coordinates) -> SVGPathNode {
+    func svgPathNode(renderedFromPath path: Path, at coordinates: Point) -> SVGPathNode {
         
         return SVGPathNode(
             
