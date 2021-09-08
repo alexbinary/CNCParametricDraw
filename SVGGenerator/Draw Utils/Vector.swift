@@ -17,17 +17,17 @@ struct Vector: Equatable {
     var y: Float
     
     
-    /// A set of coordinates that has both its X and Y components set to 0.
+    /// A vector that has both its X and Y components set to 0.
     ///
-    static var zero: Vector { Coordinates(x: 0, y: 0) }
+    static var zero: Vector { Vector(x: 0, y: 0) }
     
     
-    /// Mutates the components of the set by adding the components of another set.
+    /// Mutates the components of the vector by adding the components of another vector.
     ///
-    /// The X component of the other set is added to the X component of the set.
-    /// The Y component of the other set is added to the Y component of the set.
+    /// The X component of the other vector is added to the X component of the vector.
+    /// The Y component of the other vector is added to the Y component of the vector.
     ///
-    /// - Parameter other: The set whose component should be added to those of the set.
+    /// - Parameter other: The vector whose component should be added to those of the vector.
     ///
     mutating func add(_ other: Vector) {
         
@@ -35,47 +35,47 @@ struct Vector: Equatable {
     }
     
     
-    /// A set of coordinates whose X component is equal to the Y component of the set and vice-versa.
+    /// A vector whose X component is equal to the Y component of the vector and vice-versa.
     ///
     var flipped: Vector { Vector(x: y, y: x) }
     
     
-    /// A set of coordinates whose X component is equal to the opposite of the X component (i.e. -x) of the set and vice-versa.
+    /// A vector whose X component is equal to the opposite of the X component (i.e. -x) of the vector and vice-versa.
     ///
     var mirrorX: Vector { Vector(x: -x, y: y) }
     
     
-    /// A set of coordinates whose Y component is equal to the opposite of the Y component (i.e. -x) of the set and vice-versa.
+    /// A vector whose Y component is equal to the opposite of the Y component (i.e. -x) of the vector and vice-versa.
     ///
     var mirrorY: Vector { Vector(x: x, y: -y) }
 }
 
 
 
-/// Adds the components of two coordinates sets.
+/// Adds the components of two vectors.
 ///
-/// - Returns A coordinates set whose X and Y components are respectively the sum of the two coordinates' X and Y components.
+/// - Returns A vector whose X and Y components are respectively the sum of the two vectors' X and Y components.
 ///
-func +(lhs: Vector, rhs: Vector) -> Coordinates {
+func +(lhs: Vector, rhs: Vector) -> Vector {
     
-    return Coordinates(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    return Vector(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
 }
 
 
-/// Substracts the components of a coordinates set from another coordinates set.
+/// Substracts the components of a vector from another vector.
 ///
-/// - Returns A coordinates set whose X and Y components are respectively the difference of the two coordinates' X and Y components.
+/// - Returns A vector whose X and Y components are respectively the difference of the two vectors' X and Y components.
 ///
 func -(lhs: Vector, rhs: Vector) -> Vector {
     
-    return Coordinates(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    return Vector(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
 }
 
 
-/// Mutates the components of a set by adding the components of another set.
+/// Mutates the components of a vector by adding the components of another vector.
 ///
-/// The X component of the second set is added to the X component of the first set.
-/// The Y component of the second set is added to the Y component of the first set.
+/// The X component of the second vector is added to the X component of the first vector.
+/// The Y component of the second vector is added to the Y component of the first vector.
 ///
 func +=(lhs: inout Vector, rhs: Vector) {
     
