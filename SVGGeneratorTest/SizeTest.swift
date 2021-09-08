@@ -8,7 +8,7 @@ import XCTest
 class SizeTest: XCTestCase {
 
 
-    func test_Size_init_width_height() {
+    func test_init_width_height() {
 
         let size = Size(width: 1, height: 2)
         
@@ -17,7 +17,7 @@ class SizeTest: XCTestCase {
     }
     
     
-    func test_Size_init_points() {
+    func test_init_points() {
 
         let size = Size(from: Coordinates(x: 1, y: 2), to: Coordinates(x: 3, y: 4))
         
@@ -26,7 +26,7 @@ class SizeTest: XCTestCase {
     }
     
     
-    func test_Size_equatable() {
+    func test_equatable() {
 
         let s1 = Size(width: 1, height: 2)
         let s2 = Size(width: 1, height: 2)
@@ -36,7 +36,7 @@ class SizeTest: XCTestCase {
     }
     
     
-    func test_Size_zero() {
+    func test_zero() {
 
         let zero = Size.zero
         

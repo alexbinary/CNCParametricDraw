@@ -8,7 +8,7 @@ import XCTest
 class CoordinatesBoxTest: XCTestCase {
 
 
-    func test_CoordinatesBox_init_origin_size() {
+    func test_init_origin_size() {
 
         let box = CoordinatesBox(origin: Coordinates(x: 1, y: 2), size: Size(width: 3, height: 4))
         
@@ -17,7 +17,7 @@ class CoordinatesBoxTest: XCTestCase {
     }
     
     
-    func test_CoordinatesBox_endPoint() {
+    func test_endPoint() {
 
         let box = CoordinatesBox(origin: Coordinates(x: 1, y: 2), size: Size(width: 3, height: 4))
         
@@ -25,7 +25,7 @@ class CoordinatesBoxTest: XCTestCase {
     }
     
     
-    func test_CoordinatesBox_offsetBy() {
+    func test_offsetBy() {
 
         let box1 = CoordinatesBox(origin: Coordinates(x: 1, y: 2), size: Size(width: 3, height: 4))
         let box2 = box1.offsetBy(Coordinates(x: 5, y: 6))
