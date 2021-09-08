@@ -88,7 +88,7 @@ struct Path {
     }
     
     
-    var boundingBox: CoordinatesBox {
+    var boundingBox: Rect {
         
         var smallestCoordinate: Point! = nil
         var biggestCoordinate: Point! = nil
@@ -120,7 +120,7 @@ struct Path {
         let origin: Point! = smallestCoordinate.x < 0 || smallestCoordinate.y < 0 ? smallestCoordinate : Point(x: 0, y: 0)
         let size = Size(width: biggestCoordinate.x - origin.x, height: biggestCoordinate.y - origin.y)
         
-        return CoordinatesBox(origin: origin, size: size)
+        return Rect(origin: origin, size: size)
     }
     
     
@@ -228,7 +228,7 @@ enum PathsLayoutItem {
     case layout(PathsLayout)
     
     
-    var boundingBox: CoordinatesBox {
+    var boundingBox: Rect {
         
         switch self {
         
@@ -277,7 +277,7 @@ struct PathsLayout {
     }
     
     
-    var boundingBox: CoordinatesBox {
+    var boundingBox: Rect {
      
         var smallestOrigin: Point! = nil
         var biggestEndPoint: Point! = nil
@@ -305,7 +305,7 @@ struct PathsLayout {
         let endPoint = biggestEndPoint!
         let size = Size(from: origin, to: endPoint)
         
-        return CoordinatesBox(origin: origin, size: size)
+        return Rect(origin: origin, size: size)
     }
 }
 

@@ -18,8 +18,8 @@
 		297AD86B26E92F27008C2547 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Vector.swift */; };
 		297AD86E26E92F3C008C2547 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86A26E92F27008C2547 /* Vector.swift */; };
 		297AD87226E92F5C008C2547 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87126E92F5C008C2547 /* Size.swift */; };
-		297AD87626E92F77008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
-		297AD87B26E92F89008C2547 /* CoordinatesBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* CoordinatesBox.swift */; };
+		297AD87626E92F77008C2547 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* Rect.swift */; };
+		297AD87B26E92F89008C2547 /* Rect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87526E92F77008C2547 /* Rect.swift */; };
 		297AD87E26E92F8C008C2547 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD87126E92F5C008C2547 /* Size.swift */; };
 		297AD88726E9355A008C2547 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD88626E9355A008C2547 /* PathCommand.swift */; };
 		297AD88A26E93570008C2547 /* PathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD88626E9355A008C2547 /* PathCommand.swift */; };
@@ -59,7 +59,7 @@
 		297AD86526E8C4DF008C2547 /* CoordinatesBoxTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatesBoxTest.swift; sourceTree = "<group>"; };
 		297AD86A26E92F27008C2547 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		297AD87126E92F5C008C2547 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		297AD87526E92F77008C2547 /* CoordinatesBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesBox.swift; sourceTree = "<group>"; };
+		297AD87526E92F77008C2547 /* Rect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rect.swift; sourceTree = "<group>"; };
 		297AD88626E9355A008C2547 /* PathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathCommand.swift; sourceTree = "<group>"; };
 		297AD88D26E93651008C2547 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		297AD89126E93669008C2547 /* Offset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offset.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				297AD88D26E93651008C2547 /* Point.swift */,
 				297AD89126E93669008C2547 /* Offset.swift */,
 				297AD87126E92F5C008C2547 /* Size.swift */,
-				297AD87526E92F77008C2547 /* CoordinatesBox.swift */,
+				297AD87526E92F77008C2547 /* Rect.swift */,
 			);
 			path = "Draw Utils";
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 				29E30E8E26DD774C0048D1FD /* Renderer.swift in Sources */,
 				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
 				29247C5F26D190BC007238C8 /* crenel.swift in Sources */,
-				297AD87626E92F77008C2547 /* CoordinatesBox.swift in Sources */,
+				297AD87626E92F77008C2547 /* Rect.swift in Sources */,
 				297AD88E26E93651008C2547 /* Point.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* path.swift in Sources */,
 				29E30E7E26DD3B220048D1FD /* file_utils.swift in Sources */,
@@ -276,7 +276,7 @@
 				29A34F2C26D6E73F00BE13BB /* svg.swift in Sources */,
 				29A34F2726D6E72800BE13BB /* path.swift in Sources */,
 				297AD86626E8C4DF008C2547 /* CoordinatesBoxTest.swift in Sources */,
-				297AD87B26E92F89008C2547 /* CoordinatesBox.swift in Sources */,
+				297AD87B26E92F89008C2547 /* Rect.swift in Sources */,
 				297AD87E26E92F8C008C2547 /* Size.swift in Sources */,
 				297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */,
 				297AD86226E8C109008C2547 /* SizeTest.swift in Sources */,

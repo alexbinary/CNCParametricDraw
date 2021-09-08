@@ -10,7 +10,7 @@ class CoordinatesBoxTest: XCTestCase {
 
     func test_init_origin_size() {
 
-        let box = CoordinatesBox(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
+        let box = Rect(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
         
         XCTAssertEqual(box.origin, Point(x: 1, y: 2))
         XCTAssertEqual(box.size, Size(width: 3, height: 4))
@@ -19,7 +19,7 @@ class CoordinatesBoxTest: XCTestCase {
     
     func test_endPoint() {
 
-        let box = CoordinatesBox(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
+        let box = Rect(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
         
         XCTAssertEqual(box.endPoint, Point(x: 4, y: 6))
     }
@@ -27,7 +27,7 @@ class CoordinatesBoxTest: XCTestCase {
     
     func test_offsetBy() {
 
-        let box1 = CoordinatesBox(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
+        let box1 = Rect(origin: Point(x: 1, y: 2), size: Size(width: 3, height: 4))
         let box2 = box1.offsetBy(Point(x: 5, y: 6))
         
         XCTAssertEqual(box1.origin, Point(x: 1, y: 2))
