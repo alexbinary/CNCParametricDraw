@@ -105,16 +105,31 @@
 			isa = PBXGroup;
 			children = (
 				29247C5326D183A7007238C8 /* main.swift */,
-				29A34F1426D6DA1600BE13BB /* path.swift */,
-				29247C5E26D190BC007238C8 /* crenel.swift */,
-				291EAB8126D973A9009A8DB0 /* box.swift */,
-				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
+				2939C7A926EC7779008BE61B /* Shapes */,
 				297AD86926E92F12008C2547 /* Draw Utils */,
 				297AD88526E93543008C2547 /* Path */,
 				29E30E7826DD3AFC0048D1FD /* Renderers */,
-				291CC6B626DED2440035A118 /* cabinet.swift */,
+				2939C7AA26EC7792008BE61B /* Utils */,
 			);
 			path = SVGGenerator;
+			sourceTree = "<group>";
+		};
+		2939C7A926EC7779008BE61B /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				29247C5E26D190BC007238C8 /* crenel.swift */,
+				291EAB8126D973A9009A8DB0 /* box.swift */,
+				291CC6B626DED2440035A118 /* cabinet.swift */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		2939C7AA26EC7792008BE61B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				29E30E7D26DD3B220048D1FD /* file_utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		297AD86926E92F12008C2547 /* Draw Utils */ = {
@@ -131,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				297AD88626E9355A008C2547 /* PathCommand.swift */,
+				29A34F1426D6DA1600BE13BB /* path.swift */,
 			);
 			path = Path;
 			sourceTree = "<group>";
