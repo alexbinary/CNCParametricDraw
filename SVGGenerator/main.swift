@@ -69,9 +69,9 @@ let boxH3 = LegoCrenelBox(
 
 let boxCase = LegoCrenelBoxCase(
     
-    legoUnitLength: legoUnitLength,
-    materialThickness: materialThickness,
-    margin: defaultMargin,
+    legoUnitLength: 15.mm,
+    materialThickness: 3.mm,
+    margin: 5.mm,
     
     width: 2.studs,
     length: 2.studs,

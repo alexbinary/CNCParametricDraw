@@ -20,9 +20,9 @@ struct LegoLength {
         self.numberOfLegoUnits = numberOfStuds * Self.unitsPerStud
     }
     
-    func resolve(using legoUnitDimension: Float) -> Float {
+    func resolveToMetric(using legoUnitDimension: MetricLength) -> MetricLength {
         
-        return numberOfLegoUnits * legoUnitDimension
+        return MetricLength(millimeters: numberOfLegoUnits * legoUnitDimension.toMillimeters)
     }
 }
 

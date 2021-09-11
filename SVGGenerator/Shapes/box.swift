@@ -300,10 +300,10 @@ struct LegoCrenelBox: PathsLayoutRepresentable {
 struct LegoCrenelBoxCase: PathsLayoutRepresentable {
     
     
-    let legoUnitLength: Float
+    let legoUnitLength: MetricLength
     
-    let materialThickness: Float
-    let margin: Float
+    let materialThickness: MetricLength
+    let margin: MetricLength
     
     let width: LegoLength
     let length: LegoLength
@@ -320,9 +320,9 @@ struct LegoCrenelBoxCase: PathsLayoutRepresentable {
         
         let box = CrenelBox(
             
-            width: width.resolve(using: legoUnitLength) + 2 * materialThickness + margin,
-            length: length.resolve(using: legoUnitLength) + 2 * materialThickness + margin,
-            height: height.resolve(using: legoUnitLength) + materialThickness + margin,
+            width: width.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters,
+            length: length.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters,
+            height: height.resolveToMetric(using: legoUnitLength).toMillimeters + materialThickness.toMillimeters + margin.toMillimeters,
             
             widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsWidth),
             lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsLength),
