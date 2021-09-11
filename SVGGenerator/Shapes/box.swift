@@ -41,16 +41,16 @@ struct BoxFace: PathRepresentable {
          
         var totalPath: Path = .empty
         
-        let offsetLeft = leftCrenelConfig != nil && leftCrenelConfig!.direction == .external ? leftCrenelConfig!.crenelConfig.depth.toMillimeters : 0
-        let offsetRight = rightCrenelConfig != nil && rightCrenelConfig!.direction == .external ? rightCrenelConfig!.crenelConfig.depth.toMillimeters : 0
+        let offsetLeft = (leftCrenelConfig != nil && leftCrenelConfig!.direction == .external ? leftCrenelConfig!.crenelConfig.depth : 0.mm).toMillimeters
+        let offsetRight = (rightCrenelConfig != nil && rightCrenelConfig!.direction == .external ? rightCrenelConfig!.crenelConfig.depth : 0.mm).toMillimeters
         
-        let offsetTop = topCrenelConfig != nil && topCrenelConfig!.direction == .external ? topCrenelConfig!.crenelConfig.depth.toMillimeters : 0
-        let offsetBottom = bottomCrenelConfig != nil && bottomCrenelConfig!.direction == .external ? bottomCrenelConfig!.crenelConfig.depth.toMillimeters : 0
+        let offsetTop = (topCrenelConfig != nil && topCrenelConfig!.direction == .external ? topCrenelConfig!.crenelConfig.depth : 0.mm).toMillimeters
+        let offsetBottom = (bottomCrenelConfig != nil && bottomCrenelConfig!.direction == .external ? bottomCrenelConfig!.crenelConfig.depth : 0.mm).toMillimeters
         
         totalPath.append(.moveToRelative(Coordinates(x: offsetLeft, y: offsetTop)))
         
-        let horizontalLength = width.toMillimeters - offsetLeft - offsetRight
-        let verticalLength = height.toMillimeters - offsetTop - offsetBottom
+        let horizontalLength = (width - MetricLength(millimeters: offsetLeft) - MetricLength(millimeters: offsetRight)).toMillimeters
+        let verticalLength = (height - MetricLength(millimeters: offsetTop) - MetricLength(millimeters: offsetBottom)).toMillimeters
         
         if let crenelConfig = leftCrenelConfig {
             
@@ -59,7 +59,7 @@ struct BoxFace: PathRepresentable {
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: MetricLength(millimeters: offsetTop),
-                offsetEnd: MetricLength(millimeters: -offsetBottom)
+                offsetEnd: -MetricLength(millimeters: -offsetBottom)
             ).path.rotated90DegreesClockWise
             
             if crenelConfig.direction == .internal {
@@ -78,7 +78,7 @@ struct BoxFace: PathRepresentable {
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: MetricLength(millimeters: offsetLeft),
-                offsetEnd: MetricLength(millimeters: -offsetRight)
+                offsetEnd: -MetricLength(millimeters: offsetRight)
             ).path
             
             if crenelConfig.direction == .internal {
@@ -97,7 +97,7 @@ struct BoxFace: PathRepresentable {
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: MetricLength(millimeters: offsetBottom),
-                offsetEnd: MetricLength(millimeters: -offsetTop)
+                offsetEnd: -MetricLength(millimeters: offsetTop)
             ).path.rotated270DegreesClockWise
             
             if crenelConfig.direction == .internal {
@@ -116,7 +116,7 @@ struct BoxFace: PathRepresentable {
                 numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
                 offsetStart: MetricLength(millimeters: offsetRight),
-                offsetEnd: MetricLength(millimeters: -offsetLeft)
+                offsetEnd: -MetricLength(millimeters: offsetLeft)
             ).path.rotated180DegreesClockWise
             
             if crenelConfig.direction == .internal {
@@ -130,7 +130,7 @@ struct BoxFace: PathRepresentable {
         
         if !punchLinesPositionYStartingFromBottom.isEmpty {
             
-            totalPath.append(.moveToRelative(Coordinates(x: -offsetLeft, y: -offsetTop + height.toMillimeters)))
+            totalPath.append(.moveToRelative(Coordinates(x: -offsetLeft, y: (-MetricLength(millimeters: offsetTop) + height).toMillimeters)))
             
             punchLinesPositionYStartingFromBottom.dropLast().forEach { h in
                 
@@ -320,9 +320,9 @@ struct LegoCrenelBoxCase: PathsLayoutRepresentable {
         
         let box = CrenelBox(
             
-            width: MetricLength(millimeters: width.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters),
-            length: MetricLength(millimeters: length.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters),
-            height: MetricLength(millimeters: height.resolveToMetric(using: legoUnitLength).toMillimeters + materialThickness.toMillimeters + margin.toMillimeters),
+            width: width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
+            length: length.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
+            height: height.resolveToMetric(using: legoUnitLength) + materialThickness + margin,
             
             widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsWidth),
             lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: numberOfCrenelsLength),

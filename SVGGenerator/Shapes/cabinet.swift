@@ -18,10 +18,10 @@ struct Cabinet: PathsLayoutRepresentable {
     
     var pathsLayout: PathsLayout {
         
-        let totalHeight = shelveHeights.reduce(0, { $0 + $1.toMillimeters }) + Float(shelveHeights.count + 1) * materialThickness.toMillimeters
+        let totalHeight = (shelveHeights.reduce(0.mm, { $0 + $1 }) + Float(shelveHeights.count + 1) * materialThickness).toMillimeters
         
-        var punchLinesHeights: [MetricLength] = shelveHeights.map { MetricLength(millimeters: $0.toMillimeters + 2 * crenelConfig.depth.toMillimeters/2) }
-        punchLinesHeights[0] = MetricLength(millimeters: punchLinesHeights[0].toMillimeters + crenelConfig.depth.toMillimeters/2)
+        var punchLinesHeights: [MetricLength] = shelveHeights.map { $0 + 2 * crenelConfig.depth/2 }
+        punchLinesHeights[0] += crenelConfig.depth/2
         
         let leftRightFace = BoxFace(
             
@@ -103,9 +103,9 @@ struct LegoCabinet {
         
         let cabinet = Cabinet(
             
-            width: MetricLength(millimeters: width.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters + 2 * materialThickness.toMillimeters),
-            depth: MetricLength(millimeters: depth.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters),
-            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { MetricLength(millimeters: $0 * legoUnitLength.toMillimeters + materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters) },
+            width: width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin + margin + 2 * materialThickness,
+            depth: depth.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
+            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { $0 * legoUnitLength + materialThickness + margin + margin },
             
             crenelConfig: crenelConfig,
             materialThickness: materialThickness
