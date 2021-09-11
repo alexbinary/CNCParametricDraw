@@ -91,8 +91,8 @@ struct LegoCabinet {
     let margin: MetricLength
     
     
-    let numberOfStudsWidth: Float
-    let numberOfStudsDepth: Float
+    let width: LegoLength
+    let depth: LegoLength
     
     let shelvesNumberOfPlatesHeightsFromBottomToTop: [Float]
     
@@ -103,8 +103,8 @@ struct LegoCabinet {
         
         let cabinet = Cabinet(
             
-            width: MetricLength(millimeters: numberOfStudsWidth * legoUnitLength.toMillimeters * 2.5 + 2 * materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters + 2 * materialThickness.toMillimeters),
-            depth: MetricLength(millimeters: numberOfStudsDepth * legoUnitLength.toMillimeters * 2.5 + 2 * materialThickness.toMillimeters + margin.toMillimeters),
+            width: MetricLength(millimeters: width.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters + 2 * materialThickness.toMillimeters),
+            depth: MetricLength(millimeters: depth.resolveToMetric(using: legoUnitLength).toMillimeters + 2 * materialThickness.toMillimeters + margin.toMillimeters),
             shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { MetricLength(millimeters: $0 * legoUnitLength.toMillimeters + materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters) },
             
             crenelConfig: crenelConfig,

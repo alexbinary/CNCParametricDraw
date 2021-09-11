@@ -25,8 +25,8 @@ let cabinet = LegoCabinet(
     
     margin: MetricLength(millimeters: 5),
     
-    numberOfStudsWidth: 2,
-    numberOfStudsDepth: 2,
+    width: 2.studs,
+    depth: 2.studs,
     
     shelvesNumberOfPlatesHeightsFromBottomToTop: [3, 2, 1],
     
@@ -37,9 +37,9 @@ let boxH1 = LegoCrenelBox(
     
     legoUnitLength: legoUnitLength,
     
-    numberOfStudsWidth: 2,
-    numberOfStudsLength: 2,
-    numberOfPlatesHeight: 1,
+    width: 2.studs,
+    length: 2.studs,
+    height: 1.plates,
     
     crenelConfig: standardCrenelConfig
 )
@@ -48,9 +48,9 @@ let boxH2 = LegoCrenelBox(
     
     legoUnitLength: legoUnitLength,
     
-    numberOfStudsWidth: 2,
-    numberOfStudsLength: 2,
-    numberOfPlatesHeight: 2,
+    width: 2.studs,
+    length: 2.studs,
+    height: 2.plates,
     
     crenelConfig: standardCrenelConfig
 )
@@ -60,9 +60,9 @@ let boxH3 = LegoCrenelBox(
     
     legoUnitLength: legoUnitLength,
     
-    numberOfStudsWidth: 2,
-    numberOfStudsLength: 2,
-    numberOfPlatesHeight: 3,
+    width: 2.studs,
+    length: 2.studs,
+    height: 3.plates,
     
     crenelConfig: standardCrenelConfig
 )
