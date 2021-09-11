@@ -38,7 +38,7 @@ struct CrenelSegment: PathRepresentable {
         
         switch numberOfCrenels {
         case .auto:
-            actualNumberOfCrenels = UInt(max((totalLength - offsetStart + offsetEnd).toMillimeters / crenelConfig.baseLength.toMillimeters / 2 - 1, 0))
+            actualNumberOfCrenels = UInt(max((totalLength - offsetStart + offsetEnd) / crenelConfig.baseLength / 2 - 1, 0))
         case .manual(let n):
             actualNumberOfCrenels = n
         }
@@ -96,7 +96,7 @@ struct PunchesSegment: PathRepresentable {
         
         switch numberOfPunches {
         case .auto:
-            actualNumberOfPunches = UInt(max((totalLength - offsetStart + offsetEnd).toMillimeters / crenelConfig.baseLength.toMillimeters / 2 - 1, 0))
+            actualNumberOfPunches = UInt(max((totalLength - offsetStart + offsetEnd) / crenelConfig.baseLength / 2 - 1, 0))
         case .manual(let n):
             actualNumberOfPunches = n
         }

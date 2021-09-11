@@ -74,3 +74,9 @@ func /(lhs: MetricLength, rhs: Int) -> MetricLength {
     
     return lhs / Float(rhs)
 }
+
+
+func /(lhs: MetricLength, rhs: MetricLength) -> Float {
+    
+    return lhs.toMillimeters / rhs.toMillimeters
+}
