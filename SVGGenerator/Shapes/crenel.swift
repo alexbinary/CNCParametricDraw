@@ -43,23 +43,23 @@ struct CrenelSegment: PathRepresentable {
             actualNumberOfCrenels = n
         }
         
-        let crenelActualLength: Float = (crenelConfig.baseLength + crenelConfig.lengthAdjustment).toMillimeters
-        let antiCrenelActualLength: Float = (crenelConfig.baseLength - crenelConfig.lengthAdjustment).toMillimeters
+        let crenelActualLength = crenelConfig.baseLength + crenelConfig.lengthAdjustment
+        let antiCrenelActualLength = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
-        let totalCrenelationLength: Float = Float(actualNumberOfCrenels) * crenelActualLength + max(Float(actualNumberOfCrenels) - 1, 0) * antiCrenelActualLength
+        let totalCrenelationLength = Float(actualNumberOfCrenels) * crenelActualLength + max(Float(actualNumberOfCrenels) - 1, 0) * antiCrenelActualLength
         
-        let buttsTotalLength: Float = (totalLength - MetricLength(millimeters: totalCrenelationLength)).toMillimeters
-        let buttsStartLength: Float = buttsTotalLength/2
-        let buttsEndLength: Float = buttsTotalLength - buttsStartLength
+        let buttsTotalLength = totalLength - totalCrenelationLength
+        let buttsStartLength = buttsTotalLength/2
+        let buttsEndLength = buttsTotalLength - buttsStartLength
 
-        let buttStartPath = Path(withCommands: [.lineToRelative(Coordinates(x: (MetricLength(millimeters: buttsStartLength) - offsetStart).toMillimeters, y: 0))])
+        let buttStartPath = Path(withCommands: [.lineToRelative(Coordinates(x: (buttsStartLength - offsetStart).toMillimeters, y: 0))])
         let crenelPath = Path(withCommands: [
             .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth.toMillimeters)),
-            .lineToRelative(Coordinates(x: crenelActualLength, y: 0)),
+            .lineToRelative(Coordinates(x: crenelActualLength.toMillimeters, y: 0)),
             .lineToRelative(Coordinates(x: 0, y: -crenelConfig.depth.toMillimeters)),
         ])
-        let antiCrenelPath = Path(withCommands: [.lineToRelative(Coordinates(x: antiCrenelActualLength, y: 0))])
-        let buttEndPath = Path(withCommands: [.lineToRelative(Coordinates(x: (MetricLength(millimeters: buttsEndLength) + offsetEnd).toMillimeters, y: 0))])
+        let antiCrenelPath = Path(withCommands: [.lineToRelative(Coordinates(x: antiCrenelActualLength.toMillimeters, y: 0))])
+        let buttEndPath = Path(withCommands: [.lineToRelative(Coordinates(x: (buttsEndLength + offsetEnd).toMillimeters, y: 0))])
 
         var totalPath: Path = .empty
         totalPath.append(buttStartPath)
@@ -101,26 +101,26 @@ struct PunchesSegment: PathRepresentable {
             actualNumberOfPunches = n
         }
         
-        let punchActualLength: Float = (crenelConfig.baseLength + crenelConfig.lengthAdjustment).toMillimeters
-        let antiPunchActualLength: Float = (crenelConfig.baseLength - crenelConfig.lengthAdjustment).toMillimeters
+        let punchActualLength = crenelConfig.baseLength + crenelConfig.lengthAdjustment
+        let antiPunchActualLength = crenelConfig.baseLength - crenelConfig.lengthAdjustment
         
-        let totalPunchedLength: Float = Float(actualNumberOfPunches) * punchActualLength + max(Float(actualNumberOfPunches) - 1, 0) * antiPunchActualLength
+        let totalPunchedLength = Float(actualNumberOfPunches) * punchActualLength + max(Float(actualNumberOfPunches) - 1, 0) * antiPunchActualLength
         
-        let buttsTotalLength: Float = (totalLength - MetricLength(millimeters: totalPunchedLength)).toMillimeters
-        let buttsStartLength: Float = buttsTotalLength/2
-        let buttsEndLength: Float = buttsTotalLength - buttsStartLength
+        let buttsTotalLength = totalLength - totalPunchedLength
+        let buttsStartLength = buttsTotalLength/2
+        let buttsEndLength = buttsTotalLength - buttsStartLength
 
-        let buttStartPath = Path(withCommands: [.moveToRelative(Coordinates(x: (MetricLength(millimeters: buttsStartLength) - offsetStart).toMillimeters, y: 0))])
+        let buttStartPath = Path(withCommands: [.moveToRelative(Coordinates(x: (buttsStartLength - offsetStart).toMillimeters, y: 0))])
         let punchPath = Path(withCommands: [
             .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth.toMillimeters/2)),
-            .lineToRelative(Coordinates(x: punchActualLength, y: 0)),
+            .lineToRelative(Coordinates(x: punchActualLength.toMillimeters, y: 0)),
             .lineToRelative(Coordinates(x: 0, y: -crenelConfig.depth.toMillimeters)),
-            .lineToRelative(Coordinates(x: -punchActualLength, y: 0)),
+            .lineToRelative(Coordinates(x: -punchActualLength.toMillimeters, y: 0)),
             .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth.toMillimeters/2)),
-            .moveToRelative(Coordinates(x: punchActualLength, y: 0)),
+            .moveToRelative(Coordinates(x: punchActualLength.toMillimeters, y: 0)),
         ])
-        let antiPunchPath = Path(withCommands: [.moveToRelative(Coordinates(x: antiPunchActualLength, y: 0))])
-        let buttEndPath = Path(withCommands: [.moveToRelative(Coordinates(x: (MetricLength(millimeters: buttsEndLength) + offsetEnd).toMillimeters, y: 0))])
+        let antiPunchPath = Path(withCommands: [.moveToRelative(Coordinates(x: antiPunchActualLength.toMillimeters, y: 0))])
+        let buttEndPath = Path(withCommands: [.moveToRelative(Coordinates(x: (buttsEndLength + offsetEnd).toMillimeters, y: 0))])
 
         var totalPath: Path = .empty
         totalPath.append(buttStartPath)
