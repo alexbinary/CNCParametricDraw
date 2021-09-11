@@ -9,6 +9,7 @@ let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPat
 
 let legoUnitLength: Float = 15
 let materialThickness: Float = 3
+let defaultMargin: Float = 5
 
 let standardCrenelConfig = CrenelConfig(
     baseLength: 5,
@@ -62,6 +63,19 @@ let boxH3 = LegoCrenelBox(
     numberOfStudsWidth: 2,
     numberOfStudsLength: 2,
     numberOfPlatesHeight: 3,
+    
+    crenelConfig: standardCrenelConfig
+)
+
+let boxCase = LegoCrenelBoxCase(
+    
+    legoUnitLength: legoUnitLength,
+    materialThickness: materialThickness,
+    margin: defaultMargin,
+    
+    width: 2.studs,
+    length: 2.studs,
+    height: 3.plates,
     
     crenelConfig: standardCrenelConfig
 )
