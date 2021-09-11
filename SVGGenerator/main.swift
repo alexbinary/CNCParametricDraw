@@ -7,14 +7,14 @@ let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPat
 
 
 
-let legoUnitLength: Float = 15
-let materialThickness: Float = 3
-let defaultMargin: Float = 5
+let legoUnitLength = 15.mm
+let materialThickness = 3.mm
+let defaultMargin = 5.mm
 
 let standardCrenelConfig = CrenelConfig(
-    baseLength: 5,
-    lengthAdjustment: 0,
-    depth: 3
+    baseLength: 5.mm,
+    lengthAdjustment: 0.mm,
+    depth: 3.mm
 )
 
 
@@ -23,7 +23,7 @@ let cabinet = LegoCabinet(
     legoUnitLength: legoUnitLength,
     materialThickness: materialThickness,
     
-    margin: 5,
+    margin: MetricLength(millimeters: 5),
     
     numberOfStudsWidth: 2,
     numberOfStudsDepth: 2,

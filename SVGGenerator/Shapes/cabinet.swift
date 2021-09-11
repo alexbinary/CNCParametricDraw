@@ -6,27 +6,27 @@ import Foundation
 struct Cabinet: PathsLayoutRepresentable {
     
     
-    let width: Float
-    let depth: Float
+    let width: MetricLength
+    let depth: MetricLength
     
-    let shelveHeights: [Float]
+    let shelveHeights: [MetricLength]
     
     let crenelConfig: CrenelConfig
     
-    let materialThickness: Float
+    let materialThickness: MetricLength
     
     
     var pathsLayout: PathsLayout {
         
-        let totalHeight = shelveHeights.reduce(0, { $0 + $1 }) + Float(shelveHeights.count + 1) * materialThickness
+        let totalHeight = shelveHeights.reduce(0, { $0 + $1.toMillimeters }) + Float(shelveHeights.count + 1) * materialThickness.toMillimeters
         
-        var punchLinesHeights: [Float] = shelveHeights.map { $0 + 2 * crenelConfig.depth/2 }
-        punchLinesHeights[0] += crenelConfig.depth/2
+        var punchLinesHeights: [MetricLength] = shelveHeights.map { MetricLength(millimeters: $0.toMillimeters + 2 * crenelConfig.depth.toMillimeters/2) }
+        punchLinesHeights[0] = MetricLength(millimeters: punchLinesHeights[0].toMillimeters + crenelConfig.depth.toMillimeters/2)
         
         let leftRightFace = BoxFace(
             
             width: depth,
-            height: totalHeight,
+            height: MetricLength(millimeters: totalHeight),
             
             leftCrenelConfig: nil,
             rightCrenelConfig: nil,
@@ -85,10 +85,10 @@ struct Cabinet: PathsLayoutRepresentable {
 struct LegoCabinet {
     
     
-    let legoUnitLength: Float
+    let legoUnitLength: MetricLength
     
-    let materialThickness: Float
-    let margin: Float
+    let materialThickness: MetricLength
+    let margin: MetricLength
     
     
     let numberOfStudsWidth: Float
@@ -103,9 +103,9 @@ struct LegoCabinet {
         
         let cabinet = Cabinet(
             
-            width: numberOfStudsWidth * legoUnitLength * 2.5 + 2 * materialThickness + margin + margin + 2 * materialThickness,
-            depth: numberOfStudsDepth * legoUnitLength * 2.5 + 2 * materialThickness + margin,
-            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { $0 * legoUnitLength + materialThickness + margin + margin },
+            width: MetricLength(millimeters: numberOfStudsWidth * legoUnitLength.toMillimeters * 2.5 + 2 * materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters + 2 * materialThickness.toMillimeters),
+            depth: MetricLength(millimeters: numberOfStudsDepth * legoUnitLength.toMillimeters * 2.5 + 2 * materialThickness.toMillimeters + margin.toMillimeters),
+            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { MetricLength(millimeters: $0 * legoUnitLength.toMillimeters + materialThickness.toMillimeters + margin.toMillimeters + margin.toMillimeters) },
             
             crenelConfig: crenelConfig,
             materialThickness: materialThickness
