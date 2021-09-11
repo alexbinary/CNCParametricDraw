@@ -94,7 +94,7 @@ struct LegoCabinet {
     let width: LegoLength
     let depth: LegoLength
     
-    let shelvesNumberOfPlatesHeightsFromBottomToTop: [Float]
+    let shelvesHeightsFromBottomToTop: [LegoLength]
     
     let crenelConfig: CrenelConfig
     
@@ -105,7 +105,7 @@ struct LegoCabinet {
             
             width: width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin + margin + 2 * materialThickness,
             depth: depth.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
-            shelveHeights: shelvesNumberOfPlatesHeightsFromBottomToTop.map { $0 * legoUnitLength + materialThickness + margin + margin },
+            shelveHeights: shelvesHeightsFromBottomToTop.map { $0.resolveToMetric(using: legoUnitLength) + materialThickness + margin + margin },
             
             crenelConfig: crenelConfig,
             materialThickness: materialThickness

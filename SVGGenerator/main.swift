@@ -28,7 +28,7 @@ let cabinet = LegoCabinet(
     width: 2.studs,
     depth: 2.studs,
     
-    shelvesNumberOfPlatesHeightsFromBottomToTop: [3, 2, 1],
+    shelvesHeightsFromBottomToTop: [3.plates, 2.plates, 1.plates],
     
     crenelConfig: standardCrenelConfig
 )
