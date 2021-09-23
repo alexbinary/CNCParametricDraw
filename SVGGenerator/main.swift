@@ -10,123 +10,41 @@ let outputFileURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPat
 let legoUnitLength = 15.mm
 let materialThickness = 3.mm
 let defaultMargin = 5.mm
+let crenelBaseLength = 5.mm
+let crenelDepth = 3.15.mm
+let crenelLengthAdjustmentInternal = -0.75.mm
+let crenelLengthAdjustmentExternal = 0.mm
 
-let standardCrenelConfig = CrenelConfig(
-    baseLength: 5.mm,
-    lengthAdjustment: 0.mm,
-    depth: 3.mm
+let standardCrenelConfigInternal = CrenelConfig(
+    baseLength: crenelBaseLength,
+    lengthAdjustment: crenelLengthAdjustmentInternal,
+    depth: crenelDepth
+)
+let standardCrenelConfigExternal = CrenelConfig(
+    baseLength: crenelBaseLength,
+    lengthAdjustment: crenelLengthAdjustmentExternal,
+    depth: crenelDepth
 )
 
 
-let cabinet = LegoCabinet(
-    
-    legoUnitLength: legoUnitLength,
-    materialThickness: materialThickness,
-    
-    margin: MetricLength(millimeters: 5),
-    
-    width: 2.studs,
-    depth: 2.studs,
-    
-    shelvesHeightsFromBottomToTop: [3.plates, 2.plates, 1.plates],
-    
-    crenelConfig: standardCrenelConfig
-)
 
-let boxH1 = LegoCrenelBox(
+var box_m15_4x4_h2 = LegoCrenelBox(
     
     legoUnitLength: legoUnitLength,
     
-    width: 2.studs,
-    length: 2.studs,
-    height: 1.plates,
-    
-    crenelConfig: standardCrenelConfig
-)
-
-let boxH2 = LegoCrenelBox(
-    
-    legoUnitLength: legoUnitLength,
-    
-    width: 2.studs,
-    length: 2.studs,
+    width: 4.studs,
+    length: 4.studs,
     height: 2.plates,
     
-    crenelConfig: standardCrenelConfig
+    crenelConfigInternal: standardCrenelConfigInternal,
+    crenelConfigExternal: standardCrenelConfigExternal
 )
+box_m15_4x4_h2.numberOfCrenelsWidth = .manual(14)
+box_m15_4x4_h2.numberOfCrenelsLength = .manual(14)
+box_m15_4x4_h2.numberOfCrenelsHeight = .manual(2)
 
+let layout = PathsLayout(withVerticallyAlignedLayouts: [ box_m15_4x4_h2.pathsLayout ])
 
-let boxH3 = LegoCrenelBox(
-    
-    legoUnitLength: legoUnitLength,
-    
-    width: 2.studs,
-    length: 2.studs,
-    height: 3.plates,
-    
-    crenelConfig: standardCrenelConfig
-)
-
-let boxCase = LegoCrenelBoxCase(
-    
-    legoUnitLength: 15.mm,
-    materialThickness: 3.mm,
-    margin: 5.mm,
-    
-    width: 2.studs,
-    length: 2.studs,
-    height: 3.plates,
-    
-    crenelConfig: standardCrenelConfig
-)
-
-let layout = PathsLayout(withVerticallyAlignedLayouts: [
-                            
-                            cabinet.pathsLayout,
-                            boxH1.pathsLayout,
-                            boxH2.pathsLayout,
-                            boxH3.pathsLayout
-])
-
-    
-//    [
-//    SVGPathNode(
-//        path: BoxFace(
-//            width: 100,
-//            height: 100,
-//            leftCrenelConfig: BoxFaceCrenelConfig(
-//                crenelConfig: CrenelConfig(
-//                    baseLength: 5,
-//                    lengthAdjustment: 0,
-//                    depth: 3
-//                ),
-//                numberOfCrenels: 5,
-//                direction: .external
-//            ),
-//            rightCrenelConfig: BoxFaceCrenelConfig(
-//                crenelConfig: CrenelConfig(
-//                    baseLength: 5,
-//                    lengthAdjustment: 0,
-//                    depth: 3
-//                ),
-//                numberOfCrenels: 5,
-//                direction: .internal
-//            ),
-//            topCrenelConfig: nil,
-//            bottomCrenelConfig: BoxFaceCrenelConfig(
-//                crenelConfig: CrenelConfig(
-//                    baseLength: 5,
-//                    lengthAdjustment: 0,
-//                    depth: 3
-//                ),
-//                numberOfCrenels: 5,
-//                direction: .external
-//            )
-//        ).svgPath,
-//        pathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1",
-//        nodeId: "n1"
-//    ),
-//]
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
 let fileContent = renderer.renderFile(withRootPathsLayout: layout)
