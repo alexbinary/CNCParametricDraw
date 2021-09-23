@@ -28,22 +28,18 @@ let standardCrenelConfigExternal = CrenelConfig(
 
 
 
-var box_m15_4x4_h2 = LegoCrenelBox(
+var wine_box = CrenelBox(
     
-    legoUnitLength: legoUnitLength,
+    width: 260.mm,
+    length: 330.mm,
+    height: 180.mm,
     
-    width: 4.studs,
-    length: 4.studs,
-    height: 2.plates,
-    
-    crenelConfigInternal: standardCrenelConfigInternal,
-    crenelConfigExternal: standardCrenelConfigExternal
+    widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: standardCrenelConfigInternal, crenelConfigExternal: standardCrenelConfigExternal, numberOfCrenels: .manual(25)),
+    lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: standardCrenelConfigInternal, crenelConfigExternal: standardCrenelConfigExternal, numberOfCrenels: .manual(32)),
+    heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: standardCrenelConfigInternal, crenelConfigExternal: standardCrenelConfigExternal, numberOfCrenels: .manual(17))
 )
-box_m15_4x4_h2.numberOfCrenelsWidth = .manual(14)
-box_m15_4x4_h2.numberOfCrenelsLength = .manual(14)
-box_m15_4x4_h2.numberOfCrenelsHeight = .manual(2)
 
-let layout = PathsLayout(withVerticallyAlignedLayouts: [ box_m15_4x4_h2.pathsLayout ])
+let layout = PathsLayout(withVerticallyAlignedLayouts: [ wine_box.pathsLayout ])
 
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
