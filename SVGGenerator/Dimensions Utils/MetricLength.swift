@@ -22,6 +22,12 @@ extension Float {
 }
 
 
+extension Double {
+    
+    var mm: MetricLength { Float(self).mm }
+}
+
+
 extension Int {
     
     var mm: MetricLength { Float(self).mm }
