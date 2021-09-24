@@ -1,11 +1,17 @@
 # SVG Generator
 
-This project is a simple scripting framework to generate SVG files to use with a LASER cutter.
+This project is a scripting framework written in Swift that helps me generate SVG files that I then feed to a LASER cutter to build wooden boxes and various storage units to store my LEGO collection. #iloveswift #ilovelego
+
+![A picture with wooden boxes](picture_of_boxes.jpg)
 
 ## Usage
 
+1. Open the project in Xcode
 1. Edit the code in `main.swift` to make it generate the shape you want
-2. Run the program directly in Xcode. Path to the generated SVG file is printed in the output console
+1. Click Run. The path to the generated SVG file is printed in the output console
+
+![An Xcode window with an arrow pointing to the Run button with the number 1, and another arrow pointing to a line in the output console that indicates a path to a file, the arrow has the number 2](xcode.png)
+
 
 ## Simple shapes
 

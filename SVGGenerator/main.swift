@@ -39,7 +39,24 @@ var wine_box = CrenelBox(
     heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: standardCrenelConfigInternal, crenelConfigExternal: standardCrenelConfigExternal, numberOfCrenels: .manual(17))
 )
 
-let layout = PathsLayout(withVerticallyAlignedLayouts: [ wine_box.pathsLayout ])
+let shape = CrenelBox(
+    width: 100.mm, length: 100.mm, height: 100.mm,
+    widthCrenelConfig: BoxCrenelConfig(
+        crenelConfigInternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        crenelConfigExternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        numberOfCrenels: .manual(9)),
+    lengthCrenelConfig: BoxCrenelConfig(
+        crenelConfigInternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        crenelConfigExternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        numberOfCrenels: .manual(9)),
+    heightCrenelConfig: BoxCrenelConfig(
+        crenelConfigInternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        crenelConfigExternal: CrenelConfig(baseLength: 5.mm, lengthAdjustment: 0.mm, depth: 3.mm),
+        numberOfCrenels: .manual(9))
+)
+
+//let layout = PathsLayout(withVerticallyAlignedLayouts: [ wine_box.pathsLayout ])
+let layout = PathsLayout(withVerticallyAlignedItems: [.layout(shape.pathsLayout)])
 
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
