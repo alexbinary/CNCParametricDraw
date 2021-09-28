@@ -319,13 +319,18 @@ struct LegoCrenelBoxCase: PathsLayoutRepresentable {
     let numberOfCrenelsHeight: NumerOfCrenelsEnum = .auto
     
     
+    var actualWidth: MetricLength { width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin }
+    var actualLength: MetricLength { length.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin }
+    var actualHeight: MetricLength { height.resolveToMetric(using: legoUnitLength) + materialThickness + margin }
+    
+    
     var pathsLayout: PathsLayout {
         
         let box = CrenelBox(
             
-            width: width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
-            length: length.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
-            height: height.resolveToMetric(using: legoUnitLength) + materialThickness + margin,
+            width: actualWidth,
+            length: actualLength,
+            height: actualHeight,
             
             widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: numberOfCrenelsWidth),
             lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: numberOfCrenelsLength),
