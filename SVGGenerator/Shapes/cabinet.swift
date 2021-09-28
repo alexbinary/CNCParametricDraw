@@ -72,7 +72,7 @@ struct Cabinet: PathsLayoutRepresentable {
         ]
         
         if shelveHeights.count > 1 {
-            for i in 1..<(shelveHeights.count - 1) {
+            for i in 1...(shelveHeights.count - 1) {
                 paths.append(topBottomShelveFace.path(withName: "shelve_\(i)"))
             }
         }
