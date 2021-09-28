@@ -101,11 +101,45 @@ struct LegoCabinet {
     
     var pathsLayout: PathsLayout {
         
+        let boxCase = LegoCrenelBoxCase(
+            
+            legoUnitLength: legoUnitLength,
+            
+            materialThickness: materialThickness,
+            margin: margin,
+            
+            width: width,
+            length: depth,
+            height: 1.plates,
+            
+            crenelConfigInternal: crenelConfig,
+            crenelConfigExternal: crenelConfig
+        )
+        
         let cabinet = Cabinet(
             
-            width: width.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin + margin + 2 * materialThickness,
-            depth: depth.resolveToMetric(using: legoUnitLength) + 2 * materialThickness + margin,
-            shelveHeights: shelvesHeightsFromBottomToTop.map { $0.resolveToMetric(using: legoUnitLength) + materialThickness + margin + margin },
+            width: boxCase.actualWidth + margin + 2 * materialThickness,
+            depth: boxCase.actualLength,
+            shelveHeights: shelvesHeightsFromBottomToTop.map {
+                
+                let boxCase = LegoCrenelBoxCase(
+                    
+                    legoUnitLength: legoUnitLength,
+                    
+                    materialThickness: materialThickness,
+                    margin: margin,
+                    
+                    width: width,
+                    length: depth,
+                    height: $0,
+                    
+                    crenelConfigInternal: crenelConfig,
+                    crenelConfigExternal: crenelConfig
+                )
+                
+                return boxCase.actualHeight + margin
+                
+            },
             
             crenelConfig: crenelConfig,
             materialThickness: materialThickness

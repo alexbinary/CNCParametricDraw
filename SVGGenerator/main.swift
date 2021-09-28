@@ -55,8 +55,20 @@ let shape = CrenelBox(
         numberOfCrenels: .manual(9))
 )
 
+let legoCabinet = LegoCabinet(
+    
+    legoUnitLength: legoUnitLength,
+    materialThickness: materialThickness,
+    margin: defaultMargin,
+    
+    width: 2.studs, depth: 2.studs,
+    shelvesHeightsFromBottomToTop: [2.studs, 2.studs],
+    
+    crenelConfig: standardCrenelConfigInternal
+)
+
 //let layout = PathsLayout(withVerticallyAlignedLayouts: [ wine_box.pathsLayout ])
-let layout = PathsLayout(withVerticallyAlignedItems: [.layout(shape.pathsLayout)])
+let layout = PathsLayout(withVerticallyAlignedItems: [.layout(legoCabinet.pathsLayout)])
 
 
 let renderer = SVGRenderer(defaultPathStyle: "fill:none;stroke:#000000;stroke-width:0.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1")
