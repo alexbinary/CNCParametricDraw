@@ -12,6 +12,12 @@ This project is a scripting framework written in Swift that helps me generate SV
 
 ![An Xcode window with an arrow pointing to the Run button with the number 1, and another arrow pointing to a line in the output console that indicates a path to a file, the arrow has the number 2](xcode.png)
 
+I use [Inkscape](https://inkscape.org/) to view and post-process the generated shapes.
+
+The LASER cutter does not directly accept SVG as input, so I use Inkscape command line to batch convert my SVG files to DXF format:
+
+    inkscape --export-type="dxf" *.svg
+
 
 ## Simple shapes
 
