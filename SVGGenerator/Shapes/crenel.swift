@@ -3,15 +3,6 @@ import Foundation
 
 
 
-enum NumerOfCrenelsEnum {
-    
-    
-    case manual(UInt)
-    case auto
-}
-
-
-
 struct CrenelSegment: PathRepresentable {
 
     
