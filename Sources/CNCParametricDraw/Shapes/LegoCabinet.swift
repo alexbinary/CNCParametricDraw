@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct LegoCabinet {
+public struct LegoCabinet {
     
     
     let legoUnitLength: MetricLength
@@ -20,7 +20,26 @@ struct LegoCabinet {
     let crenelConfig: CrenelConfig
     
     
-    var pathsLayout: PathsLayout {
+    public init(
+        legoUnitLength: MetricLength,
+        materialThickness: MetricLength,
+        margin: MetricLength,
+        width: LegoLength,
+        depth: LegoLength,
+        shelvesHeights: [LegoLength],
+        crenelConfig: CrenelConfig
+    ) {
+        self.legoUnitLength = legoUnitLength
+        self.materialThickness = materialThickness
+        self.margin = margin
+        self.width = width
+        self.depth = depth
+        self.shelvesHeights = shelvesHeights
+        self.crenelConfig = crenelConfig
+    }
+    
+    
+    public var pathsLayout: PathsLayout {
         
         let boxCase = LegoCrenelBoxCase(
             

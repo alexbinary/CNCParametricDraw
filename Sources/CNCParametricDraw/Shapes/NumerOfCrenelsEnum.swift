@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum NumerOfCrenelsEnum {
+public enum NumerOfCrenelsEnum {
     
     
     case manual(UInt)

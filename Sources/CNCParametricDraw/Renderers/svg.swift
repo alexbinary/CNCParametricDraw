@@ -132,19 +132,19 @@ struct SVGFile {
 }
 
 
-struct SVGRenderer: Renderer {
+public struct SVGRenderer: Renderer {
     
     
     let defaultPathStyle: String
     
     
-    init(defaultPathStyle: String) {
+    public init(defaultPathStyle: String) {
         
         self.defaultPathStyle = defaultPathStyle
     }
     
     
-    func renderFile(withRootPathsLayout pathsLayout: PathsLayout) -> String {
+    public func renderFile(withRootPathsLayout pathsLayout: PathsLayout) -> String {
         
         return SVGFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
     }

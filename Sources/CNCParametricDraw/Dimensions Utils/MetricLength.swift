@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct MetricLength {
+public struct MetricLength {
     
     private let millimeters: Float
     
@@ -18,19 +18,19 @@ struct MetricLength {
 
 extension Float {
     
-    var mm: MetricLength { MetricLength(millimeters: self) }
+    public var mm: MetricLength { MetricLength(millimeters: self) }
 }
 
 
 extension Double {
     
-    var mm: MetricLength { Float(self).mm }
+    public var mm: MetricLength { Float(self).mm }
 }
 
 
 extension Int {
     
-    var mm: MetricLength { Float(self).mm }
+    public var mm: MetricLength { Float(self).mm }
 }
 
 
@@ -46,7 +46,7 @@ func +=(lhs: inout MetricLength, rhs: MetricLength) {
 }
 
 
-prefix func -(l: MetricLength) -> MetricLength {
+public prefix func -(l: MetricLength) -> MetricLength {
     
     return MetricLength(millimeters: -l.toMillimeters)
 }

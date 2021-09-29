@@ -1,7 +1,7 @@
 
 import XCTest
 
-@testable import SVGGenerator
+@testable import CNCParametricDraw
 
 
 

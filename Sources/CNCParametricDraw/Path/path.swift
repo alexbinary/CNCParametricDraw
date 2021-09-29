@@ -4,7 +4,7 @@ import Foundation
 
 
 
-struct Path {
+public struct Path {
     
     
     var commands: [PathCommand]
@@ -221,7 +221,7 @@ extension PathRepresentable {
 
 
 
-enum PathsLayoutItem {
+public enum PathsLayoutItem {
     
     
     case path(Path)
@@ -246,13 +246,13 @@ enum PathsLayoutItem {
 typealias PathsLayoutElement = (item: PathsLayoutItem, position: Coordinates)
 
 
-struct PathsLayout {
+public struct PathsLayout {
     
     
     var elements: [PathsLayoutElement]
     
     
-    init(withVerticallyAlignedItems items: [PathsLayoutItem]) {
+    public init(withVerticallyAlignedItems items: [PathsLayoutItem]) {
         
         var currentPosition: Coordinates = .zero
         
@@ -265,13 +265,13 @@ struct PathsLayout {
     }
     
     
-    init(withVerticallyAlignedPaths paths: [Path]) {
+    public init(withVerticallyAlignedPaths paths: [Path]) {
         
         self.init(withVerticallyAlignedItems: paths.map { .path($0) })
     }
     
     
-    init(withVerticallyAlignedLayouts layouts: [PathsLayout]) {
+    public init(withVerticallyAlignedLayouts layouts: [PathsLayout]) {
         
         self.init(withVerticallyAlignedItems: layouts.map { .layout($0) })
     }

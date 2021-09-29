@@ -1,22 +1,8 @@
-# SVG Generator
+# CNCParametricDraw
 
-This project is a scripting framework written in Swift that helps me generate SVG files that I then feed to a LASER cutter to build wooden boxes and various storage units to store my LEGO collection. #iloveswift #ilovelego
+This Swift package is a scripting framework that helps me generate SVG files that I then feed to a LASER cutter to build wooden boxes and various storage units to store my LEGO collection. #iloveswift #ilovelego
 
 ![A picture with wooden boxes](picture_of_boxes.jpg)
-
-## Usage
-
-1. Open the project in Xcode
-1. Edit the code in `main.swift` to make it generate the shape you want
-1. Click Run. The path to the generated SVG file is printed in the output console
-
-![An Xcode window with an arrow pointing to the Run button with the number 1, and another arrow pointing to a line in the output console that indicates a path to a file, the arrow has the number 2](xcode.png)
-
-I use [Inkscape](https://inkscape.org/) to view and post-process the generated shapes.
-
-The LASER cutter does not directly accept SVG as input, so I use Inkscape command line to batch convert my SVG files to DXF format:
-
-    inkscape --export-type="dxf" *.svg
 
 
 ## Simple shapes

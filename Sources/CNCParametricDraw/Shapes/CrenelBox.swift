@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct CrenelBox: PathsLayoutRepresentable {
+public struct CrenelBox: PathsLayoutRepresentable {
     
     
     var width: MetricLength
@@ -13,6 +13,23 @@ struct CrenelBox: PathsLayoutRepresentable {
     var widthCrenelConfig: BoxCrenelConfig
     var lengthCrenelConfig: BoxCrenelConfig
     var heightCrenelConfig: BoxCrenelConfig
+    
+    
+    public init(
+        width: MetricLength,
+        length: MetricLength,
+        height: MetricLength,
+        widthCrenelConfig: BoxCrenelConfig,
+        lengthCrenelConfig: BoxCrenelConfig,
+        heightCrenelConfig: BoxCrenelConfig
+    ) {
+        self.width = width
+        self.length = length
+        self.height = height
+        self.widthCrenelConfig = widthCrenelConfig
+        self.lengthCrenelConfig = lengthCrenelConfig
+        self.heightCrenelConfig = heightCrenelConfig
+    }
     
     
     var pathsLayout: PathsLayout {

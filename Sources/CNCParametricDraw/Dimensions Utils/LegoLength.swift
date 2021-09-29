@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct LegoLength {
+public struct LegoLength {
     
     let numberOfLegoUnits: Float
     
@@ -29,15 +29,15 @@ struct LegoLength {
 
 extension Float {
     
-    var plates: LegoLength { LegoLength(plates: self) }
+    public var plates: LegoLength { LegoLength(plates: self) }
     
-    var studs: LegoLength { LegoLength(studs: self) }
+    public var studs: LegoLength { LegoLength(studs: self) }
 }
 
 
 extension Int {
     
-    var plates: LegoLength { Float(self).plates }
+    public var plates: LegoLength { Float(self).plates }
     
-    var studs: LegoLength { Float(self).studs }
+    public var studs: LegoLength { Float(self).studs }
 }
