@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		291CC6B726DED2440035A118 /* cabinet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291CC6B626DED2440035A118 /* cabinet.swift */; };
-		291EAB8226D973A9009A8DB0 /* box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* box.swift */; };
+		291EAB8226D973A9009A8DB0 /* LegoCrenelBoxCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291EAB8126D973A9009A8DB0 /* LegoCrenelBoxCase.swift */; };
 		29247C5426D183A7007238C8 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5326D183A7007238C8 /* main.swift */; };
 		29247C5F26D190BC007238C8 /* PunchesSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* PunchesSegment.swift */; };
 		29484B5B27049E1A00740DC8 /* CrenelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29484B5A27049E1A00740DC8 /* CrenelConfig.swift */; };
@@ -56,7 +56,7 @@
 
 /* Begin PBXFileReference section */
 		291CC6B626DED2440035A118 /* cabinet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cabinet.swift; sourceTree = "<group>"; };
-		291EAB8126D973A9009A8DB0 /* box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = box.swift; sourceTree = "<group>"; };
+		291EAB8126D973A9009A8DB0 /* LegoCrenelBoxCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCrenelBoxCase.swift; sourceTree = "<group>"; };
 		29247C5026D183A7007238C8 /* SVGGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SVGGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		29247C5326D183A7007238C8 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		29247C5B26D18931007238C8 /* svg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svg.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 				29484B7E27049F5100740DC8 /* BoxCrenelConfig.swift */,
 				29484B8427049F7000740DC8 /* CrenelBox.swift */,
 				29484B8827049F9800740DC8 /* LegoCrenelBox.swift */,
-				291EAB8126D973A9009A8DB0 /* box.swift */,
+				291EAB8126D973A9009A8DB0 /* LegoCrenelBoxCase.swift */,
 				291CC6B626DED2440035A118 /* cabinet.swift */,
 			);
 			path = Shapes;
@@ -317,7 +317,7 @@
 				29E30E8E26DD774C0048D1FD /* Renderer.swift in Sources */,
 				29484B6D27049EDD00740DC8 /* BoxCrenelDirection.swift in Sources */,
 				29484B7727049F2900740DC8 /* BoxFace.swift in Sources */,
-				291EAB8226D973A9009A8DB0 /* box.swift in Sources */,
+				291EAB8226D973A9009A8DB0 /* LegoCrenelBoxCase.swift in Sources */,
 				29247C5F26D190BC007238C8 /* PunchesSegment.swift in Sources */,
 				297AD87626E92F77008C2547 /* Rect.swift in Sources */,
 				29A34F1526D6DA1600BE13BB /* path.swift in Sources */,
