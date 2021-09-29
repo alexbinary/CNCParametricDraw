@@ -13,6 +13,7 @@
 		29247C5F26D190BC007238C8 /* crenel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29247C5E26D190BC007238C8 /* crenel.swift */; };
 		29484B5B27049E1A00740DC8 /* CrenelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29484B5A27049E1A00740DC8 /* CrenelConfig.swift */; };
 		29484B5F27049E5100740DC8 /* NumerOfCrenelsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29484B5E27049E5100740DC8 /* NumerOfCrenelsEnum.swift */; };
+		29484B6527049E8300740DC8 /* CrenelSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29484B6427049E8300740DC8 /* CrenelSegment.swift */; };
 		297AD85426E8BBFB008C2547 /* CoordinatesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */; };
 		297AD85E26E8BD8D008C2547 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E30E8D26DD774C0048D1FD /* Renderer.swift */; };
 		297AD86226E8C109008C2547 /* SizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297AD86126E8C109008C2547 /* SizeTest.swift */; };
@@ -56,6 +57,7 @@
 		29247C5E26D190BC007238C8 /* crenel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = crenel.swift; sourceTree = "<group>"; };
 		29484B5A27049E1A00740DC8 /* CrenelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrenelConfig.swift; sourceTree = "<group>"; };
 		29484B5E27049E5100740DC8 /* NumerOfCrenelsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumerOfCrenelsEnum.swift; sourceTree = "<group>"; };
+		29484B6427049E8300740DC8 /* CrenelSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrenelSegment.swift; sourceTree = "<group>"; };
 		297AD85326E8BBFB008C2547 /* CoordinatesTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatesTest.swift; sourceTree = "<group>"; };
 		297AD86126E8C109008C2547 /* SizeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeTest.swift; sourceTree = "<group>"; };
 		297AD86A26E92F27008C2547 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				29484B5A27049E1A00740DC8 /* CrenelConfig.swift */,
 				29484B5E27049E5100740DC8 /* NumerOfCrenelsEnum.swift */,
+				29484B6427049E8300740DC8 /* CrenelSegment.swift */,
 				29247C5E26D190BC007238C8 /* crenel.swift */,
 				291EAB8126D973A9009A8DB0 /* box.swift */,
 				291CC6B626DED2440035A118 /* cabinet.swift */,
@@ -284,6 +287,7 @@
 				297AD87226E92F5C008C2547 /* Size.swift in Sources */,
 				2994CA6C26EC7E8A00B3F541 /* LegoLength.swift in Sources */,
 				29A34F2F26D6E74000BE13BB /* svg.swift in Sources */,
+				29484B6527049E8300740DC8 /* CrenelSegment.swift in Sources */,
 				29247C5426D183A7007238C8 /* main.swift in Sources */,
 				29484B5B27049E1A00740DC8 /* CrenelConfig.swift in Sources */,
 				291CC6B726DED2440035A118 /* cabinet.swift in Sources */,
