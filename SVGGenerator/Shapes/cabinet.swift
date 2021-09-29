@@ -20,8 +20,8 @@ struct Cabinet: PathsLayoutRepresentable {
         
         let totalHeight = shelveHeights.reduce(0.mm, { $0 + $1 }) + Float(shelveHeights.count + 1) * materialThickness
         
-        var punchLinesHeights: [MetricLength] = shelveHeights.map { $0 + 2 * crenelConfig.depth/2 }
-        punchLinesHeights[0] += crenelConfig.depth/2
+        var punchLinesPositionsY: [MetricLength] = shelveHeights.map { $0 + 2 * crenelConfig.depth/2 }
+        punchLinesPositionsY[0] += crenelConfig.depth/2
         
         let leftRightFace = BoxFace(
             
@@ -41,7 +41,7 @@ struct Cabinet: PathsLayoutRepresentable {
                 direction: .internal
             ),
             
-            punchLinesPositionYStartingFromBottom: punchLinesHeights,
+            punchLinesPositionsY: punchLinesPositionsY,
             punchLinesCrenelConfig: crenelConfig
         )
         
