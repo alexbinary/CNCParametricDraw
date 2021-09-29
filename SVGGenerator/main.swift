@@ -62,7 +62,7 @@ let legoCabinet = LegoCabinet(
     margin: defaultMargin,
     
     width: 2.studs, depth: 2.studs,
-    shelvesHeightsFromBottomToTop: [2.studs, 2.studs],
+    shelvesHeights: [2.studs, 2.studs],
     
     crenelConfig: standardCrenelConfigInternal
 )

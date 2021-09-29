@@ -94,7 +94,7 @@ struct LegoCabinet {
     let width: LegoLength
     let depth: LegoLength
     
-    let shelvesHeightsFromBottomToTop: [LegoLength]
+    let shelvesHeights: [LegoLength]
     
     let crenelConfig: CrenelConfig
     
@@ -120,7 +120,7 @@ struct LegoCabinet {
             
             width: boxCase.actualWidth + margin + 2 * materialThickness,
             depth: boxCase.actualLength,
-            shelveHeights: shelvesHeightsFromBottomToTop.map {
+            shelveHeights: shelvesHeights.map {
                 
                 let boxCase = LegoCrenelBoxCase(
                     
