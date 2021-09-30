@@ -5,6 +5,24 @@ This Swift package is a scripting framework that helps me generate SVG files tha
 ![A picture with wooden boxes](picture_of_boxes.jpg)
 
 
+## Overall design
+
+### The Path type and PathRepresentable protocol
+
+The `Path` type represents an abstract path composed of one or more commands.
+Path commands are inspired by the SVG path spec but are meant to be independant of the rendering engine used.
+
+Types can be created to represent arbitrarily complex shapes, that can all utltimately be expressed as a path.
+Shape types implement the  `PathRepresentable` protocol which requires a readable `path` property of type `Path`.
+
+### The PathsLayout type and PathsLayoutRepresentable protocol
+
+The `PathsLayout` type is a collection of one or more paths that all have a fixed position.
+
+Paths layouts are usefull for shapes that cannot be represented as a single path.
+Types that represent shapes that cannot be represented as a single path implement the  `PathsLayoutRepresentable` protocol which requires a readable `pathsLayout` property of type `PathsLayout`.
+
+
 ## Simple shapes
 
 ### CrenelSegment
