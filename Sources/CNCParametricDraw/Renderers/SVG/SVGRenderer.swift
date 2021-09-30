@@ -26,9 +26,13 @@ public struct SVGRenderer: Renderer {
     }
     
     
-    public func renderFile(withRootPathsLayout pathsLayout: PathsLayout) -> String {
+    public func writeSVGFile(withRootPathsLayout pathsLayout: PathsLayout, to url: URL) {
         
-        return SVGFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
+        let fileContent = SVGFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
+
+        try! fileContent.data(using: .utf8)!.write(to: url)
+
+        return
     }
     
     
