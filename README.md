@@ -5,7 +5,23 @@ This Swift package is a scripting framework that helps me generate SVG files tha
 ![A picture with wooden boxes](picture_of_boxes.jpg)
 
 
+## Parametric Drawing
+
+Parametric drawing is a type of drawing that draws shapes based on parameters.
+Parametric drawing uses elementary shapes and operations that act on those shapes.
+Elementary shapes and operations are each defined by a set of parameters that contain all the information required to draw the actual shape or perform the operation.
+The actual drawing is inflated from all the parameters every time it is required.
+
+The main advantage of parametric drawing is that it is easy to modify the drawing at each step.
+
 ## Overall design
+
+### Parametric shapes
+
+Several Swift types are created to represent various shapes.
+Each type contains all the properties required to unambiguously define the shape.
+Every property can be modified at any point in time.
+When needed, the actual paths are generated based on the shape's properties.
 
 ### The Path type and PathRepresentable protocol
 
