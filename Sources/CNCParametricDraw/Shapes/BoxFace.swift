@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct BoxFace: PathRepresentable {
+public struct BoxFace: PathRepresentable {
         
     
     var width: MetricLength
@@ -18,7 +18,28 @@ struct BoxFace: PathRepresentable {
     var punchLinesCrenelConfig: CrenelConfig? = nil
     
     
-    var path: Path {
+    public init(
+        width: MetricLength,
+        height: MetricLength,
+        leftCrenelConfig: BoxFaceCrenelConfig? = nil,
+        rightCrenelConfig: BoxFaceCrenelConfig? = nil,
+        topCrenelConfig: BoxFaceCrenelConfig? = nil,
+        bottomCrenelConfig: BoxFaceCrenelConfig? = nil,
+        punchLinesPositionsY: [MetricLength] = [],
+        punchLinesCrenelConfig: CrenelConfig? = nil
+    ) {
+        self.width = width
+        self.height = height
+        self.leftCrenelConfig = leftCrenelConfig
+        self.rightCrenelConfig = rightCrenelConfig
+        self.topCrenelConfig = topCrenelConfig
+        self.bottomCrenelConfig = bottomCrenelConfig
+        self.punchLinesPositionsY = punchLinesPositionsY
+        self.punchLinesCrenelConfig = punchLinesCrenelConfig
+    }
+    
+    
+    public var path: Path {
          
         var totalPath: Path = .empty
         

@@ -3,7 +3,7 @@ import Foundation
 
 
 
-struct BoxFaceCrenelConfig {
+public struct BoxFaceCrenelConfig {
 
     
     var crenelConfig: CrenelConfig
