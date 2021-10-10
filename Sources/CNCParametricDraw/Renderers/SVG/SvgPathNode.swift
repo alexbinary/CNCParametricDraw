@@ -3,10 +3,10 @@ import Foundation
 
 
 
-struct SVGPathNode {
+struct SvgPathNode {
 
     
-    let path: SVGPath
+    let path: SvgPath
     let pathStyle: String
     let nodeId: String
     

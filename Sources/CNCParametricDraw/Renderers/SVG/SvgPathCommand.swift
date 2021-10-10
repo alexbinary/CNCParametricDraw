@@ -3,12 +3,12 @@ import Foundation
 
 
 
-enum SVGPathCommand {
+enum SvgPathCommand {
 
     
-    case moveTo(Coordinates, SVGCoordinateRef)
-    case lineTo(Coordinates, SVGCoordinateRef)
-    case axis(SVGAxis, Float, SVGCoordinateRef)
+    case moveTo(Coordinates, SvgCoordinateRef)
+    case lineTo(Coordinates, SvgCoordinateRef)
+    case axis(SvgAxis, Float, SvgCoordinateRef)
     case close
     
     

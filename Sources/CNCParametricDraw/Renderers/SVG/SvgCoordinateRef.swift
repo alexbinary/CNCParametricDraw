@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum SVGCoordinateRef {
+enum SvgCoordinateRef {
 
     case relative
     case absolute

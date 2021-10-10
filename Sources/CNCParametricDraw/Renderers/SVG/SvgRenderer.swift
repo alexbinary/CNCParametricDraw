@@ -14,7 +14,7 @@ extension Coordinates {
 
 
 
-public struct SVGRenderer: Renderer {
+public struct SvgRenderer: Renderer {
     
     
     let defaultPathStyle: String
@@ -26,9 +26,9 @@ public struct SVGRenderer: Renderer {
     }
     
     
-    public func writeSVGFile(withRootPathsLayout pathsLayout: PathsLayout, to url: URL) {
+    public func writeSvgFile(withRootPathsLayout pathsLayout: PathsLayout, to url: URL) {
         
-        let fileContent = SVGFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
+        let fileContent = SvgFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
 
         try! fileContent.data(using: .utf8)!.write(to: url)
 
@@ -36,7 +36,7 @@ public struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SVGPathNode] {
+    func svgPathNodes(renderedFromLayout pathsLayout: PathsLayout, at coordinates: Coordinates) -> [SvgPathNode] {
         
         return pathsLayout.elements.reduce(into: []) { (nodes, element) in
             
@@ -54,9 +54,9 @@ public struct SVGRenderer: Renderer {
     }
     
     
-    func svgPathNode(renderedFromPath path: Path, at coordinates: Coordinates) -> SVGPathNode {
+    func svgPathNode(renderedFromPath path: Path, at coordinates: Coordinates) -> SvgPathNode {
         
-        return SVGPathNode(
+        return SvgPathNode(
             
             path: svgPath(renderedFromPath: path).withInitialAbsoluteMove(to: coordinates),
             pathStyle: defaultPathStyle,
@@ -65,9 +65,9 @@ public struct SVGRenderer: Renderer {
     }
     
     
-    func svgPath(renderedFromPath path: Path) -> SVGPath {
+    func svgPath(renderedFromPath path: Path) -> SvgPath {
         
-        return SVGPath(withCommands: path.commands.map { command in
+        return SvgPath(withCommands: path.commands.map { command in
             
             switch command {
             

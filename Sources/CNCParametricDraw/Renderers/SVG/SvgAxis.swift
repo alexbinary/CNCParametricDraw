@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum SVGAxis {
+enum SvgAxis {
     
     case vertical
     case horizontal

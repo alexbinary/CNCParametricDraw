@@ -3,24 +3,24 @@ import Foundation
 
 
 
-struct SVGPath {
+struct SvgPath {
     
     
-    let commands: [SVGPathCommand]
+    let commands: [SvgPathCommand]
     
     
-    init(withCommands commands: [SVGPathCommand]) {
+    init(withCommands commands: [SvgPathCommand]) {
         
         self.commands = commands
     }
     
     
-    func withInitialAbsoluteMove(to coordinates: Coordinates) -> SVGPath {
+    func withInitialAbsoluteMove(to coordinates: Coordinates) -> SvgPath {
         
         var completedCommands = commands
         completedCommands.insert(.moveTo(coordinates, .absolute), at: 0)
         
-        return SVGPath(withCommands: completedCommands)
+        return SvgPath(withCommands: completedCommands)
     }
     
     

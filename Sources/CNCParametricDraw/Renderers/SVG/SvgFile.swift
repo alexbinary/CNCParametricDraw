@@ -3,10 +3,10 @@ import Foundation
 
 
 
-struct SVGFile {
+struct SvgFile {
 
     
-    let pathNodes: [SVGPathNode]
+    let pathNodes: [SvgPathNode]
     
     
     func render() -> String {
