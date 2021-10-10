@@ -17,7 +17,8 @@ public struct LegoCabinet {
     
     let shelvesHeights: [LegoLength]
     
-    let crenelConfig: CrenelConfig
+    let crenelConfigInternal: CrenelConfig
+    let crenelConfigExternal: CrenelConfig
     
     
     public init(
@@ -27,7 +28,8 @@ public struct LegoCabinet {
         width: LegoLength,
         depth: LegoLength,
         shelvesHeights: [LegoLength],
-        crenelConfig: CrenelConfig
+        crenelConfigInternal: CrenelConfig,
+        crenelConfigExternal: CrenelConfig
     ) {
         self.legoUnitLength = legoUnitLength
         self.materialThickness = materialThickness
@@ -35,7 +37,8 @@ public struct LegoCabinet {
         self.width = width
         self.depth = depth
         self.shelvesHeights = shelvesHeights
-        self.crenelConfig = crenelConfig
+        self.crenelConfigInternal = crenelConfigInternal
+        self.crenelConfigExternal = crenelConfigExternal
     }
     
     
@@ -52,8 +55,8 @@ public struct LegoCabinet {
             length: depth,
             height: 1.plates,
             
-            crenelConfigInternal: crenelConfig,
-            crenelConfigExternal: crenelConfig
+            crenelConfigInternal: crenelConfigInternal,
+            crenelConfigExternal: crenelConfigExternal
         )
         
         let cabinet = Cabinet(
@@ -73,15 +76,17 @@ public struct LegoCabinet {
                     length: depth,
                     height: $0,
                     
-                    crenelConfigInternal: crenelConfig,
-                    crenelConfigExternal: crenelConfig
+                    crenelConfigInternal: crenelConfigInternal,
+                    crenelConfigExternal: crenelConfigExternal
                 )
                 
                 return boxCase.actualHeight + margin
                 
             },
             
-            crenelConfig: crenelConfig,
+            crenelConfigInternal: crenelConfigInternal,
+            crenelConfigExternal: crenelConfigExternal,
+            
             materialThickness: materialThickness
         )
         
