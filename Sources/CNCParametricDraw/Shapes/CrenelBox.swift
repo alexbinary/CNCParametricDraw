@@ -32,7 +32,7 @@ public struct CrenelBox: PathsLayoutRepresentable {
     }
     
     
-    var pathsLayout: PathsLayout {
+    public var pathsLayout: PathsLayout {
         
         let bottomFace = BoxFace(
             
