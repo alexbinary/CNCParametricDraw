@@ -32,14 +32,16 @@ struct PunchesSegment: PathRepresentable {
         let buttsTotalLength = totalLength - totalPunchedLength
         let buttsStartLength = buttsTotalLength/2
         let buttsEndLength = buttsTotalLength - buttsStartLength
+        
+        let punchWidth = crenelConfig.depth + 0.5.mm
 
         let buttStartPath = Path(withCommands: [.moveToRelative(Coordinates(x: (buttsStartLength - offsetStart).toMillimeters, y: 0))])
         let punchPath = Path(withCommands: [
-            .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth.toMillimeters/2)),
+            .lineToRelative(Coordinates(x: 0, y: (punchWidth/2).toMillimeters)),
             .lineToRelative(Coordinates(x: punchActualLength.toMillimeters, y: 0)),
-            .lineToRelative(Coordinates(x: 0, y: -crenelConfig.depth.toMillimeters)),
+            .lineToRelative(Coordinates(x: 0, y: -punchWidth.toMillimeters)),
             .lineToRelative(Coordinates(x: -punchActualLength.toMillimeters, y: 0)),
-            .lineToRelative(Coordinates(x: 0, y: crenelConfig.depth.toMillimeters/2)),
+            .lineToRelative(Coordinates(x: 0, y: (punchWidth/2).toMillimeters)),
             .moveToRelative(Coordinates(x: punchActualLength.toMillimeters, y: 0)),
         ])
         let antiPunchPath = Path(withCommands: [.moveToRelative(Coordinates(x: antiPunchActualLength.toMillimeters, y: 0))])
