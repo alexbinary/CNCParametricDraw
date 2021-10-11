@@ -6,5 +6,5 @@ import Foundation
 protocol Renderer {
     
     
-    func writeSvgFile(withRootPathsLayout pathsLayout: PathsLayout, to url: URL)
+    func renderFile(withRootPathsLayout pathsLayout: PathsLayout, writeContentToFileAt url: URL)
 }

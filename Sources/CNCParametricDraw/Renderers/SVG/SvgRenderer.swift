@@ -26,7 +26,7 @@ public struct SvgRenderer: Renderer {
     }
     
     
-    public func writeSvgFile(withRootPathsLayout pathsLayout: PathsLayout, to url: URL) {
+    public func renderFile(withRootPathsLayout pathsLayout: PathsLayout, writeContentToFileAt url: URL) {
         
         let fileContent = SvgFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
 
