@@ -31,6 +31,8 @@ public struct SvgRenderer: Renderer {
         let fileContent = SvgFile(pathNodes: svgPathNodes(renderedFromLayout: pathsLayout, at: .zero)).render()
 
         try! fileContent.data(using: .utf8)!.write(to: url)
+        
+        print("SVG file written to \(url)")
 
         return
     }
