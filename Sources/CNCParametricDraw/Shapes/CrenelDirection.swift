@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum BoxCrenelDirection {
+enum CrenelDirection {
     
     
     case external
