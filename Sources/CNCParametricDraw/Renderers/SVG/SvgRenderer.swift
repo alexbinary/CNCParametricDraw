@@ -3,12 +3,28 @@ import Foundation
 
 
 
+extension Float {
+
+    
+    func render() -> String {
+        
+        var str = "\(self)"
+        
+        if str == "-0.0" { str = "0" }
+        if str == "0.0" { str = "0" }
+        
+        return str
+    }
+}
+
+
+
 extension Coordinates {
 
     
     func render() -> String {
         
-        return "\(x) \(y)"
+        return "\(x.render()) \(y.render())"
     }
 }
 
