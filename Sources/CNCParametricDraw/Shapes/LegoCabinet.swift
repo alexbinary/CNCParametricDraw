@@ -55,8 +55,9 @@ public struct LegoCabinet {
             length: depth,
             height: 1.plates,
             
-            crenelConfigInternal: crenelConfigInternal,
-            crenelConfigExternal: crenelConfigExternal
+            widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
+            lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
+            heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto)
         )
         
         let cabinet = Cabinet(
@@ -76,8 +77,9 @@ public struct LegoCabinet {
                     length: depth,
                     height: $0,
                     
-                    crenelConfigInternal: crenelConfigInternal,
-                    crenelConfigExternal: crenelConfigExternal
+                    widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
+                    lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
+                    heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto)
                 )
                 
                 return boxCase.actualHeight + margin
