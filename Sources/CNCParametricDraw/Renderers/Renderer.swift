@@ -3,7 +3,7 @@ import Foundation
 
 
 
-protocol Renderer {
+public protocol Renderer {
     
     
     func renderFile(withRootPathsLayout pathsLayout: PathsLayout, writeContentToFileAt url: URL)
