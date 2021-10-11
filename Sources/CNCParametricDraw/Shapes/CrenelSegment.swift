@@ -7,8 +7,8 @@ struct CrenelSegment: PathRepresentable {
 
     
     var totalLength: MetricLength
-    var numberOfCrenels: NumerOfCrenelsEnum
     var crenelConfig: CrenelConfig
+    var numberOfCrenels: NumerOfCrenelsEnum
     var offsetStart: MetricLength
     var offsetEnd: MetricLength
     

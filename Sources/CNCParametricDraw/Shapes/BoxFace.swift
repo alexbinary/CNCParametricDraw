@@ -58,8 +58,8 @@ public struct BoxFace: PathRepresentable {
             
             var crenelPath = CrenelSegment(
                 totalLength: height,
-                numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
+                numberOfCrenels: crenelConfig.numberOfCrenels,
                 offsetStart: offsetTop,
                 offsetEnd: -offsetBottom
             ).path.rotated90DegreesClockWise
@@ -77,8 +77,8 @@ public struct BoxFace: PathRepresentable {
             
             var crenelPath = CrenelSegment(
                 totalLength: width,
-                numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
+                numberOfCrenels: crenelConfig.numberOfCrenels,
                 offsetStart: offsetLeft,
                 offsetEnd: -offsetRight
             ).path
@@ -96,8 +96,8 @@ public struct BoxFace: PathRepresentable {
             
             var crenelPath = CrenelSegment(
                 totalLength: height,
-                numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
+                numberOfCrenels: crenelConfig.numberOfCrenels,
                 offsetStart: offsetBottom,
                 offsetEnd: -offsetTop
             ).path.rotated270DegreesClockWise
@@ -115,8 +115,8 @@ public struct BoxFace: PathRepresentable {
             
             var crenelPath = CrenelSegment(
                 totalLength: width,
-                numberOfCrenels: crenelConfig.numberOfCrenels,
                 crenelConfig: crenelConfig.crenelConfig,
+                numberOfCrenels: crenelConfig.numberOfCrenels,
                 offsetStart: offsetRight,
                 offsetEnd: -offsetLeft
             ).path.rotated180DegreesClockWise
