@@ -8,6 +8,7 @@ struct CrenelSegment: PathRepresentable {
     
     var totalLength: MetricLength
     var crenelConfig: CrenelConfig
+    var crenelLengthAdjustmentMainTarget: CrenelLengthAdjustmentTarget
     var numberOfCrenels: NumerOfCrenelsEnum
     var offsetStart: MetricLength
     var offsetEnd: MetricLength
@@ -24,8 +25,10 @@ struct CrenelSegment: PathRepresentable {
             actualNumberOfCrenels = n
         }
         
-        let crenelActualLength = crenelConfig.baseLength + crenelConfig.lengthAdjustment
-        let antiCrenelActualLength = crenelConfig.baseLength - crenelConfig.lengthAdjustment
+        let multiplier = crenelLengthAdjustmentMainTarget == .crenel ? +1 : -1
+        
+        let crenelActualLength = crenelConfig.baseLength + multiplier * crenelConfig.lengthAdjustment
+        let antiCrenelActualLength = crenelConfig.baseLength - multiplier * crenelConfig.lengthAdjustment
         
         let totalCrenelationLength = Float(actualNumberOfCrenels) * crenelActualLength + max(Float(actualNumberOfCrenels) - 1, 0) * antiCrenelActualLength
         
