@@ -71,3 +71,10 @@ A template composed of five box faces that can be assembled to form an open box.
 The top-most shape is the box's bottom, then come the four sides.
 
 ![Five box faces arranged vertically](shape_crenelBox.png)
+
+
+# Development
+
+Setup git hooks:
+
+    ln -s $PWD/git_hooks/pre-commit.sh .git/hooks/pre-commit
