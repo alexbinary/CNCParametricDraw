@@ -40,22 +40,22 @@ public struct CrenelBox: PathsLayoutRepresentable {
             height: width,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: widthCrenelConfig.crenelConfigInternal,
+                crenelConfig: widthCrenelConfig.crenelConfig,
                 numberOfCrenels: widthCrenelConfig.numberOfCrenels,
                 direction: .internal
             ),
             rightCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: widthCrenelConfig.crenelConfigInternal,
+                crenelConfig: widthCrenelConfig.crenelConfig,
                 numberOfCrenels: widthCrenelConfig.numberOfCrenels,
                 direction: .internal
             ),
             topCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: lengthCrenelConfig.crenelConfigInternal,
+                crenelConfig: lengthCrenelConfig.crenelConfig,
                 numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
                 direction: .internal
             ),
             bottomCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: lengthCrenelConfig.crenelConfigInternal,
+                crenelConfig: lengthCrenelConfig.crenelConfig,
                 numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
                 direction: .internal
             )
@@ -67,18 +67,18 @@ public struct CrenelBox: PathsLayoutRepresentable {
             height: height,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: heightCrenelConfig.crenelConfigInternal,
+                crenelConfig: heightCrenelConfig.crenelConfig,
                 numberOfCrenels: heightCrenelConfig.numberOfCrenels,
                 direction: .internal
             ),
             rightCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: heightCrenelConfig.crenelConfigExternal,
+                crenelConfig: heightCrenelConfig.crenelConfig,
                 numberOfCrenels: heightCrenelConfig.numberOfCrenels,
                 direction: .external
             ),
             topCrenelConfig: nil,
             bottomCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: lengthCrenelConfig.crenelConfigExternal,
+                crenelConfig: lengthCrenelConfig.crenelConfig,
                 numberOfCrenels: lengthCrenelConfig.numberOfCrenels,
                 direction: .external
             )
@@ -90,18 +90,18 @@ public struct CrenelBox: PathsLayoutRepresentable {
             height: height,
             
             leftCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: heightCrenelConfig.crenelConfigInternal,
+                crenelConfig: heightCrenelConfig.crenelConfig,
                 numberOfCrenels: heightCrenelConfig.numberOfCrenels,
                 direction: .internal
             ),
             rightCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: heightCrenelConfig.crenelConfigExternal,
+                crenelConfig: heightCrenelConfig.crenelConfig,
                 numberOfCrenels: heightCrenelConfig.numberOfCrenels,
                 direction: .external
             ),
             topCrenelConfig: nil,
             bottomCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: widthCrenelConfig.crenelConfigExternal,
+                crenelConfig: widthCrenelConfig.crenelConfig,
                 numberOfCrenels: widthCrenelConfig.numberOfCrenels,
                 direction: .external
             )

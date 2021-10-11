@@ -6,18 +6,15 @@ import Foundation
 public struct BoxCrenelConfig {
 
     
-    var crenelConfigInternal: CrenelConfig
-    var crenelConfigExternal: CrenelConfig
+    var crenelConfig: CrenelConfig
     var numberOfCrenels: NumerOfCrenelsEnum
     
     
     public init(
-        crenelConfigInternal: CrenelConfig,
-        crenelConfigExternal: CrenelConfig,
+        crenelConfig: CrenelConfig,
         numberOfCrenels: NumerOfCrenelsEnum
     ) {
-        self.crenelConfigInternal = crenelConfigInternal
-        self.crenelConfigExternal = crenelConfigExternal
+        self.crenelConfig = crenelConfig
         self.numberOfCrenels = numberOfCrenels
     }
 }

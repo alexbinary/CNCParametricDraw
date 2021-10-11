@@ -11,8 +11,7 @@ struct Cabinet: PathsLayoutRepresentable {
     
     let shelveHeights: [MetricLength]
     
-    let crenelConfigInternal: CrenelConfig
-    let crenelConfigExternal: CrenelConfig
+    let crenelConfig: CrenelConfig
     
     let materialThickness: MetricLength
     
@@ -21,8 +20,8 @@ struct Cabinet: PathsLayoutRepresentable {
         
         let totalHeight = shelveHeights.reduce(0.mm, { $0 + $1 }) + Float(shelveHeights.count + 1) * materialThickness
         
-        var punchLinesPositionsY: [MetricLength] = shelveHeights.map { $0 + 2 * crenelConfigInternal.depth/2 }
-        punchLinesPositionsY[0] += crenelConfigInternal.depth/2
+        var punchLinesPositionsY: [MetricLength] = shelveHeights.map { $0 + 2 * crenelConfig.depth/2 }
+        punchLinesPositionsY[0] += crenelConfig.depth/2
         
         let leftRightFace = BoxFace(
             
@@ -32,18 +31,18 @@ struct Cabinet: PathsLayoutRepresentable {
             leftCrenelConfig: nil,
             rightCrenelConfig: nil,
             topCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: crenelConfigInternal,
+                crenelConfig: crenelConfig,
                 numberOfCrenels: .auto,
                 direction: .internal
             ),
             bottomCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: crenelConfigInternal,
+                crenelConfig: crenelConfig,
                 numberOfCrenels: .auto,
                 direction: .internal
             ),
             
             punchLinesPositionsY: punchLinesPositionsY,
-            punchLinesCrenelConfig: crenelConfigInternal
+            punchLinesCrenelConfig: crenelConfig
         )
         
         let topBottomShelveFace = BoxFace(
@@ -54,12 +53,12 @@ struct Cabinet: PathsLayoutRepresentable {
             leftCrenelConfig: nil,
             rightCrenelConfig: nil,
             topCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: crenelConfigExternal,
+                crenelConfig: crenelConfig,
                 numberOfCrenels: .auto,
                 direction: .external
             ),
             bottomCrenelConfig: BoxFaceCrenelConfig(
-                crenelConfig: crenelConfigExternal,
+                crenelConfig: crenelConfig,
                 numberOfCrenels: .auto,
                 direction: .external
             )

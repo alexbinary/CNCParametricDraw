@@ -17,8 +17,7 @@ public struct LegoCabinet {
     
     let shelvesHeights: [LegoLength]
     
-    let crenelConfigInternal: CrenelConfig
-    let crenelConfigExternal: CrenelConfig
+    let crenelConfig: CrenelConfig
     
     
     public init(
@@ -28,8 +27,7 @@ public struct LegoCabinet {
         width: LegoLength,
         depth: LegoLength,
         shelvesHeights: [LegoLength],
-        crenelConfigInternal: CrenelConfig,
-        crenelConfigExternal: CrenelConfig
+        crenelConfig: CrenelConfig
     ) {
         self.legoUnitLength = legoUnitLength
         self.materialThickness = materialThickness
@@ -37,8 +35,7 @@ public struct LegoCabinet {
         self.width = width
         self.depth = depth
         self.shelvesHeights = shelvesHeights
-        self.crenelConfigInternal = crenelConfigInternal
-        self.crenelConfigExternal = crenelConfigExternal
+        self.crenelConfig = crenelConfig
     }
     
     
@@ -55,9 +52,9 @@ public struct LegoCabinet {
             length: depth,
             height: 1.plates,
             
-            widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
-            lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
-            heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto)
+            widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto),
+            lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto),
+            heightCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto)
         )
         
         let cabinet = Cabinet(
@@ -77,17 +74,16 @@ public struct LegoCabinet {
                     length: depth,
                     height: $0,
                     
-                    widthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
-                    lengthCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto),
-                    heightCrenelConfig: BoxCrenelConfig(crenelConfigInternal: crenelConfigInternal, crenelConfigExternal: crenelConfigExternal, numberOfCrenels: .auto)
+                    widthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto),
+                    lengthCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto),
+                    heightCrenelConfig: BoxCrenelConfig(crenelConfig: crenelConfig, numberOfCrenels: .auto)
                 )
                 
                 return boxCase.actualHeight + margin
                 
             },
             
-            crenelConfigInternal: crenelConfigInternal,
-            crenelConfigExternal: crenelConfigExternal,
+            crenelConfig: crenelConfig,
             
             materialThickness: materialThickness
         )
