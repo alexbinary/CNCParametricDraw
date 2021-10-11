@@ -76,7 +76,7 @@ func /(lhs: MetricLength, rhs: Float) -> MetricLength {
 }
 
 
-func /(lhs: MetricLength, rhs: Int) -> MetricLength {
+public func /(lhs: MetricLength, rhs: Int) -> MetricLength {
     
     return lhs / Float(rhs)
 }
