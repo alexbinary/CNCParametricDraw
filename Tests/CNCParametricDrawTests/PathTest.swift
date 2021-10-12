@@ -5,10 +5,10 @@ import XCTest
 
 
 
-class DrawTest: XCTestCase {
+class PathTest: XCTestCase {
 
 
-    func test_Path_endPoint_line() {
+    func test_endPoint_line() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -17,7 +17,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 1, y: 2))
     }
     
-    func test_Path_endPoint_move() {
+    func test_endPoint_move() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -26,7 +26,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 1, y: 2))
     }
     
-    func test_Path_endPoint_lineClose() {
+    func test_endPoint_lineClose() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -36,7 +36,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 0, y: 0))
     }
     
-    func test_Path_endPoint_lineCloseLine() {
+    func test_endPoint_lineCloseLine() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -47,7 +47,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 3, y: 4))
     }
     
-    func test_Path_endPoint_moveLineClose() {
+    func test_endPoint_moveLineClose() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -58,7 +58,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 1, y: 2))
     }
     
-    func test_Path_endPoint_moveLineCloseLine() {
+    func test_endPoint_moveLineCloseLine() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -70,7 +70,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 6, y: 8))
     }
     
-    func test_Path_endPoint_lineMoveLine() {
+    func test_endPoint_lineMoveLine() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -81,7 +81,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 9, y: 12))
     }
     
-    func test_Path_endPoint_lineMoveLineClose() {
+    func test_endPoint_lineMoveLineClose() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -93,7 +93,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 0, y: 0))
     }
     
-    func test_Path_endPoint_moveLineMove() {
+    func test_endPoint_moveLineMove() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -104,7 +104,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.endPoint, Coordinates(x: 9, y: 12))
     }
     
-    func test_Path_endPoint_moveLineMoveClose() {
+    func test_endPoint_moveLineMoveClose() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -117,7 +117,7 @@ class DrawTest: XCTestCase {
     }
     
     
-    func test_Path_boundingBox_line() {
+    func test_boundingBox_line() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
@@ -126,7 +126,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.boundingBox, Rect(origin: Coordinates(x: 0, y: 0), size: Size(width: 1, height: 2)))
     }
     
-    func test_Path_boundingBox_line_negative() {
+    func test_boundingBox_line_negative() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: -1, y: -2)),
@@ -135,7 +135,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.boundingBox, Rect(origin: Coordinates(x: -1, y: -2), size: Size(width: 1, height: 2)))
     }
     
-    func test_Path_boundingBox_move() {
+    func test_boundingBox_move() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: 1, y: 2)),
@@ -144,7 +144,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.boundingBox, Rect(origin: Coordinates(x: 0, y: 0), size: Size(width: 1, height: 2)))
     }
     
-    func test_Path_boundingBox_move_nagative() {
+    func test_boundingBox_move_nagative() {
         
         let path = Path(withCommands: [
             .moveToRelative(Coordinates(x: -1, y: -2)),
@@ -153,7 +153,7 @@ class DrawTest: XCTestCase {
         XCTAssertEqual(path.boundingBox, Rect(origin: Coordinates(x: -1, y: -2), size: Size(width: 1, height: 2)))
     }
     
-    func test_Path_boundingBox_lineMoveLine() {
+    func test_boundingBox_lineMoveLine() {
         
         let path = Path(withCommands: [
             .lineToRelative(Coordinates(x: 1, y: 2)),
