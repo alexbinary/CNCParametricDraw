@@ -28,4 +28,35 @@ struct SvgPath {
         
         return commands.map { $0.render() }.joined()
     }
+    
+    
+    var optimized: SvgPath {
+        
+        return SvgPath(withCommands: self.commands.compactMap { command in
+            
+            switch command {
+            
+            case .axis, .close:
+                
+                return command
+                
+            case .moveTo(let coordinates, let ref):
+                
+                if ref == .relative, coordinates == .zero {
+                    return nil
+                }
+                return command
+                
+            case .lineTo(let coordinates, let ref):
+                
+                if coordinates.x == 0 {
+                    return .axis(.vertical, coordinates.y, ref)
+                }
+                if coordinates.y == 0 {
+                    return .axis(.horizontal, coordinates.x, ref)
+                }
+                return command
+            }
+        })
+    }
 }

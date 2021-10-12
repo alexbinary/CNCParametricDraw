@@ -16,7 +16,7 @@ struct SvgPathNode {
         return """
             <path
             style="\(pathStyle)"
-            d="\(path.render())"
+            d="\(path.optimized.render())"
             id="\(nodeId)"/>
             """
     }
