@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum SvgPathCommand {
+enum SvgPathCommand: Equatable {
 
     
     case moveTo(Coordinates, SvgCoordinateRef)
