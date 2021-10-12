@@ -63,11 +63,13 @@ class SvgPathTest: XCTestCase {
     }
     
     
-    /// Tests that the `.optimized` property converts `.lineTo` commands to the proper `.axis` command when one of its coordinates is zero.
+    /// Tests that the `.optimized` property converts `.lineTo` commands to the proper `.axis` command when one of its coordinates is zero, or removes it when it moves to relative (0,0)
     ///
     func test_optimized_line() {
         
         let path = SvgPath(withCommands: [
+            .lineTo(Coordinates(x: 0, y: 0), .absolute),
+            .lineTo(Coordinates(x: 0, y: 0), .relative),
             .lineTo(Coordinates(x: 0, y: 2), .absolute),
             .lineTo(Coordinates(x: 0, y: 2), .relative),
             .lineTo(Coordinates(x: 1, y: 0), .absolute),
@@ -77,6 +79,7 @@ class SvgPathTest: XCTestCase {
         ])
         
         XCTAssertEqual(path.optimized.commands, [
+            .lineTo(Coordinates(x: 0, y: 0), .absolute),
             .axis(.vertical, 2, .absolute),
             .axis(.vertical, 2, .relative),
             .axis(.horizontal, 1, .absolute),

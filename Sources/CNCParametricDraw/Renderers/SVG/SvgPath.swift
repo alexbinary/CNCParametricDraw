@@ -42,13 +42,16 @@ struct SvgPath {
                 
             case .moveTo(let coordinates, let ref):
                 
-                if ref == .relative, coordinates == .zero {
+                if coordinates == .zero, ref == .relative {
                     return nil
                 }
                 return command
                 
             case .lineTo(let coordinates, let ref):
                 
+                if coordinates == .zero, ref == .relative {
+                    return nil
+                }
                 if coordinates.x == 0 {
                     return .axis(.vertical, coordinates.y, ref)
                 }
