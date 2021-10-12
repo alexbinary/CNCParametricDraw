@@ -3,7 +3,7 @@ import Foundation
 
 
 
-enum SvgPathCommand: Equatable {
+enum SvgPathCommand: Equatable, CustomStringConvertible {
 
     
     case moveTo(Coordinates, SvgCoordinateRef)
@@ -34,4 +34,7 @@ enum SvgPathCommand: Equatable {
             return "Z"
         }
     }
+    
+    
+    var description: String { self.render() }
 }
