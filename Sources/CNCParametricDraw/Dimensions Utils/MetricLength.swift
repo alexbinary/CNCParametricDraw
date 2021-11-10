@@ -24,7 +24,7 @@ import Foundation
 /// print(length.toMillimeters) // 35.0
 /// ```
 ///
-public struct MetricLength {
+public struct MetricLength: Equatable {
     
     private let millimeters: Float
     
