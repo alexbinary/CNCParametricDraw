@@ -3,6 +3,27 @@ import Foundation
 
 
 
+/// A type that stores a length in the metric system.
+///
+/// To create an instance of this type, use the `init(millimeters:)` initializer, passing the length expressed in millimeters.
+///
+/// ```swift
+/// let length = MetricLength(millimeters: 35)
+/// ```
+///
+/// A more convenient and more readable way is to use the `.mm` extensions available on `Float`, `Double` and `Int`.
+///
+/// ```swift
+/// let length = 35.mm
+/// ```
+///
+/// To get a numeric value from an instance of the `MetricLength` type, use the `.toMillimeters` property.
+///
+/// ```swift
+/// let length = 35.mm
+/// print(length.toMillimeters) // 35.0
+/// ```
+///
 public struct MetricLength {
     
     private let millimeters: Float
